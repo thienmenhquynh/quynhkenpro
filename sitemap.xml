@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://quynhken.pro/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quynhken.pro/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://quynhken.pro/?lang=vi"/>
+    <lastmod>2026-10-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://quynhken.pro/case-study</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quynhken.pro/case-study"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://quynhken.pro/case-study?lang=vi"/>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://quynhken.pro/ai-product</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quynhken.pro/ai-product"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://quynhken.pro/ai-product?lang=vi"/>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://quynhken.pro/designer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quynhken.pro/designer"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://quynhken.pro/designer?lang=vi"/>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://quynhken.pro/du-an</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quynhken.pro/du-an"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://quynhken.pro/du-an?lang=vi"/>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/pm-po", "destination": "/", "permanent": false },
+    { "source": "/pm", "destination": "/", "permanent": false }
+  ]
+}
