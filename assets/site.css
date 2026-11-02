@@ -535,6 +535,7 @@ footer .wordmark { font-size:18px; }
 .btn-sm { height:var(--control-height-sm); padding:0 var(--space-3); font-size:14px; min-width:0; }
 .works { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--space-5) var(--space-4); }
 .work[hidden] { display:none; }
+.pcard[hidden], .feat-head[hidden] { display:none; }
 .work-link { display:flex; flex-direction:column; gap:var(--space-3); text-decoration:none; color:inherit; border-radius:var(--rounded-card); }
 .work-link:focus-visible { outline:2px solid var(--focus-ring); outline-offset:4px; }
 .work-media { position:relative; display:block; border-radius:var(--rounded-card); overflow:hidden; background:var(--surface-1); border:1px solid var(--hairline); aspect-ratio:808 / 632; }

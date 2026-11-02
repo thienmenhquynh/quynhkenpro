@@ -169,11 +169,13 @@
     var wEmpty = $('.works-empty');
     function applyWorks() {
       var shown = [];
-      $$('.works-list .work').forEach(function (w) {
+      $$('.works-list .work, .pcard[data-domain]').forEach(function (w) {
         var on = (wState.domain === 'all' || w.getAttribute('data-domain') === wState.domain) &&
-                 (wState.plat === 'all' || w.getAttribute('data-plat') === wState.plat);
+                 (wState.plat === 'all' || (w.getAttribute('data-plat') || '').split(' ').indexOf(wState.plat) !== -1);
         w.hidden = !on; if (on) shown.push(w);
       });
+      var featuredTitle = $('#works-title');
+      if (featuredTitle) featuredTitle.parentElement.hidden = !$('.pcard[data-domain]:not([hidden])');
       if (wEmpty) wEmpty.hidden = shown.length > 0;
       if (window.gsap) {
         if (reduce.matches) gsap.set(shown, { autoAlpha: 1, y: 0 });
@@ -215,7 +217,7 @@
       }
       /* Thứ tự xem liền mạch: các product (pcard) trước, rồi tới các case study đang hiển thị */
       function seq() {
-        return pcards.filter(function (c) { return c.querySelector('.br-view'); }).map(function (c) { return { p: c }; })
+        return pcards.filter(function (c) { return !c.hidden && c.querySelector('.br-view'); }).map(function (c) { return { p: c }; })
           .concat(visibleWorks().map(function (a) { return { w: a }; }));
       }
       function seqPos(x) {
