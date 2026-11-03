@@ -235,7 +235,9 @@
       if (!items.length) return;
       var body = element('tbody'), groupRow = element('tr', 'project-gantt-group');
       var groupCell = element('th'); groupCell.colSpan = 3; groupCell.scope = 'rowgroup';
-      groupCell.appendChild(chip({ domain: group.key })); groupCell.appendChild(element('span', 'project-group-count', ' · ' + items.length)); groupRow.appendChild(groupCell); body.appendChild(groupRow);
+      var groupLabel = element('span', 'project-gantt-group-label');
+      groupLabel.appendChild(chip({ domain: group.key })); groupLabel.appendChild(element('span', 'project-group-count', ' · ' + items.length));
+      groupCell.appendChild(groupLabel); groupRow.appendChild(groupCell); body.appendChild(groupRow);
       items.forEach(function (record) {
         var row = element('tr', 'project-gantt-row');
         var name = element('td', 'gantt-name'); name.appendChild(element('span', 'code', record.code)); name.appendChild(recordButton(record)); row.appendChild(name);

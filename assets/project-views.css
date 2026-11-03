@@ -96,7 +96,8 @@
 .project-gantt-table .gantt-timeline { width:var(--timeline-width); padding:0; }
 .project-gantt-table .gantt-name > .code { display:inline-block; width:68px; font-size:11px; }
 .project-gantt-table .gantt-name .project-record-link { max-width:225px; vertical-align:middle; font-size:13px; }
-.project-gantt-group th { padding:8px 12px; background:var(--surface-2); text-align:left; }
+.project-gantt-group th { position:sticky; top:77px; z-index:3; padding:8px 12px; background:var(--surface-2); text-align:left; }
+.project-gantt-group-label { position:sticky; left:12px; display:inline-flex; align-items:center; gap:4px; max-width:calc(100vw - 72px); }
 .project-gantt-track { position:relative; height:58px; overflow:hidden; background-image:linear-gradient(to right,var(--hairline) 1px,transparent 1px); background-size:calc(var(--day-width) * 7) 100%; }
 .project-gantt-ticks { height:76px; }
 .project-gantt-month { position:absolute; top:8px; padding-left:8px; font-size:12px; color:var(--ink); white-space:nowrap; }
