@@ -119,6 +119,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,600..900&family=Mona+Sans:wdth,wght@100,400..600&family=Archivo:wght@600..800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/project-views.css">
 <script src="assets/i18n.js"></script>
 </head>
 <body>
@@ -234,6 +235,15 @@
   <!-- ============ CASE STUDY: lưới ảnh bìa kiểu Behance + trình xem chi tiết ============ -->
   <section id="case-study" class="band-light" data-theme="light" aria-labelledby="works-title">
     <div class="wrap">
+      <div class="project-view-tabs" role="tablist" aria-label="Chế độ xem dự án" data-i18n-aria="views.label" hidden>
+        <button type="button" id="view-tab-current" role="tab" aria-controls="project-current" aria-selected="true" tabindex="0" data-view="current"><svg aria-hidden="true"><use href="#i-grid"/></svg><span data-i18n="views.current">View hiện tại</span></button>
+        <button type="button" id="view-tab-lark" role="tab" aria-controls="project-lark" aria-selected="false" tabindex="-1" data-view="lark"><svg aria-hidden="true"><use href="#i-menu"/></svg><span data-i18n="views.lark">List Lark</span></button>
+        <button type="button" id="view-tab-kanban" role="tab" aria-controls="project-kanban" aria-selected="false" tabindex="-1" data-view="kanban"><svg aria-hidden="true"><use href="#i-layers"/></svg><span>Kanban</span></button>
+        <button type="button" id="view-tab-gantt" role="tab" aria-controls="project-gantt" aria-selected="false" tabindex="-1" data-view="gantt"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>Gantt</span></button>
+      </div>
+      <div id="project-shared-tools" hidden></div>
+      <p class="project-view-summary" id="project-view-summary" role="status" hidden></p>
+      <div id="project-current" role="tabpanel" aria-labelledby="view-tab-current">
 
       <div class="feat-head"><h3 id="works-title" class="headline" data-i18n="wk.featured">Dự án nổi bật</h3></div>
       <div class="pcards">
@@ -425,6 +435,7 @@
         </article>
       </div>
       <div class="feat-head feat-head-list"><h3 class="headline" data-i18n="wk.allTitle">Tất cả dự án</h3></div>
+      <span id="project-tools-home" hidden></span>
       <div class="works-tools">
           <div class="fbar">
             <div class="fbar-left">
@@ -669,6 +680,10 @@
           </div>
         </li>
       </ul>
+      </div>
+      <div id="project-lark" class="project-view-panel" role="tabpanel" aria-labelledby="view-tab-lark" tabindex="0" hidden></div>
+      <div id="project-kanban" class="project-view-panel" role="tabpanel" aria-labelledby="view-tab-kanban" tabindex="0" hidden></div>
+      <div id="project-gantt" class="project-view-panel" role="tabpanel" aria-labelledby="view-tab-gantt" tabindex="0" hidden></div>
     </div>
   </section>
 
@@ -806,5 +821,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/details.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/project-views.js"></script>
 </body>
 </html>

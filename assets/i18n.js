@@ -562,6 +562,12 @@ window.I18N = (function () {
   "md.domain": "Press & media · Events · MCN/KOL · Real estate"
 });
 
+  Object.assign(EN, {
+    'views.label': 'Project views',
+    'views.current': 'Current view',
+    'views.lark': 'Lark list'
+  });
+
   var VI_UI = { 'ui.menu': 'Mở menu', 'ui.menuClose': 'Đóng menu', 'ui.toDark': 'Bật giao diện tối', 'ui.toLight': 'Bật giao diện sáng' };
   var store = new WeakMap(); // giữ bản VN gốc của từng phần tử
   var lang = 'vi';
