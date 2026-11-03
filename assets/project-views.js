@@ -11,7 +11,7 @@
     lark: document.getElementById('project-lark'),
     gantt: document.getElementById('project-gantt')
   };
-  var tools = root.querySelector('.works-tools');
+  var viewToolbar = root.querySelector('.project-toolbar');
   var empty = root.querySelector('.works-empty');
   var home = document.getElementById('project-tools-home');
   var shared = document.getElementById('project-shared-tools');
@@ -104,6 +104,13 @@
     return button;
   }
   function platform(record) { return record.platform === 'web' ? 'Web' : record.platform === 'app' ? 'App' : 'Web · App'; }
+  function fitLarkTable() {
+    var table = panels.lark.querySelector('table');
+    if (!table) return;
+    var mode = matchMedia('(max-width:600px)').matches ? 'mobile' : matchMedia('(max-width:980px)').matches ? 'compact' : 'full';
+    table.dataset.layout = mode;
+    table.querySelectorAll('.project-group-row th').forEach(function (cell) { cell.colSpan = mode === 'mobile' ? 2 : mode === 'compact' ? 4 : 6; });
+  }
   function renderLark(data) {
     var wrapper = element('div', 'project-table-scroll');
     wrapper.tabIndex = 0; wrapper.setAttribute('role', 'region');
@@ -124,7 +131,7 @@
       var toggle = element('button', 'project-group-toggle'); toggle.type = 'button';
       var closed = collapsed.has(group.key);
       toggle.setAttribute('aria-expanded', String(!closed));
-      var arrow = element('span', 'project-group-arrow', closed ? '›' : '⌄'); arrow.setAttribute('aria-hidden', 'true');
+      var arrow = element('span', 'project-group-arrow'); arrow.setAttribute('aria-hidden', 'true');
       toggle.appendChild(arrow); toggle.appendChild(chip({ domain: group.key }));
       toggle.appendChild(element('span', 'project-group-count', items.length + label(' dự án', ' projects')));
       groupCell.appendChild(toggle); groupRow.appendChild(groupCell); body.appendChild(groupRow);
@@ -133,7 +140,8 @@
         var row = element('tr', 'project-data-row'); row.hidden = closed;
         row.appendChild(element('td', 'project-row-number', index + 1));
         row.appendChild(element('td', 'project-code-cell', record.code));
-        var name = element('td', 'project-name-cell'); name.appendChild(recordButton(record)); row.appendChild(name);
+        var name = element('td', 'project-name-cell'); name.appendChild(recordButton(record));
+        name.appendChild(element('span', 'project-mobile-meta', record.code + ' · ' + platform(record))); row.appendChild(name);
         var domain = element('td'); domain.appendChild(chip(record)); row.appendChild(domain);
         row.appendChild(element('td', 'project-platform-cell', platform(record)));
         row.appendChild(element('td', 'project-description-cell', record.description));
@@ -142,12 +150,12 @@
       toggle.addEventListener('click', function () {
         var closing = toggle.getAttribute('aria-expanded') === 'true';
         if (closing) collapsed.add(group.key); else collapsed.delete(group.key);
-        toggle.setAttribute('aria-expanded', String(!closing)); arrow.textContent = closing ? '›' : '⌄';
+        toggle.setAttribute('aria-expanded', String(!closing));
         rows.forEach(function (row) { row.hidden = closing; });
       });
       table.appendChild(body);
     });
-    wrapper.appendChild(table); panels.lark.replaceChildren(wrapper);
+    wrapper.appendChild(table); panels.lark.replaceChildren(wrapper); fitLarkTable();
   }
   function dateLabel(date, options) {
     return new Intl.DateTimeFormat(english() ? 'en-GB' : 'vi-VN', Object.assign({ timeZone: 'UTC' }, options)).format(date);
@@ -259,17 +267,18 @@
   }
   function select(next, focus) {
     if (!Object.prototype.hasOwnProperty.call(panels, next)) return;
+    var restoreTabFocus = focus || tabs.contains(document.activeElement);
     view = next;
     buttons.forEach(function (button) {
       var selected = button.dataset.view === view;
       button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1;
-      if (selected && focus) button.focus();
     });
     Object.keys(panels).forEach(function (name) { panels[name].hidden = name !== view; });
     shared.hidden = view === 'current'; summary.hidden = view === 'current';
-    if (view === 'current') { home.after(tools); tools.after(empty); }
-    else { shared.appendChild(tools); shared.appendChild(empty); }
+    if (view === 'current') { home.after(viewToolbar); viewToolbar.after(empty); }
+    else { shared.appendChild(viewToolbar); shared.appendChild(empty); }
     render();
+    if (restoreTabFocus) buttons.find(function (button) { return button.dataset.view === view; }).focus();
     try { localStorage.setItem('qk-project-view', view); } catch (error) { /* Storage may be disabled. */ }
     if (window.ScrollTrigger) ScrollTrigger.refresh();
   }
@@ -286,6 +295,7 @@
   });
   [domainSelect, platformSelect, sortSelect].forEach(function (control) { control.addEventListener('change', render); });
   document.addEventListener('langchange', render);
+  window.addEventListener('resize', fitLarkTable);
   tabs.hidden = false;
   var saved = 'current';
   try { saved = localStorage.getItem('qk-project-view') || 'current'; } catch (error) { /* Use current view. */ }

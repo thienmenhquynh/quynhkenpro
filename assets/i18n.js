@@ -564,6 +564,9 @@ window.I18N = (function () {
 
   Object.assign(EN, {
     'views.label': 'Project views',
+    'filters.domainAll': 'Domain',
+    'filters.platformAll': 'Platform',
+    'filters.sortDefault': 'Sort',
     'views.current': 'Current view',
     'views.lark': 'Lark list'
   });
