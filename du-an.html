@@ -240,6 +240,26 @@
       <p class="project-view-summary" id="project-view-summary" role="status" hidden></p>
       <div id="project-current" role="tabpanel" aria-labelledby="view-tab-current">
 
+      <div class="feat-head feat-head-list"><h3 class="headline" data-i18n="wk.allTitle">Tất cả dự án</h3></div>
+      <span id="project-tools-home" hidden></span>
+      <div class="project-toolbar">
+      <div class="project-view-tabs" role="tablist" aria-label="Chế độ xem dự án" data-i18n-aria="views.label" hidden>
+        <button type="button" id="view-tab-current" role="tab" aria-controls="project-current" aria-selected="true" tabindex="0" data-view="current"><svg aria-hidden="true"><use href="#i-grid"/></svg><span data-i18n="views.current">View hiện tại</span></button>
+        <button type="button" id="view-tab-lark" role="tab" aria-controls="project-lark" aria-selected="false" tabindex="-1" data-view="lark"><svg aria-hidden="true"><use href="#i-menu"/></svg><span data-i18n="views.lark">List Lark</span></button>
+        <button type="button" id="view-tab-gantt" role="tab" aria-controls="project-gantt" aria-selected="false" tabindex="-1" data-view="gantt"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>Gantt</span></button>
+      </div>
+      <div class="works-tools">
+          <div class="fbar">
+            <div class="fbar-left">
+              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byDomain">Lĩnh vực</span><select id="f-domain"><option value="all" data-i18n="filters.domainAll">Lĩnh vực</option><option value="media" data-i18n="fo.d.media">Báo chí – Truyền thông · 4</option><option value="event" data-i18n="fo.d.event">Sự kiện · 3</option><option value="kol" data-i18n="fo.d.kol">MCN / KOL · 3</option><option value="re" data-i18n="fo.d.re">Bất động sản · 8</option></select></label>
+              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byPlat">Nền tảng</span><select id="f-plat"><option value="all" data-i18n="filters.platformAll">Nền tảng</option><option value="web" data-i18n="fo.p.web">Web · 22</option><option value="app" data-i18n="fo.p.app">App · 6</option></select></label>
+            </div>
+            <label class="fsel fsel-sort"><span class="fsel-lab" data-i18n="wk.sortBy">Sắp xếp</span><select id="f-sort"><option value="default" data-i18n="filters.sortDefault">Sắp xếp</option><option value="az" data-i18n="fo.sort.az">Tên A → Z</option><option value="za" data-i18n="fo.sort.za">Tên Z → A</option><option value="result" data-i18n="fo.sort.result">Có kết quả trước</option></select></label>
+          </div>
+        </div>
+      </div>
+      <p class="works-empty" data-i18n="wk.empty" hidden>Chưa có dự án nào khớp bộ lọc này.</p>
+
       <div class="feat-head"><h3 id="works-title" class="headline" data-i18n="wk.featured">Dự án nổi bật</h3></div>
       <div class="pcards">
         <article class="pcard" data-detail-cover="assets/products/netrace.png" data-demo="https://netrace.vn/giai-chay" data-profile="netrace" data-domain="event" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-race">
@@ -429,26 +449,6 @@
           </div>
         </article>
       </div>
-      <div class="feat-head feat-head-list"><h3 class="headline" data-i18n="wk.allTitle">Tất cả dự án</h3></div>
-      <span id="project-tools-home" hidden></span>
-      <div class="project-toolbar">
-      <div class="project-view-tabs" role="tablist" aria-label="Chế độ xem dự án" data-i18n-aria="views.label" hidden>
-        <button type="button" id="view-tab-current" role="tab" aria-controls="project-current" aria-selected="true" tabindex="0" data-view="current"><svg aria-hidden="true"><use href="#i-grid"/></svg><span data-i18n="views.current">View hiện tại</span></button>
-        <button type="button" id="view-tab-lark" role="tab" aria-controls="project-lark" aria-selected="false" tabindex="-1" data-view="lark"><svg aria-hidden="true"><use href="#i-menu"/></svg><span data-i18n="views.lark">List Lark</span></button>
-        <button type="button" id="view-tab-gantt" role="tab" aria-controls="project-gantt" aria-selected="false" tabindex="-1" data-view="gantt"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>Gantt</span></button>
-      </div>
-      <div class="works-tools">
-          <div class="fbar">
-            <div class="fbar-left">
-              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byDomain">Lĩnh vực</span><select id="f-domain"><option value="all" data-i18n="filters.domainAll">Lĩnh vực</option><option value="media" data-i18n="fo.d.media">Báo chí – Truyền thông · 4</option><option value="event" data-i18n="fo.d.event">Sự kiện · 3</option><option value="kol" data-i18n="fo.d.kol">MCN / KOL · 3</option><option value="re" data-i18n="fo.d.re">Bất động sản · 8</option></select></label>
-              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byPlat">Nền tảng</span><select id="f-plat"><option value="all" data-i18n="filters.platformAll">Nền tảng</option><option value="web" data-i18n="fo.p.web">Web · 22</option><option value="app" data-i18n="fo.p.app">App · 6</option></select></label>
-            </div>
-            <label class="fsel fsel-sort"><span class="fsel-lab" data-i18n="wk.sortBy">Sắp xếp</span><select id="f-sort"><option value="default" data-i18n="filters.sortDefault">Sắp xếp</option><option value="az" data-i18n="fo.sort.az">Tên A → Z</option><option value="za" data-i18n="fo.sort.za">Tên Z → A</option><option value="result" data-i18n="fo.sort.result">Có kết quả trước</option></select></label>
-          </div>
-        </div>
-      </div>
-      <p class="works-empty" data-i18n="wk.empty" hidden>Chưa có dự án nào khớp bộ lọc này.</p>
-
       <ul class="works works-list">
         <li class="work" data-profile="netstory" data-domain="media" data-plat="web">
           <a class="work-link" href="assets/products/netstory.png" data-demo="" data-code="NS-01" data-images="assets/products/netstory.png,assets/feat/nst-1.jpg,assets/feat/nst-2.jpg,assets/feat/nst-3.jpg,assets/feat/nst-4.jpg,assets/feat/nst-6.jpg,assets/feat/nst-7.jpg,assets/feat/nst-8.jpg,assets/products/netstory-case-1.png,assets/products/netstory-case-2.png">
