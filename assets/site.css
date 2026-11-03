@@ -1249,6 +1249,15 @@ img.job-logo { width:auto; height:44px; padding:8px 10px; box-sizing:border-box;
 .vw-stats b { font-family:var(--font-display); font-stretch:120%; font-weight:800; font-size:26px; line-height:30px; color:var(--cyan-ink); }
 .vw-stats span { font-size:13px; line-height:18px; color:var(--ink-muted); }
 .vw-info-r { margin:14px 0 0; font-size:14px; line-height:21px; color:var(--ink-subtle); }
+.vw-layout { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); align-items:start; gap:24px; max-width:1600px; margin:0 auto; }
+.vw-gallery { min-width:0; }
+.vw-layout > .vw-info { position:sticky; top:0; width:100%; min-width:0; margin:0; max-height:calc(100dvh - 160px); overflow-y:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+.vw-layout:has(> .vw-info[hidden]) { grid-template-columns:minmax(0,1fr); }
+@media (max-width:900px) {
+  .vw-layout { display:flex; flex-direction:column; gap:20px; }
+  .vw-gallery { width:100%; }
+  .vw-layout > .vw-info { position:static; order:-1; max-height:none; overflow:visible; scrollbar-gutter:auto; }
+}
 @media (max-width:600px) { .vw-info { padding:16px; } .vw-info-d { font-size:15px; line-height:24px; } .vw-stats { grid-template-columns:1fr 1fr; } .vw-stats b { font-size:22px; } }
 
 /* Xem ảnh toàn màn hình trong trang xem trước */
