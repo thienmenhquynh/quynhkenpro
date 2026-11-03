@@ -9,7 +9,6 @@
   var panels = {
     current: document.getElementById('project-current'),
     lark: document.getElementById('project-lark'),
-    kanban: document.getElementById('project-kanban'),
     gantt: document.getElementById('project-gantt')
   };
   var tools = root.querySelector('.works-tools');
@@ -150,35 +149,6 @@
     });
     wrapper.appendChild(table); panels.lark.replaceChildren(wrapper);
   }
-  function renderKanban(data) {
-    var board = element('div', 'project-kanban-board');
-    board.tabIndex = 0; board.setAttribute('role', 'region');
-    board.setAttribute('aria-label', label('Kanban dự án theo lĩnh vực', 'Project kanban grouped by domain'));
-    groups.forEach(function (group) {
-      var items = data.filter(function (record) { return record.domain === group.key; });
-      if (!items.length) return;
-      var column = element('section', 'project-kanban-column'); column.dataset.domain = group.key;
-      column.setAttribute('aria-label', groupName(group.key));
-      var header = element('header', 'project-kanban-heading');
-      var title = element('h4'); title.appendChild(chip({ domain: group.key })); header.appendChild(title);
-      header.appendChild(element('span', 'project-kanban-count', items.length)); column.appendChild(header);
-      items.forEach(function (record) {
-        var card = element('article', 'project-kanban-card');
-        if (record.image) {
-          var image = element('img'); image.src = record.image; image.alt = ''; image.loading = 'lazy'; image.decoding = 'async';
-          card.appendChild(image);
-        }
-        var content = element('div', 'project-kanban-body');
-        content.appendChild(element('span', 'code', record.code));
-        var heading = element('h5'); heading.appendChild(recordButton(record)); content.appendChild(heading);
-        content.appendChild(element('p', '', record.description));
-        content.appendChild(element('span', 'badge badge-neutral', platform(record)));
-        card.appendChild(content); column.appendChild(card);
-      });
-      board.appendChild(column);
-    });
-    panels.kanban.replaceChildren(board);
-  }
   function dateLabel(date, options) {
     return new Intl.DateTimeFormat(english() ? 'en-GB' : 'vi-VN', Object.assign({ timeZone: 'UTC' }, options)).format(date);
   }
@@ -286,7 +256,6 @@
     summary.textContent = data.length + label(' dự án · Nhóm theo lĩnh vực', ' projects · Grouped by domain');
     if (view === 'lark') renderLark(data);
     else if (view === 'gantt') renderGantt(data);
-    else renderKanban(data);
   }
   function select(next, focus) {
     if (!Object.prototype.hasOwnProperty.call(panels, next)) return;

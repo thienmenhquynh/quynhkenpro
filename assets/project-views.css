@@ -32,18 +32,6 @@
 .project-row-number, .project-code-cell, .project-platform-cell { color:var(--ink-subtle); }
 .project-data-row:hover td { background:var(--surface-2); }
 .project-data-row[hidden] { display:none; }
-.project-kanban-board { display:flex; align-items:flex-start; gap:16px; overflow-x:auto; padding:0 0 18px; max-width:100%; scroll-snap-type:x proximity; }
-.project-kanban-column { flex:0 0 285px; min-width:0; padding:12px; border:1px solid var(--hairline); border-radius:12px; background:var(--surface-2); scroll-snap-align:start; }
-.project-kanban-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
-.project-kanban-heading h4 { margin:0; font-size:14px; }
-.project-kanban-count { font-size:12px; color:var(--ink-subtle); }
-.project-kanban-card { overflow:hidden; margin:0 0 12px; border:1px solid var(--hairline); border-radius:10px; background:var(--surface-1); box-shadow:0 2px 5px rgba(0,0,0,.025); }
-.project-kanban-card:last-child { margin-bottom:0; }
-.project-kanban-card > img { display:block; width:100%; aspect-ratio:808 / 632; object-fit:cover; border-bottom:1px solid var(--hairline); }
-.project-kanban-body { padding:14px; }
-.project-kanban-body h5 { margin:8px 0; }
-.project-kanban-body .project-record-link { font-size:16px; }
-.project-kanban-body p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; margin:0 0 12px; font-size:13px; line-height:20px; color:var(--ink-muted); }
 .project-gantt-tools { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px; }
 .project-gantt-navigation, .project-gantt-scales { display:flex; align-items:center; flex-wrap:wrap; gap:4px; }
 .project-gantt-control { border:1px solid var(--hairline); border-radius:6px; background:var(--surface-1); color:var(--ink-muted); padding:7px 10px; cursor:pointer; font:500 12px/18px var(--font-text); }
@@ -78,4 +66,4 @@
   .project-gantt-table .gantt-name > .code { display:block; width:auto; }
   .project-gantt-table .gantt-name .project-record-link { max-width:165px; }
 }
-@media (max-width:640px) { .project-view-tabs { width:100%; } .project-view-tabs button { flex:1; justify-content:center; gap:6px; padding:10px 8px; font-size:12px; } .project-kanban-column { flex-basis:275px; } }
+@media (max-width:640px) { .project-view-tabs { width:100%; } .project-view-tabs button { flex:1; justify-content:center; gap:6px; padding:10px 8px; font-size:12px; } }
