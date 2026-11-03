@@ -239,7 +239,7 @@
         vDemoUrl.textContent = url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
       }
       /* Mô tả + con số của sản phẩm ở đầu trang xem trước */
-      var vInfo = $('#vw-info'), vInfoD = $('#vw-info-d'), vStats = $('#vw-stats'), vInfoR = $('#vw-info-r'), vKey = null;
+      var vInfo = $('#vw-info'), vInfoD = $('#vw-info-d'), vStats = $('#vw-stats'), vInfoR = $('#vw-info-r'), vProfile = $('#vw-profile'), vKey = null;
       function setInfo(key) {
         vKey = key;
         if (!vInfo) return;
@@ -247,6 +247,47 @@
         vInfo.hidden = !it;
         if (!it) return;
         vInfoD.textContent = it.d;
+        if (vProfile) {
+          vProfile.replaceChildren();
+          var en = I18N.lang === 'en';
+          function paragraph(label, text) {
+            if (!text) return;
+            var p = document.createElement('p'), b = document.createElement('b');
+            b.textContent = label + ': ';
+            p.appendChild(b); p.appendChild(document.createTextNode(text));
+            vProfile.appendChild(p);
+          }
+          paragraph(en ? 'Who it is for' : 'Đối tượng', it.a);
+          paragraph(en ? 'Problem' : 'Bài toán', it.problem);
+          if (it.f && it.f.length) {
+            var heading = document.createElement('h3'), list = document.createElement('ul');
+            heading.textContent = en ? 'Key features' : 'Tính năng nổi bật';
+            it.f.forEach(function (text) { var li = document.createElement('li'); li.textContent = text; list.appendChild(li); });
+            vProfile.appendChild(heading); vProfile.appendChild(list);
+          }
+          if (it.cases && it.cases.length) {
+            var casesHeading = document.createElement('h3');
+            casesHeading.textContent = 'Case study'; vProfile.appendChild(casesHeading);
+            it.cases.forEach(function (item) {
+              paragraph(item.name, item.text);
+              if (item.url && /^https:\/\//.test(item.url)) {
+                var link = document.createElement('a');
+                link.href = item.url; link.target = '_blank'; link.rel = 'noopener';
+                link.textContent = (en ? 'Visit ' : 'Khám phá ') + item.name + ' ↗';
+                vProfile.appendChild(link);
+              }
+            });
+          }
+          if (it.source) {
+            var source = document.createElement('p'), sourceLink = document.createElement('a');
+            source.className = 'profile-source'; sourceLink.href = it.source;
+            sourceLink.target = '_blank'; sourceLink.rel = 'noopener';
+            sourceLink.textContent = en ? 'NetSpace product profile · 3 Nov 2026' : 'Hồ sơ sản phẩm NetSpace · 03/11/2026';
+            source.appendChild(sourceLink);
+            source.appendChild(document.createTextNode(en ? ' — figures and outcomes reported in the profile.' : ' — số liệu và kết quả theo công bố trong hồ sơ.'));
+            vProfile.appendChild(source);
+          }
+        }
         vStats.innerHTML = '';
         it.s.forEach(function (x) {
           var li = document.createElement('li'), b = document.createElement('b'), sp = document.createElement('span');

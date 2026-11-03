@@ -286,7 +286,7 @@ window.I18N = (function () {
     'pf.race2d': 'One profile per runner across every race: photos, results, tickets and activity; AI suggests follow-ups and brings runners back next season.',
     'pf.race2a': 'A runner’s NetRace ID profile',
     'pf.race3t': 'NetRace Photo',
-    'pf.race3d': 'Race photo library: runners find their own photos by BIB number, no face scanning; HD photos without watermark, saved to their Runner Passport. Photographers upload, AI reads BIBs and links every photo to the right runner.',
+    'pf.race3d': "The race photo library supports BIB and face recognition, with unwatermarked HD downloads saved to each runner. Photographers upload photos for matching.",
     'pf.race3a': 'NetRace Photo library searched by BIB',
     'pf.race3x1': 'Photographers upload photos',
     'pf.race3x2': 'AI reads BIB numbers and fixes misreads',
@@ -518,6 +518,49 @@ window.I18N = (function () {
     'nsd.tv': 'Online real estate marketplace: 4 products sharing one transaction flow', 'nsd.nd': 'Released for Thien Khoi brokers',
     'ns.s1': ' users', 'ns.s2': ' new accounts / 30 days'
   };
+
+  // Profile labels and summaries, aligned with docs/netspace-products.md.
+  Object.assign(EN, {
+  "profile.netcms": "AI and Big Data CMS for modern newsrooms.",
+  "profile.netstory": "AI turns articles into e-magazines and long-form stories.",
+  "profile.netsocial": "AI creates videos, podcasts and multi-channel posts from existing content.",
+  "profile.netbiz": "No-code brand websites with central content management and analytics.",
+  "profile.netevent": "Communications, registration, ticketing and attendee care before, during and after events.",
+  "profile.netrace": "A running-race platform connecting organisers, photographers and runners.",
+  "profile.netfoto": "Find event photos with a selfie using AI face recognition.",
+  "profile.kolsafety": "AI moderation of Vietnamese videos to identify risks before publishing.",
+  "profile.brand-safety": "Review KOL/KOC videos against brand campaign criteria.",
+  "profile.kol-gov": "Information portal and database for digital creators and online advertising.",
+  "profile.tkg-proptech": "Verified property data, intelligent classification and broker connectivity.",
+  "profile.thien-khoi-hrm": "HR, training, transfers and permissions for brokerage teams.",
+  "profile.thien-khoi-id": "Secure internal messaging, calls and collaboration in one platform.",
+  "profile.netagent": "An LLM assistant for procedures and information from controlled sources.",
+  "profile.thien-khoi-elearning": "Online training, revision and examinations for property brokerage.",
+  "profile.nhadat247": "Verified property listings connecting sellers and landlords with buyers and tenants.",
+  "profile.bannha888": "Reviewed property listings with transparent prices and legal information.",
+  "profile.netroom": "Explore room concepts and interior layouts during a consultation.",
+  "pc.cms": "A modern newsroom CMS with AI and Big Data for producing and distributing multi-format content across channels and devices.",
+  "pc.race": "A digital platform connecting race organisers, photographers and runners for operations before, during and after a race, including fast BIB-based photo search.",
+  "pc.kol": "Vietnamese information portal and database for digital creators and online advertising. NetSpace is the technology partner supporting system operation and ecosystem development.",
+  "profile.domain.media": "CMS, e-magazines, video, podcasts and brand websites.",
+  "profile.domain.event": "Event communications, race operations and AI photo distribution.",
+  "profile.domain.kol": "Video moderation, campaign review and creator information.",
+  "profile.domain.re": "The Thien Khoi ecosystem, verified property data and brokerage tools.",
+  "fo.d.all": "All projects · 28",
+  "fo.d.media": "Press & media · 4",
+  "fo.d.event": "Events · 3",
+  "fo.d.kol": "MCN / KOL · 3",
+  "fo.d.re": "Real estate · 8",
+  "fo.p.all": "All platforms · 28",
+  "fo.p.web": "Web · 22",
+  "fo.p.app": "App · 6",
+  "ns.aKol": "MCN / KOL",
+  "profile.intro": "18 NetSpace solutions across four domains. Other projects and design case studies remain available under All projects.",
+  "profile.solutions": "solutions",
+  "profile.ecosystem": "Ecosystem overview",
+  "meta.projDesc": "28 projects and case studies by Quynh Ken, including 18 NetSpace solutions across press & media, events, MCN/KOL and real estate.",
+  "md.domain": "Press & media · Events · MCN/KOL · Real estate"
+});
 
   var VI_UI = { 'ui.menu': 'Mở menu', 'ui.menuClose': 'Đóng menu', 'ui.toDark': 'Bật giao diện tối', 'ui.toLight': 'Bật giao diện sáng' };
   var store = new WeakMap(); // giữ bản VN gốc của từng phần tử
