@@ -259,31 +259,35 @@
           }
           paragraph(en ? 'Who it is for' : 'Đối tượng', it.a);
           paragraph(en ? 'Problem' : 'Bài toán', it.problem);
+          function detailTable(label, className) {
+            var table = document.createElement('table'), caption = document.createElement('caption'), body = document.createElement('tbody');
+            table.className = 'vw-detail-table ' + className;
+            caption.textContent = label;
+            table.appendChild(caption); table.appendChild(body); vProfile.appendChild(table);
+            return body;
+          }
+          function detailRow(body, label, text) {
+            var row = document.createElement('tr'), name = document.createElement('th'), content = document.createElement('td');
+            name.scope = 'row'; name.textContent = label; content.textContent = text;
+            row.appendChild(name); row.appendChild(content); body.appendChild(row);
+            return content;
+          }
           if (it.f && it.f.length) {
-            var heading = document.createElement('h3'), list = document.createElement('ul');
-            heading.textContent = en ? 'Key features' : 'Tính năng nổi bật';
-            list.className = 'vw-features';
-            it.f.forEach(function (text) {
-              var li = document.createElement('li'), separator = text.indexOf(': ');
-              if (separator > -1) {
-                var title = document.createElement('strong');
-                title.textContent = text.slice(0, separator);
-                li.appendChild(title); li.appendChild(document.createTextNode(': ' + text.slice(separator + 2)));
-              } else li.textContent = text;
-              list.appendChild(li);
+            var featuresBody = detailTable(en ? 'Key features' : 'Tính năng nổi bật', 'vw-features');
+            it.f.forEach(function (text, index) {
+              var separator = text.indexOf(': ');
+              detailRow(featuresBody, separator > -1 ? text.slice(0, separator) : String(index + 1), separator > -1 ? text.slice(separator + 2) : text);
             });
-            vProfile.appendChild(heading); vProfile.appendChild(list);
           }
           if (it.cases && it.cases.length) {
-            var casesHeading = document.createElement('h3');
-            casesHeading.textContent = 'Case study'; vProfile.appendChild(casesHeading);
+            var casesBody = detailTable('Case study', 'vw-cases');
             it.cases.forEach(function (item) {
-              paragraph(item.name, item.text);
+              var content = detailRow(casesBody, item.name, item.text);
               if (item.url && /^https:\/\//.test(item.url)) {
                 var link = document.createElement('a');
                 link.href = item.url; link.target = '_blank'; link.rel = 'noopener';
                 link.textContent = (en ? 'Visit ' : 'Khám phá ') + item.name + ' ↗';
-                vProfile.appendChild(link);
+                content.appendChild(link);
               }
             });
           }
