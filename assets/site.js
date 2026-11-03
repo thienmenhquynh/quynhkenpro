@@ -262,7 +262,16 @@
           if (it.f && it.f.length) {
             var heading = document.createElement('h3'), list = document.createElement('ul');
             heading.textContent = en ? 'Key features' : 'Tính năng nổi bật';
-            it.f.forEach(function (text) { var li = document.createElement('li'); li.textContent = text; list.appendChild(li); });
+            list.className = 'vw-features';
+            it.f.forEach(function (text) {
+              var li = document.createElement('li'), separator = text.indexOf(': ');
+              if (separator > -1) {
+                var title = document.createElement('strong');
+                title.textContent = text.slice(0, separator);
+                li.appendChild(title); li.appendChild(document.createTextNode(': ' + text.slice(separator + 2)));
+              } else li.textContent = text;
+              list.appendChild(li);
+            });
             vProfile.appendChild(heading); vProfile.appendChild(list);
           }
           if (it.cases && it.cases.length) {
