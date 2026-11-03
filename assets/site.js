@@ -361,7 +361,7 @@
         // data-rows="3-5,6-8": gom các ảnh (đánh số từ 1) thành một hàng nhiều cột
         var rows = (a.getAttribute('data-rows') || '').split(',').filter(Boolean).map(function (r) { var b = r.split('-'); return [Number(b[0]), Number(b[1] || b[0])]; });
         var rowEl = null, rowEnd = 0;
-        a.getAttribute('data-images').split(',').forEach(function (f, i) {
+        (a.getAttribute('data-images') || '').split(',').filter(Boolean).forEach(function (f, i) {
           var n = i + 1;
           var img = new Image();
           img.src = /^(https?:|assets\/)/.test(f) ? f : CDN + f;
