@@ -21,6 +21,29 @@
   var sortSelect = document.getElementById('f-sort');
   var view = 'current';
   var collapsed = new Set();
+  var stickyFrame = 0;
+  function syncStickyHeaders() {
+    stickyFrame = 0;
+    var navHeight = parseFloat(getComputedStyle(root).getPropertyValue('--nav-height')) || 62;
+    var stickyTop = navHeight + viewToolbar.getBoundingClientRect().height;
+    root.style.setProperty('--project-sticky-top', stickyTop + 'px');
+    if (view !== 'gantt') return;
+    var scroller = panels.gantt.querySelector('.project-gantt-scroll');
+    var table = panels.gantt.querySelector('table');
+    if (!scroller || !table) return;
+    var header = table.tHead, headerHeight = header.getBoundingClientRect().height;
+    var box = scroller.getBoundingClientRect();
+    var offset = Math.max(0, Math.min(stickyTop - box.top, table.offsetHeight - headerHeight));
+    header.querySelectorAll('th').forEach(function (cell) { cell.style.transform = 'translateY(' + offset + 'px)'; });
+    table.querySelectorAll('.project-gantt-group').forEach(function (row) {
+      var rowBox = row.getBoundingClientRect(), bodyBox = row.parentElement.getBoundingClientRect();
+      var shift = Math.max(0, Math.min(stickyTop + headerHeight - rowBox.top, bodyBox.bottom - rowBox.top - rowBox.height));
+      row.firstElementChild.style.transform = 'translateY(' + shift + 'px)';
+    });
+  }
+  function scheduleStickyHeaders() {
+    if (!stickyFrame) stickyFrame = requestAnimationFrame(syncStickyHeaders);
+  }
   var dateParts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Saigon', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
   function part(name) { return Number(dateParts.find(function (item) { return item.type === name; }).value); }
   var today = new Date(Date.UTC(part('year'), part('month') - 1, part('day')));
@@ -266,11 +289,13 @@
     summary.textContent = data.length + label(' dự án · Nhóm theo lĩnh vực', ' projects · Grouped by domain');
     if (view === 'lark') renderLark(data);
     else if (view === 'gantt') renderGantt(data);
+    scheduleStickyHeaders();
   }
   function select(next, focus) {
     if (!Object.prototype.hasOwnProperty.call(panels, next)) return;
     var restoreTabFocus = focus || tabs.contains(document.activeElement);
     view = next;
+    root.dataset.projectView = view;
     buttons.forEach(function (button) {
       var selected = button.dataset.view === view;
       button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1;
@@ -298,6 +323,9 @@
   [domainSelect, platformSelect, sortSelect].forEach(function (control) { control.addEventListener('change', render); });
   document.addEventListener('langchange', render);
   window.addEventListener('resize', fitLarkTable);
+  window.addEventListener('resize', scheduleStickyHeaders);
+  window.addEventListener('scroll', scheduleStickyHeaders, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(scheduleStickyHeaders).observe(viewToolbar);
   tabs.hidden = false;
   var saved = 'current';
   try { saved = localStorage.getItem('qk-project-view') || 'current'; } catch (error) { /* Use current view. */ }
