@@ -313,6 +313,14 @@
         var card = pcards[i];
         fillFeat(i);
         vEl.col.innerHTML = '';
+        var detailCover = card.getAttribute('data-detail-cover');
+        if (detailCover) {
+          var coverFigure = document.createElement('figure'), coverImage = new Image(), coverCaption = document.createElement('figcaption');
+          coverFigure.className = 'vw-fig'; coverImage.src = detailCover;
+          coverImage.alt = card.querySelector('.pc-name').textContent;
+          coverCaption.textContent = I18N.lang === 'en' ? 'Product overview' : 'Tổng quan sản phẩm';
+          coverFigure.appendChild(coverImage); coverFigure.appendChild(coverCaption); vEl.col.appendChild(coverFigure);
+        }
         var tabs = [].slice.call(card.querySelectorAll('.feat-item'));
         var target = null;
         tabs.forEach(function (t, k) {

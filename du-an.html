@@ -234,30 +234,18 @@
   <!-- ============ CASE STUDY: lưới ảnh bìa kiểu Behance + trình xem chi tiết ============ -->
   <section id="case-study" class="band-light" data-theme="light" aria-labelledby="works-title">
     <div class="wrap">
-      <div class="works-tools">
-          <div class="fbar">
-            <div class="fbar-left">
-              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byDomain">Lĩnh vực</span><select id="f-domain"><option value="all" data-i18n="fo.d.all">Tất cả dự án · 28</option><option value="media" data-i18n="fo.d.media">Báo chí – Truyền thông · 4</option><option value="event" data-i18n="fo.d.event">Sự kiện · 3</option><option value="kol" data-i18n="fo.d.kol">MCN / KOL · 3</option><option value="re" data-i18n="fo.d.re">Bất động sản · 8</option></select></label>
-              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byPlat">Nền tảng</span><select id="f-plat"><option value="all" data-i18n="fo.p.all">Tất cả nền tảng · 28</option><option value="web" data-i18n="fo.p.web">Web · 22</option><option value="app" data-i18n="fo.p.app">App · 6</option></select></label>
-            </div>
-            <label class="fsel fsel-sort"><span class="fsel-lab" data-i18n="wk.sortBy">Sắp xếp</span><select id="f-sort"><option value="default" data-i18n="fo.sort.default">Mặc định</option><option value="az" data-i18n="fo.sort.az">Tên A → Z</option><option value="za" data-i18n="fo.sort.za">Tên Z → A</option><option value="result" data-i18n="fo.sort.result">Có kết quả trước</option></select></label>
-          </div>
-        </div>
-      <p class="works-empty" data-i18n="wk.empty" hidden>Chưa có dự án nào khớp bộ lọc này.</p>
+
       <div class="feat-head"><h3 id="works-title" class="headline" data-i18n="wk.featured">Dự án nổi bật</h3></div>
       <div class="pcards">
-        <article class="pcard" data-demo="https://netrace.vn/giai-chay" data-profile="netrace" data-domain="event" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-race">
+        <article class="pcard" data-detail-cover="assets/products/netrace.png" data-demo="https://netrace.vn/giai-chay" data-profile="netrace" data-domain="event" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-race">
           <header class="pc-head">
             <div><h4 class="pc-name" id="pc-race">NetRace</h4><p class="pc-lead" data-i18n="pc.race">NetRace là nền tảng số cho giải chạy, kết nối ban tổ chức, nhiếp ảnh gia và người chạy trong một hệ thống, giúp quản lý trọn trình trước – trong – sau giải chạy và tìm ảnh bằng số BIB nhanh chóng.</p></div>
             <div class="pc-meta"><span class="badge">NetSpace · 2025</span><span class="badge badge-neutral" data-i18n="ns.aEvent">Sự kiện</span><span class="badge badge-neutral">Desktop · Mobile</span><a class="badge badge-mint pc-live" href="https://netrace.vn/giai-chay" target="_blank" rel="noopener"><span data-i18n="pc.live">Xem bản demo</span> ↗</a></div>
           </header>
           <div class="feat">
             <div class="feat-list" role="tablist" aria-labelledby="pc-race">
-              <button type="button" class="feat-item" role="tab" id="ft-race-cover" aria-controls="fp-race-cover" aria-selected="true" tabindex="0" data-url="NetRace">
-                <span class="fi-no">01</span><span class="fi-body"><b class="fi-title" data-i18n="pf.overview">Tổng quan sản phẩm</b><span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pc.race">NetRace là nền tảng số cho giải chạy, kết nối ban tổ chức, nhiếp ảnh gia và người chạy trong một hệ thống, giúp quản lý trọn trình trước – trong – sau giải chạy và tìm ảnh bằng số BIB nhanh chóng.</span></span></span></span><span class="fi-bar" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="feat-item" role="tab" id="ft-race-1" aria-controls="fp-race-1" aria-selected="false" tabindex="-1" data-url="NetRace · Roadmap Q4/2026">
-                <span class="fi-no">02</span>
+              <button type="button" class="feat-item" role="tab" id="ft-race-1" aria-controls="fp-race-1" aria-selected="true" tabindex="0" data-url="NetRace · Roadmap Q4/2026">
+                <span class="fi-no">01</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.race1t">Roadmap Q4/2026</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.race1d">Lộ trình theo tháng cho kho ảnh, AI CRM, gửi tin Email & Zalo và sàn bán vé, bám lịch các giải GreatRace, hoàn thành và đóng gói trước 31/12/2026.</span></span></span>
@@ -265,7 +253,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-race-2" aria-controls="fp-race-2" aria-selected="false" tabindex="-1" data-url="id.netrace.vn" data-extra="assets/feat/nr2-mytickets.jpg~NetRace ID: Ảnh của tôi, Vé của tôi, Đơn hàng" data-extra-i18n="pf.race2x1">
-                <span class="fi-no">03</span>
+                <span class="fi-no">02</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.race2t">NetRace ID & AI CRM</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.race2d">Một hồ sơ cho mỗi người chạy qua nhiều giải: ảnh, kết quả, vé và hoạt động; AI gợi ý chăm sóc, nhắc người chạy quay lại mùa sau.</span></span></span>
@@ -273,7 +261,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-race-3" aria-controls="fp-race-3" aria-selected="false" tabindex="-1" data-url="netrace.vercel.app/#/photos" data-extra="assets/feat/nr2-gallery.jpg~Trang ảnh của giải: tìm bằng số BIB|assets/feat/nr-upload.jpg~Nhiếp ảnh gia tải ảnh lên|assets/feat/nr-detect.jpg~AI đọc số BIB và tự sửa số đọc nhầm" data-extra-i18n="pf.race3x0|pf.race3x1|pf.race3x2">
-                <span class="fi-no">04</span>
+                <span class="fi-no">03</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.race3t">NetRace Photo</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.race3d">Kho ảnh giải chạy: người chạy tìm ảnh của mình bằng số BIB hoặc nhận diện khuôn mặt; ảnh HD không watermark, tự lưu vào Runner Passport. Nhiếp ảnh gia tải ảnh lên, AI đọc BIB và gắn ảnh vào đúng người.</span></span></span>
@@ -281,7 +269,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-race-4" aria-controls="fp-race-4" aria-selected="false" tabindex="-1" data-url="netrace.vercel.app/#/races" data-extra="assets/feat/nr2-event.jpg~Trang giải: cự ly, giá theo đợt, mua vé hoặc mua nhóm|assets/feat/nr3-success.jpg~Mua vé thành công: đơn hàng, tổng tiền, hoá đơn VAT, bổ sung thông tin người tham dự|assets/feat/nr3-group-create.jpg~Tạo nhóm: thông tin trưởng nhóm, hạn đăng ký, chế độ công khai hoặc mật khẩu|assets/feat/nr3-group-manage.jpg~Quản lý nhóm: link đăng ký, tài khoản nhận tiền, ưu đãi theo mốc 15/30/50 người|assets/feat/nr3-group-members.jpg~Danh sách thành viên: cự ly, chiết khấu, trạng thái thanh toán, mời qua email, xuất Excel|assets/feat/nr3-join.jpg~Thành viên mở link nhóm: chọn cự ly, điền thông tin, chuyển khoản cho trưởng nhóm" data-extra-i18n="pf.race4x0|pf.race4x1|pf.race4x2|pf.race4x3|pf.race4x4|pf.race4x5">
-                <span class="fi-no">05</span>
+                <span class="fi-no">04</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.race4t">Sàn bán vé online</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.race4d">Đã chạy thật: giải nổi bật có đếm ngược giá theo đợt và tỷ lệ vé đã bán, lọc theo cự ly, địa điểm, thời gian; mua cá nhân hoặc mua nhóm (giảm tới 15%), thanh toán VietQR; vé và BIB về thẳng hồ sơ người chạy.</span></span></span>
@@ -289,7 +277,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-race-5" aria-controls="fp-race-5" aria-selected="false" tabindex="-1" data-url="NetRace OS · Ban tổ chức" data-extra="assets/feat/nr4-ticketing.jpg~Bán vé: trạng thái mở bán, giờ xuất phát, hạn bổ sung thông tin, ảnh bìa, sức chứa từng cự ly|assets/feat/nr4-orders.jpg~Đơn hàng: vé đã bán, doanh thu, đơn chờ chuyển khoản, vé thiếu thông tin, hoá đơn VAT, tiến độ theo cự ly" data-extra-i18n="pf.race5x0|pf.race5x1">
-                <span class="fi-no">06</span>
+                <span class="fi-no">05</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.race5t">NetRace OS</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.race5d">Công cụ quản lý giải cho ban tổ chức: cấu hình giải, đơn hàng, vận động viên, racekit & check-in, kết quả, doanh thu và CRM trong một nơi.</span></span></span>
@@ -299,10 +287,9 @@
             </div>
             <div class="feat-stage">
               <div class="browser">
-                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">NetRace</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
+                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">NetRace · Roadmap Q4/2026</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
                 <div class="br-view" role="button" tabindex="0" aria-label="Xem toàn màn hình tất cả ảnh" data-i18n-aria="ft.zoom"><span class="br-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span data-i18n="ft.zoomL">Xem toàn màn hình</span></span>
-                  <img class="fp is-on" id="fp-race-cover" role="tabpanel" aria-labelledby="ft-race-cover" src="assets/products/netrace.png" width="2500" height="1589" alt="netrace – tổng quan sản phẩm">
-                  <img class="fp" id="fp-race-1" role="tabpanel" aria-labelledby="ft-race-1" src="assets/feat/nr-roadmap.jpg" width="1600" height="1131" alt="Lộ trình Quý 4/2026 của NetRace" data-i18n-alt="pf.race1a" loading="lazy" hidden>
+                  <img class="fp is-on" id="fp-race-1" role="tabpanel" aria-labelledby="ft-race-1" src="assets/feat/nr-roadmap.jpg" width="1600" height="1131" alt="Lộ trình Quý 4/2026 của NetRace" data-i18n-alt="pf.race1a">
                   <img class="fp" id="fp-race-2" role="tabpanel" aria-labelledby="ft-race-2" src="assets/feat/nr-id.jpg" width="1600" height="1000" alt="Hồ sơ NetRace ID của một người chạy" data-i18n-alt="pf.race2a" loading="lazy" hidden>
                   <img class="fp" id="fp-race-3" role="tabpanel" aria-labelledby="ft-race-3" src="assets/feat/nr2-photos.jpg" width="3024" height="1890" alt="Kho ảnh NetRace Photo tìm theo số BIB" data-i18n-alt="pf.race3a" loading="lazy" hidden>
                   <img class="fp" id="fp-race-4" role="tabpanel" aria-labelledby="ft-race-4" src="assets/feat/nr2-races.jpg" width="3024" height="1890" alt="Sàn bán vé NetRace: giải nổi bật, đếm ngược giá theo đợt, tỷ lệ vé đã bán và danh sách giải" data-i18n-alt="pf.race4a" loading="lazy" hidden>
@@ -312,18 +299,15 @@
             </div>
           </div>
         </article>
-        <article class="pcard" data-profile="kol-gov" data-domain="kol" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-kol" data-demo="https://kol.gov.vn/">
+        <article class="pcard" data-detail-cover="assets/products/kol-gov.png" data-profile="kol-gov" data-domain="kol" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-kol" data-demo="https://kol.gov.vn/">
           <header class="pc-head">
             <div><h4 class="pc-name" id="pc-kol">Kol.gov.vn</h4><p class="pc-lead" data-i18n="pc.kol">Dự án công nghệ Kol.gov.vn: Cổng thông tin điện tử và cơ sở dữ liệu về nhà sáng tạo nội dung số và quảng cáo trực tuyến Việt Nam. NetSpace là đối tác công nghệ, phối hợp quản lý, vận hành hệ thống và phát triển hệ sinh thái sáng tạo nội dung số.</p></div>
             <div class="pc-meta"><span class="badge">NetSpace · 2025</span><span class="badge badge-neutral" data-i18n="ns.aKol">MCN / KOL</span><span class="fi-stat"><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="n.15k">15.000+</span> user</span></div>
           </header>
           <div class="feat">
             <div class="feat-list" role="tablist" aria-labelledby="pc-kol">
-              <button type="button" class="feat-item" role="tab" id="ft-kol-cover" aria-controls="fp-kol-cover" aria-selected="true" tabindex="0" data-url="Kol.gov.vn">
-                <span class="fi-no">01</span><span class="fi-body"><b class="fi-title" data-i18n="pf.overview">Tổng quan sản phẩm</b><span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pc.kol">Dự án công nghệ Kol.gov.vn: Cổng thông tin điện tử và cơ sở dữ liệu về nhà sáng tạo nội dung số và quảng cáo trực tuyến Việt Nam. NetSpace là đối tác công nghệ, phối hợp quản lý, vận hành hệ thống và phát triển hệ sinh thái sáng tạo nội dung số.</span></span></span></span><span class="fi-bar" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="feat-item" role="tab" id="ft-kol-1" aria-controls="fp-kol-1" aria-selected="false" tabindex="-1" data-url="kol.gov.vn">
-                <span class="fi-no">02</span>
+              <button type="button" class="feat-item" role="tab" id="ft-kol-1" aria-controls="fp-kol-1" aria-selected="true" tabindex="0" data-url="kol.gov.vn">
+                <span class="fi-no">01</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.kol1t">Cổng thông tin công khai</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.kol1d">Dải tin chạy về chiến dịch, sự kiện và người ảnh hưởng nổi bật, cùng bản tin và tài liệu chính thức.</span></span></span>
@@ -331,7 +315,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-kol-2" aria-controls="fp-kol-2" aria-selected="false" tabindex="-1" data-url="kol.gov.vn">
-                <span class="fi-no">03</span>
+                <span class="fi-no">02</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.kol2t">Bảng xếp hạng trực tiếp</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.kol2d">KOL đang được chú ý và Top MCN tăng trưởng theo tuần, tháng, kèm lượng tương tác.</span></span></span>
@@ -339,7 +323,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-kol-3" aria-controls="fp-kol-3" aria-selected="false" tabindex="-1" data-url="kol.gov.vn">
-                <span class="fi-no">04</span>
+                <span class="fi-no">03</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.kol3t">Chỉ số ảnh hưởng xã hội</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.kol3d">Top 10 người ảnh hưởng nổi bật trên Social Media theo tháng, lọc theo chiến dịch, sự kiện, chương trình.</span></span></span>
@@ -347,7 +331,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-kol-4" aria-controls="fp-kol-4" aria-selected="false" tabindex="-1" data-url="safety.netspace.vn">
-                <span class="fi-no">05</span>
+                <span class="fi-no">04</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.kol4t">Tích hợp KolSafety giám sát nội dung</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.kol4d">Quét video và kênh của KOL/MCN trên TikTok, YouTube, Facebook: chấm Điểm An toàn 0–100, phân loại vi phạm và cảnh báo trước khi xuất bản.</span></span></span>
@@ -355,7 +339,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-kol-5" aria-controls="fp-kol-5" aria-selected="false" tabindex="-1" data-url="kolhub.vn">
-                <span class="fi-no">06</span>
+                <span class="fi-no">05</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.kol5t">Kolhub.vn</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.kol5d">Quản lý, xác thực hồ sơ KOL/MCN; tích hợp KolSafety giám sát nội dung; sàn booking chiến dịch cho nhãn hàng và agency.</span></span></span>
@@ -365,10 +349,9 @@
             </div>
             <div class="feat-stage">
               <div class="browser">
-                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">Kol.gov.vn</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
+                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">kol.gov.vn</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
                 <div class="br-view" role="button" tabindex="0" aria-label="Xem toàn màn hình tất cả ảnh" data-i18n-aria="ft.zoom"><span class="br-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span data-i18n="ft.zoomL">Xem toàn màn hình</span></span>
-                  <img class="fp is-on" id="fp-kol-cover" role="tabpanel" aria-labelledby="ft-kol-cover" src="assets/products/kol-gov.png" width="2500" height="1589" alt="kol-gov – tổng quan sản phẩm">
-                  <img class="fp" id="fp-kol-1" role="tabpanel" aria-labelledby="ft-kol-1" src="assets/feat/kol-portal.jpg" width="1440" height="900" alt="Trang chủ Kol.gov.vn" data-i18n-alt="pf.kol1a" loading="lazy" hidden>
+                  <img class="fp is-on" id="fp-kol-1" role="tabpanel" aria-labelledby="ft-kol-1" src="assets/feat/kol-portal.jpg" width="1440" height="900" alt="Trang chủ Kol.gov.vn" data-i18n-alt="pf.kol1a">
                   <img class="fp" id="fp-kol-2" role="tabpanel" aria-labelledby="ft-kol-2" src="assets/feat/kol-rank.jpg" width="1440" height="900" alt="Bảng xếp hạng KOL và MCN trên Kol.gov.vn" data-i18n-alt="pf.kol2a" loading="lazy" hidden>
                   <img class="fp" id="fp-kol-3" role="tabpanel" aria-labelledby="ft-kol-3" src="assets/feat/kol-index.jpg" width="1440" height="900" alt="Biểu đồ Top 10 chỉ số ảnh hưởng trên Kol.gov.vn" data-i18n-alt="pf.kol3a" loading="lazy" hidden>
                   <img class="fp" id="fp-kol-4" role="tabpanel" aria-labelledby="ft-kol-4" src="assets/feat/ks2-1.jpg" width="3024" height="1496" alt="Trang chủ NetSpace Safety: điểm an toàn, video cần xử lý và kênh theo dõi" data-i18n-alt="pf.kol4a" loading="lazy" hidden>
@@ -378,18 +361,15 @@
             </div>
           </div>
         </article>
-        <article class="pcard" data-demo="https://antcms.vn/" data-profile="netcms" data-domain="media" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-cms">
+        <article class="pcard" data-detail-cover="assets/products/netcms.png" data-demo="https://antcms.vn/" data-profile="netcms" data-domain="media" data-plat="web" data-theme="dark" data-theme-follow aria-labelledby="pc-cms">
           <header class="pc-head">
             <div><h4 class="pc-name" id="pc-cms">NetCMS</h4><p class="pc-lead" data-i18n="pc.cms">NetCMS là hệ thống quản trị nội dung (CMS) thế hệ mới dành cho tòa soạn hiện đại. Tích hợp AI và Big Data, NetCMS tối ưu hóa quy trình sản xuất và phân phối nội dung đa định dạng trên nhiều kênh, linh hoạt trên mọi thiết bị.</p></div>
             <div class="pc-meta"><span class="badge">NetSpace · 2025</span><span class="badge badge-neutral" data-i18n="ns.aMedia">Báo chí – truyền thông</span><span class="badge badge-neutral">Web</span></div>
           </header>
           <div class="feat">
             <div class="feat-list" role="tablist" aria-labelledby="pc-cms">
-              <button type="button" class="feat-item" role="tab" id="ft-cms-cover" aria-controls="fp-cms-cover" aria-selected="true" tabindex="0" data-url="NetCMS">
-                <span class="fi-no">01</span><span class="fi-body"><b class="fi-title" data-i18n="pf.overview">Tổng quan sản phẩm</b><span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pc.cms">NetCMS là hệ thống quản trị nội dung (CMS) thế hệ mới dành cho tòa soạn hiện đại. Tích hợp AI và Big Data, NetCMS tối ưu hóa quy trình sản xuất và phân phối nội dung đa định dạng trên nhiều kênh, linh hoạt trên mọi thiết bị.</span></span></span></span><span class="fi-bar" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="feat-item" role="tab" id="ft-cms-1" aria-controls="fp-cms-1" aria-selected="false" tabindex="-1" data-url="NetCMS · Dàn trang">
-                <span class="fi-no">02</span>
+              <button type="button" class="feat-item" role="tab" id="ft-cms-1" aria-controls="fp-cms-1" aria-selected="true" tabindex="0" data-url="NetCMS · Dàn trang">
+                <span class="fi-no">01</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.cms1t">Dàn trang nội dung</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.cms1d">Kéo thả khối nội dung để dựng bố cục trang chủ và chuyên mục: tin nổi bật, lưới bài, eMagazine, podcast, video.</span></span></span>
@@ -397,7 +377,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-cms-2" aria-controls="fp-cms-2" aria-selected="false" tabindex="-1" data-url="NetCMS · Bài viết">
-                <span class="fi-no">03</span>
+                <span class="fi-no">02</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.cms2t">Quản lý nội dung</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.cms2d">Theo dõi bài viết theo chuyên mục, tác giả và trạng thái, cùng thư viện media và số liệu xuất bản trong ngày.</span></span></span>
@@ -405,7 +385,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-cms-3" aria-controls="fp-cms-3" aria-selected="false" tabindex="-1" data-url="NetCMS · Duyệt bài">
-                <span class="fi-no">04</span>
+                <span class="fi-no">03</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.cms3t">Duyệt bài theo chuẩn quy trình</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.cms3d">Phân luồng phóng viên → biên tập viên → thư ký toà soạn; góp ý ngay trên bài và lên lịch xuất bản đa kênh.</span></span></span>
@@ -413,7 +393,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-cms-4" aria-controls="fp-cms-4" aria-selected="false" tabindex="-1" data-url="NetSocial · AI Studio" data-extra="assets/feat/cms-magazine.jpg~Tạo tạp chí: AI dàn trang, viết tít và lời toà soạn" data-extra-i18n="pf.cms4x1">
-                <span class="fi-no">05</span>
+                <span class="fi-no">04</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.cms4t">Tạo nội dung bằng AI</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.cms4d">Từ một bài nguồn: NetStory dàn trang eMagazine, NetSocial tạo bài đăng mạng xã hội, kịch bản video và bản tin đa kênh.</span></span></span>
@@ -421,7 +401,7 @@
                 <span class="fi-bar" aria-hidden="true"></span>
               </button>
               <button type="button" class="feat-item" role="tab" id="ft-cms-5" aria-controls="fp-cms-5" aria-selected="false" tabindex="-1" data-url="NetCMS · Tạo Emagazine AI" data-extra="assets/feat/nst-2.jpg~Tư liệu: chọn tin nguồn để chuyển thành bản nháp e-magazine|assets/feat/nst-3.jpg~Template: mỗi mẫu là một công thức dàn trang, chọn mẫu rồi đưa bản thảo vào|assets/feat/nst-6.jpg~Bản xem trước: e-magazine sau khi dựng, có hiệu ứng cuộn và số liệu động" data-extra-i18n="pf.cms5x0|pf.cms5x1|pf.cms5x2">
-                <span class="fi-no">06</span>
+                <span class="fi-no">05</span>
                 <span class="fi-body">
                   <b class="fi-title" data-i18n="pf.cms5t">Tạo Emagazine AI</b>
                   <span class="fi-more"><span class="fi-inner"><span class="fi-desc" data-i18n="pf.cms5d">NetStory biến tin nguồn thành e-magazine: trợ lý AI dàn trang theo mẫu, gợi ý hiệu ứng, soát chính tả rồi xuất bản.</span></span></span>
@@ -431,10 +411,9 @@
             </div>
             <div class="feat-stage">
               <div class="browser">
-                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">NetCMS</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
+                <div class="br-bar"><i></i><i></i><i></i><span class="br-url"><span class="feat-url">NetCMS · Dàn trang</span><span class="br-mock" data-i18n="ft.mock" hidden>Ảnh minh hoạ</span></span></div>
                 <div class="br-view" role="button" tabindex="0" aria-label="Xem toàn màn hình tất cả ảnh" data-i18n-aria="ft.zoom"><span class="br-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span data-i18n="ft.zoomL">Xem toàn màn hình</span></span>
-                  <img class="fp is-on" id="fp-cms-cover" role="tabpanel" aria-labelledby="ft-cms-cover" src="assets/products/netcms.png" width="2500" height="1589" alt="netcms – tổng quan sản phẩm">
-                  <img class="fp" id="fp-cms-1" role="tabpanel" aria-labelledby="ft-cms-1" src="assets/feat/cms-layout.jpg" width="3024" height="1496" alt="Màn dàn trang NetCMS: chọn bài cho box Nổi bật trang chủ" data-i18n-alt="pf.cms1a" loading="lazy" hidden>
+                  <img class="fp is-on" id="fp-cms-1" role="tabpanel" aria-labelledby="ft-cms-1" src="assets/feat/cms-layout.jpg" width="3024" height="1496" alt="Màn dàn trang NetCMS: chọn bài cho box Nổi bật trang chủ" data-i18n-alt="pf.cms1a">
                   <img class="fp" id="fp-cms-2" role="tabpanel" aria-labelledby="ft-cms-2" src="assets/feat/cms-posts.jpg" width="3024" height="1496" alt="Danh sách bài viết NetCMS theo trạng thái: nháp, gửi biên tập, chờ xuất bản, đã xuất bản" data-i18n-alt="pf.cms2a" loading="lazy" hidden>
                   <img class="fp" id="fp-cms-3" role="tabpanel" aria-labelledby="ft-cms-3" src="assets/feat/cms-review.jpg" width="3024" height="1496" alt="Màn duyệt bài NetCMS: quy trình trạng thái, nút trả bài, chờ xuất bản, xuất bản và trợ lý AI" data-i18n-alt="pf.cms3a" loading="lazy" hidden>
                   <img class="fp" id="fp-cms-4" role="tabpanel" aria-labelledby="ft-cms-4" src="assets/feat/cms-ai.jpg" width="2880" height="1496" alt="NetSocial: dán link bài báo để AI viết lời, đọc giọng, chọn hình và dựng thành video hoặc bài đăng" data-i18n-alt="pf.cms4a" loading="lazy" hidden>
@@ -446,6 +425,16 @@
         </article>
       </div>
       <div class="feat-head feat-head-list"><h3 class="headline" data-i18n="wk.allTitle">Tất cả dự án</h3></div>
+      <div class="works-tools">
+          <div class="fbar">
+            <div class="fbar-left">
+              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byDomain">Lĩnh vực</span><select id="f-domain"><option value="all" data-i18n="fo.d.all">Tất cả dự án · 28</option><option value="media" data-i18n="fo.d.media">Báo chí – Truyền thông · 4</option><option value="event" data-i18n="fo.d.event">Sự kiện · 3</option><option value="kol" data-i18n="fo.d.kol">MCN / KOL · 3</option><option value="re" data-i18n="fo.d.re">Bất động sản · 8</option></select></label>
+              <label class="fsel"><span class="fsel-lab" data-i18n="wk.byPlat">Nền tảng</span><select id="f-plat"><option value="all" data-i18n="fo.p.all">Tất cả nền tảng · 28</option><option value="web" data-i18n="fo.p.web">Web · 22</option><option value="app" data-i18n="fo.p.app">App · 6</option></select></label>
+            </div>
+            <label class="fsel fsel-sort"><span class="fsel-lab" data-i18n="wk.sortBy">Sắp xếp</span><select id="f-sort"><option value="default" data-i18n="fo.sort.default">Mặc định</option><option value="az" data-i18n="fo.sort.az">Tên A → Z</option><option value="za" data-i18n="fo.sort.za">Tên Z → A</option><option value="result" data-i18n="fo.sort.result">Có kết quả trước</option></select></label>
+          </div>
+        </div>
+      <p class="works-empty" data-i18n="wk.empty" hidden>Chưa có dự án nào khớp bộ lọc này.</p>
 
       <ul class="works works-list">
         <li class="work" data-profile="netstory" data-domain="media" data-plat="web">
@@ -462,7 +451,7 @@
         </li>
         <li class="work" data-profile="netbiz" data-domain="media" data-plat="web">
           <a class="work-link" href="assets/products/netbiz.png" data-demo="" data-code="NS-12" data-images="assets/products/netbiz.png,assets/products/netbiz-case-1.png,assets/products/netbiz-case-2.png,assets/products/netbiz-case-3.png">
-            <span class="work-media"><img src="assets/products/netbiz.png" width="2500" height="1589" alt="NetBiz – tổng quan sản phẩm" loading="lazy" decoding="async"><span class="work-code">NS-12</span></span>
+            <span class="work-media"><img src="assets/thumb/netbiz.jpg" width="1616" height="1264" alt="NetBiz" loading="lazy" decoding="async"><span class="work-code">NS-12</span></span>
             <span class="work-body"><b class="work-title">NetBiz</b><span class="work-sub" data-i18n="profile.netbiz">Website thương hiệu không cần lập trình, quản trị nội dung và đo lường tập trung.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aMedia">Báo chí – Truyền thông</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
@@ -474,7 +463,7 @@
         </li>
         <li class="work" data-profile="netfoto" data-domain="event" data-plat="web">
           <a class="work-link" href="https://netrace.vn/giai-chay" data-demo="https://netrace.vn/giai-chay" data-code="NS-13" data-images="assets/products/netfoto.png">
-            <span class="work-media"><img src="assets/products/netfoto.png" width="2500" height="1589" alt="NetFoto – tổng quan sản phẩm" loading="lazy" decoding="async"><span class="work-code">NS-13</span></span>
+            <span class="work-media"><img src="assets/thumb/netfoto.jpg" width="1616" height="1264" alt="NetFoto" loading="lazy" decoding="async"><span class="work-code">NS-13</span></span>
             <span class="work-body"><b class="work-title">NetFoto</b><span class="work-sub" data-i18n="profile.netfoto">Tìm ảnh sự kiện bằng selfie với AI nhận diện khuôn mặt.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aEvent">Sự kiện</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
@@ -486,23 +475,25 @@
         </li>
         <li class="work" data-profile="brand-safety" data-domain="kol" data-plat="web">
           <a class="work-link" href="assets/products/brand-safety.png" data-demo="" data-code="NS-14" data-images="assets/products/brand-safety.png">
-            <span class="work-media"><img src="assets/products/brand-safety.png" width="2500" height="1589" alt="Brand Safety – tổng quan sản phẩm" loading="lazy" decoding="async"><span class="work-code">NS-14</span></span>
+            <span class="work-media"><img src="assets/thumb/brand-safety.jpg" width="1616" height="1264" alt="Brand Safety" loading="lazy" decoding="async"><span class="work-code">NS-14</span></span>
             <span class="work-body"><b class="work-title">Brand Safety</b><span class="work-sub" data-i18n="profile.brand-safety">Nghiệm thu video KOL/KOC theo tiêu chí chiến dịch của nhãn hàng.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aKol">MCN / KOL</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
         <li class="work" data-profile="tkg-proptech" data-domain="re" data-plat="web">
           <a class="work-link" href="assets/products/tkg-proptech.png" data-demo="" data-code="NS-15" data-images="assets/products/tkg-proptech.png">
-            <span class="work-media"><img src="assets/products/tkg-proptech.png" width="6000" height="4500" alt="TKG Proptech – tổng quan sản phẩm" loading="lazy" decoding="async"><span class="work-code">NS-15</span></span>
+            <span class="work-media"><img src="assets/thumb/tkg-proptech.jpg" width="1616" height="1264" alt="TKG Proptech" loading="lazy" decoding="async"><span class="work-code">NS-15</span></span>
             <span class="work-body"><b class="work-title">TKG Proptech</b><span class="work-sub" data-i18n="profile.tkg-proptech">Dữ liệu BĐS xác thực, phân loại thông minh và kết nối môi giới.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
-        <li class="work work-text" data-profile="thien-khoi-hrm" data-domain="re" data-plat="web">
+        <li class="work" data-profile="thien-khoi-hrm" data-domain="re" data-plat="web">
           <a class="work-link" href="#viewer" data-demo="" data-code="NS-16" data-images="">
+            <span class="work-media"><img src="assets/thumb/thien-khoi-hrm.jpg" width="1616" height="1264" alt="Thiên Khôi HRM" loading="lazy" decoding="async"><span class="work-code">NS-16</span></span>
             <span class="work-body"><b class="work-title">Thiên Khôi HRM</b><span class="work-sub" data-i18n="profile.thien-khoi-hrm">Quản lý nhân sự, đào tạo, điều chuyển và phân quyền đội ngũ môi giới.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
-        <li class="work work-text" data-profile="thien-khoi-id" data-domain="re" data-plat="web">
+        <li class="work" data-profile="thien-khoi-id" data-domain="re" data-plat="web">
           <a class="work-link" href="#viewer" data-demo="" data-code="NS-17" data-images="">
+            <span class="work-media"><img src="assets/thumb/thien-khoi-id.jpg" width="1616" height="1264" alt="Thiên Khôi ID" loading="lazy" decoding="async"><span class="work-code">NS-17</span></span>
             <span class="work-body"><b class="work-title">Thiên Khôi ID</b><span class="work-sub" data-i18n="profile.thien-khoi-id">Nhắn tin, gọi điện và phối hợp nội bộ trên một nền tảng an toàn.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
@@ -512,8 +503,9 @@
             <span class="work-body"><b class="work-title">Trợ lý AI (NetAgent)</b><span class="work-sub" data-i18n="profile.netagent">Trợ lý LLM tra cứu nghiệp vụ và thông tin từ nguồn dữ liệu có kiểm soát.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
-        <li class="work work-text" data-profile="thien-khoi-elearning" data-domain="re" data-plat="web">
+        <li class="work" data-profile="thien-khoi-elearning" data-domain="re" data-plat="web">
           <a class="work-link" href="#viewer" data-demo="" data-code="NS-18" data-images="">
+            <span class="work-media"><img src="assets/thumb/thien-khoi-elearning.jpg" width="1616" height="1264" alt="Thiên Khôi Elearning" loading="lazy" decoding="async"><span class="work-code">NS-18</span></span>
             <span class="work-body"><b class="work-title">Thiên Khôi Elearning</b><span class="work-sub" data-i18n="profile.thien-khoi-elearning">Đào tạo, ôn luyện và thi trực tuyến cho nghiệp vụ môi giới BĐS.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
@@ -525,7 +517,7 @@
         </li>
         <li class="work" data-profile="bannha888" data-domain="re" data-plat="web">
           <a class="work-link" href="https://bannha888.com/" data-demo="https://bannha888.com/" data-code="NS-19" data-images="assets/products/bannha888.png">
-            <span class="work-media"><img src="assets/products/bannha888.png" width="2500" height="1589" alt="Bannha888 – tổng quan sản phẩm" loading="lazy" decoding="async"><span class="work-code">NS-19</span></span>
+            <span class="work-media"><img src="assets/thumb/bannha888.jpg" width="1616" height="1264" alt="Bannha888" loading="lazy" decoding="async"><span class="work-code">NS-19</span></span>
             <span class="work-body"><b class="work-title">Bannha888</b><span class="work-sub" data-i18n="profile.bannha888">Tin BĐS được kiểm duyệt, minh bạch về giá và pháp lý.</span><span class="work-tags"><span class="badge">NetSpace</span><span class="badge badge-neutral" data-i18n="ns.aRe">Bất động sản</span><span class="badge badge-neutral">Desktop · Mobile</span></span></span>
           </a>
         </li>
