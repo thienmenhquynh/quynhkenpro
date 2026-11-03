@@ -348,7 +348,7 @@ window.I18N = (function () {
     'cs.lead': 'Four stories I often tell in interviews. Each has the context, the work I personally did and numbers measured with real users.',
     'cs.prod3': 'Product portfolio',
     'cs.l1': 'View the NetRace demo', 'cs.l2': 'Open kol.gov.vn', 'cs.l4': 'View the case study on Behance',
-    'cs.alt1': 'NetRace product overview', 'cs.alt2': 'Kol.gov.vn portal overview', 'cs.alt4': 'KiotViet store website built with Page Builder',
+    'cs.alt1': 'NetRace Photo library searched by BIB number', 'cs.alt2': 'KOL and MCN rankings on Kol.gov.vn', 'cs.alt4': 'KiotViet store website built with Page Builder',
     'cs.a11': 'Shaped an end-to-end platform connecting organisers, photographers and runners on one system.',
     'cs.a12': 'AI reads the BIB number on every photo so runners find their photos by BIB, with no face scanning.',
     'cs.a13': 'Runner Passport keeps each runner\'s photos, results and tickets across races; photos are sent via Email/Zalo.',
