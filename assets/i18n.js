@@ -563,7 +563,6 @@ window.I18N = (function () {
 });
 
   Object.assign(EN, {
-    'pc.passportDemo': 'NetRace Passport app',
     'views.label': 'Project views',
     'filters.domainAll': 'Domain',
     'filters.platformAll': 'Platform',
