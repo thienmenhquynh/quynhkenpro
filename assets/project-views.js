@@ -296,6 +296,12 @@
     var restoreTabFocus = focus || tabs.contains(document.activeElement);
     view = next;
     root.dataset.projectView = view;
+    var heading = root.querySelector('.feat-head-list .headline');
+    if (heading) {
+      var titles = { current: ['Tất cả dự án', 'All projects'], lark: ['Danh sách dự án', 'Project list'], gantt: ['Tiến độ dự án', 'Project timeline'] };
+      heading.removeAttribute('data-i18n');
+      heading.textContent = english() ? titles[view][1] : titles[view][0];
+    }
     buttons.forEach(function (button) {
       var selected = button.dataset.view === view;
       button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1;
