@@ -526,7 +526,6 @@ footer .wordmark { font-size:18px; }
 .num { font-family:var(--font-display); font-stretch:125%; font-weight:800; font-size:26px; line-height:1.2; letter-spacing:-0.02em; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
 
 /* ============ CASE STUDY — lưới ảnh bìa kiểu Behance ============ */
-#case-study { padding-top:var(--space-6); }
 .works-head { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-4); margin-bottom:var(--space-5); }
 .works-head .display { max-width:720px; }
 .works-head .lead { margin-top:var(--space-2); max-width:560px; }
@@ -812,7 +811,7 @@ p, li, small { text-wrap:pretty; }
 .feat-head .headline { font-size:22px; line-height:28px; }
 .feat-note { font-size:13px; line-height:18px; color:var(--ink-subtle); }
 .feat-head-list { margin-top:var(--space-8, 64px); padding-top:var(--space-6); border-top:1px solid var(--hairline); margin-bottom:var(--space-3); }
-.feat-head-list + .works-tools { border-top:0; padding-top:0; margin-bottom:var(--space-5); }
+.feat-head-list + .works-tools { border-top:0; padding-top:0; margin-bottom:var(--space-6); }
 .works-featured { grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:var(--space-5) var(--space-5); }
 .works-featured .work { display:flex; }
 .works-featured .work > .work-link { flex:1 1 auto; }
