@@ -1288,3 +1288,7 @@ img.job-logo { width:auto; height:44px; padding:8px 10px; box-sizing:border-box;
   .vw-lb-nav[data-lb="1"] { right:calc(50% - 56px); }
   .vw-lb-cap { bottom:8px; }
 }
+
+/* Dự án: giảm khoảng cách giữa hero và danh sách */
+#case-study { padding-top:var(--space-5); }
+#case-study .feat-head-list { margin-top:0; }
