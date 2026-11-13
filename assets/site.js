@@ -240,6 +240,33 @@
       }
       /* Mô tả + con số của sản phẩm ở đầu trang xem trước */
       var vInfo = $('#vw-info'), vInfoD = $('#vw-info-d'), vStats = $('#vw-stats'), vInfoR = $('#vw-info-r'), vProfile = $('#vw-profile'), vKey = null;
+      function scrollToImage(n) {
+        var imgs = [].slice.call(vEl.col.querySelectorAll('img')), target = imgs[n];
+        if (!target) return;
+        // Ảnh phía trên đích phải tải xong (loading="lazy" chưa có chiều cao) thì vị trí cuộn mới chính xác.
+        var pending = imgs.slice(0, n + 1).filter(function (im) { return !im.complete; });
+        pending.forEach(function (im) { im.loading = 'eager'; });
+        var ready = pending.length ? Promise.race([
+          Promise.all(pending.map(function (im) { return new Promise(function (ok) { im.addEventListener('load', ok, { once: true }); im.addEventListener('error', ok, { once: true }); }); })),
+          new Promise(function (ok) { setTimeout(ok, 3500); })
+        ]) : Promise.resolve();
+        ready.then(function () {
+          var box = vEl.scroll.getBoundingClientRect();
+          var top = target.getBoundingClientRect().top - box.top + vEl.scroll.scrollTop - 24;
+          var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          vEl.scroll.scrollTo({ top: Math.max(0, top), behavior: calm ? 'auto' : 'smooth' });
+          target.classList.remove('vw-pulse'); void target.offsetWidth; target.classList.add('vw-pulse');
+          setTimeout(function () { target.classList.remove('vw-pulse'); }, 1600);
+        });
+      }
+      function linkFeatureRow(row, imageIndex, en) {
+        row.classList.add('is-linked');
+        row.tabIndex = 0; row.setAttribute('role', 'button');
+        row.title = en ? 'Show the matching image (' + (imageIndex + 1) + ')' : 'Xem ảnh tương ứng (' + (imageIndex + 1) + ')';
+        function go() { scrollToImage(imageIndex); }
+        row.addEventListener('click', go);
+        row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      }
       function setInfo(key) {
         vKey = key;
         if (!vInfo) return;
@@ -276,7 +303,9 @@
             var featuresBody = detailTable(en ? 'Key features' : 'Tính năng nổi bật', 'vw-features');
             it.f.forEach(function (text, index) {
               var separator = text.indexOf(': ');
-              detailRow(featuresBody, separator > -1 ? text.slice(0, separator) : String(index + 1), separator > -1 ? text.slice(separator + 2) : text);
+              var featureCell = detailRow(featuresBody, separator > -1 ? text.slice(0, separator) : String(index + 1), separator > -1 ? text.slice(separator + 2) : text);
+              var imageIndex = it.fi && typeof it.fi[index] === 'number' ? it.fi[index] : -1;
+              if (imageIndex > -1) linkFeatureRow(featureCell.parentNode, imageIndex, en);
             });
           }
           if (it.cases && it.cases.length) {

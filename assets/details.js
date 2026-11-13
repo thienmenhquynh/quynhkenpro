@@ -460,9 +460,17 @@ window.PRODUCT_DETAILS = {
       "r": "",
       "a": "Mọi loại hình sự kiện: hội nghị, hội thảo, tri ân khách hàng, đào tạo, workshop, sự kiện nội bộ, ngày hội giao lưu và ra mắt sản phẩm.",
       "f": [
-        "Tải ảnh tập trung & phân quyền: Ban tổ chức hoặc nhiếp ảnh gia tải ảnh lên một nơi, chủ động cấp quyền truy cập cho người tham dự.",
-        "Tìm ảnh bằng selfie: AI nhận diện khuôn mặt, tự động quét và lọc ra những bức ảnh có mặt người tham dự trong kho ảnh."
+        "Tạo album sự kiện nhanh: Điền tên, ngày, địa điểm và ảnh bìa; mỗi sự kiện có một đường dẫn riêng để chia sẻ cho khách.",
+        "Tải ảnh lên đám mây & theo dõi xử lý: Ban tổ chức hoặc nhiếp ảnh gia tải ảnh theo lô; hệ thống xử lý và nhận diện khuôn mặt, hiển thị tiến độ (ví dụ 226/226 ảnh, 100%).",
+        "Tìm ảnh bằng selfie: Người tham dự chọn một ảnh selfie, AI nhận diện khuôn mặt và trả về mọi ảnh có mặt họ; selfie chỉ dùng để tìm ảnh, không được lưu.",
+        "Ảnh nổi bật trên trang sự kiện: Ban tổ chức chọn tối đa 12 ảnh minh hoạ cho sự kiện; các ảnh còn lại chỉ hiện khi khách tìm bằng selfie.",
+        "Xem ảnh lớn & chia sẻ: Mở ảnh toàn màn hình kèm giờ chụp, duyệt qua dải ảnh nhỏ, tải ảnh hoặc chia sẻ trang ảnh.",
+        "Tải ảnh linh hoạt: Chọn nhiều ảnh hoặc tải tất cả ảnh nổi bật; ảnh tải về có cạnh dài 2.048px kèm watermark của sự kiện (nếu ban tổ chức đặt).",
+        "Watermark riêng từng sự kiện: Dùng logo mặc định, khung ảnh PNG, logo tuỳ chỉnh hoặc không đóng dấu.",
+        "Phân quyền & bảo mật: Album công khai, riêng tư (cần mật khẩu) hoặc ẩn hoàn toàn; selfie không bị lưu lại.",
+        "Gói dịch vụ & hạn dùng: Miễn phí 1.000 ảnh trong 10 ngày; nâng cấp để thêm số ảnh và thời hạn lưu trữ."
       ],
+      "fi": [12, 13, 6, 7, 8, 9, 1, 4, 14],
       "source": "https://netspace-profile.vercel.app/giai-phap.html"
     },
     "en": {
@@ -471,9 +479,17 @@ window.PRODUCT_DETAILS = {
       "r": "",
       "a": "Conferences, seminars, customer events, training, workshops, internal events and launches.",
       "f": [
-        "Central uploads and access control: Organisers and photographers upload to one place and manage attendee access.",
-        "Selfie photo search: AI filters the event gallery for images containing the attendee."
+        "Quick event albums: Enter the name, date, venue and a cover image; each event gets its own link to share with guests.",
+        "Cloud upload and processing progress: Organisers or photographers upload in batches; the system processes photos and detects faces, with live progress (for example 226/226 photos, 100%).",
+        "Selfie photo search: An attendee picks a selfie, AI matches faces and returns every photo they appear in; the selfie is used only for matching and is not stored.",
+        "Featured photos on the event page: Organisers pick up to 12 photos to represent the event; all other photos appear only when a guest searches with a selfie.",
+        "Full-size viewer and sharing: Open a photo full screen with its capture time, browse the filmstrip, download it or share the album page.",
+        "Flexible downloads: Select several photos or download all featured photos; downloads have a 2,048px long edge with the event watermark (if the organiser sets one).",
+        "Per-event watermark: Use the default logo, a PNG frame, a custom logo, or no watermark.",
+        "Access control and privacy: Public, private (password) or fully hidden albums; selfies are never stored.",
+        "Plans and validity: Free 1,000 photos for 10 days; upgrade for more photos and longer storage."
       ],
+      "fi": [12, 13, 6, 7, 8, 9, 1, 4, 14],
       "source": "https://netspace-profile.vercel.app/giai-phap.html"
     }
   },

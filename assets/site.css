@@ -1292,3 +1292,12 @@ img.job-logo { width:auto; height:44px; padding:8px 10px; box-sizing:border-box;
 /* Dự án: giảm khoảng cách giữa hero và danh sách */
 #case-study { padding-top:var(--space-5); }
 #case-study .feat-head-list { margin-top:0; }
+
+/* Tính năng nổi bật: bấm để cuộn tới ảnh tương ứng */
+#vw-profile .vw-features tr.is-linked { cursor:pointer; }
+#vw-profile .vw-features tr.is-linked:hover td, #vw-profile .vw-features tr.is-linked:focus-visible td { background:var(--surface-2); }
+#vw-profile .vw-features tr.is-linked:focus-visible { outline:2px solid var(--focus-ring); outline-offset:-2px; }
+#vw-profile .vw-features tr.is-linked th::after { content:" \2192"; color:var(--cyan-ink); font-weight:700; }
+.vw-col img.vw-pulse { animation:vwPulse 1.6s ease-out 1; }
+@keyframes vwPulse { 0% { box-shadow:0 0 0 0 rgba(30,170,255,.75); } 40% { box-shadow:0 0 0 8px rgba(30,170,255,.45); } 100% { box-shadow:0 0 0 0 rgba(30,170,255,0); } }
+@media (prefers-reduced-motion: reduce) { .vw-col img.vw-pulse { animation:none; outline:3px solid rgba(30,170,255,.6); } }
