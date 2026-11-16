@@ -263,7 +263,7 @@
         row.classList.add('is-linked');
         row.tabIndex = 0; row.setAttribute('role', 'button');
         row.title = en ? 'Show the matching image (' + (imageIndex + 1) + ')' : 'Xem ảnh tương ứng (' + (imageIndex + 1) + ')';
-        function go() { scrollToImage(imageIndex); }
+        function go() { scrollToImage(imageIndex); if (window.nsTrack) nsTrack('Feature Image Opened', { code: vKey, feature: row.querySelector('th').textContent, image: imageIndex + 1 }); }
         row.addEventListener('click', go);
         row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
       }
@@ -348,6 +348,7 @@
       }
       function openFeat(i, start) {
         vMode = 'feat'; fIdx = i;
+        if (window.nsTrack) nsTrack('Project Viewed', { code: pcards[i].getAttribute('aria-labelledby'), title: pcards[i].querySelector('.pc-name').textContent, source: 'featured' });
         setInfo(pcards[i].getAttribute('aria-labelledby'));
         var live = pcards[i].querySelector('.pc-live');
         setDemo(live ? live.getAttribute('href') : pcards[i].getAttribute('data-demo'));
@@ -401,6 +402,7 @@
       });
       function openWork(a) {
         vMode = 'works';
+        if (window.nsTrack) nsTrack('Project Viewed', { code: a.getAttribute('data-code'), title: a.querySelector('.work-title').textContent, source: 'list' });
         setInfo(a.getAttribute('data-code'));
         setDemo(a.hasAttribute('data-demo') ? a.getAttribute('data-demo') : a.getAttribute('href'));
         vEl.col.classList.remove('is-feat');
