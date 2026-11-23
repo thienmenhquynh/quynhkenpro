@@ -2,8 +2,8 @@
 :is(.hero,.page-head,.cs-hero) {
   --hero-grid:rgb(14 116 144 / .10);
   --hero-wire:rgb(14 116 144 / .20);
-  --hero-glow:rgb(8 145 178 / .12);
-  --hero-glow-alt:rgb(98 80 214 / .07);
+  --hero-glow:rgb(8 145 178 / .16);
+  --hero-glow-alt:rgb(98 80 214 / .12);
   position:relative;
   isolation:isolate;
   overflow:hidden;
@@ -12,8 +12,8 @@
 [data-theme="dark"] :is(.hero,.page-head,.cs-hero) {
   --hero-grid:rgb(46 228 255 / .08);
   --hero-wire:rgb(46 228 255 / .23);
-  --hero-glow:rgb(8 145 178 / .21);
-  --hero-glow-alt:rgb(98 80 214 / .14);
+  --hero-glow:rgb(8 145 178 / .24);
+  --hero-glow-alt:rgb(98 80 214 / .19);
 }
 :is(.hero,.page-head,.cs-hero) > .wrap { position:relative; z-index:1; }
 .hero::before,.page-head::before,.hero-bg { display:none; }
@@ -47,7 +47,7 @@
 .hero .hero-track .lane { stroke:var(--hero-wire); }
 .hero .hero-strip,.race-head .rb-strip {
   height:1px; opacity:1;
-  background:linear-gradient(90deg,transparent,var(--hero-wire) 20%,var(--primary) 70%,transparent);
+  background:linear-gradient(90deg,transparent,var(--highlight-start) 40%,var(--highlight-end) 75%,transparent);
 }
 .page-head .hero-tech,.cs-hero .hero-tech { opacity:.65; }
 .page-head .hero-tech::after,.cs-hero .hero-tech::after { display:none; }

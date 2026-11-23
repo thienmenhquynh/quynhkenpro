@@ -35,6 +35,10 @@
   --brand-cyan-50: #DEFEFF;
   --brand-cyan: #2EE4FF;
   --brand-lime: #A2FF00;
+  --highlight-start: #0E7490;
+  --highlight-end: #6353B5;
+  --highlight-surface-start: #D5F5FA;
+  --highlight-surface-end: #F2ECFF;
   color-scheme: light;
 }
 [data-theme="dark"] {
@@ -73,6 +77,10 @@
   --brand-cyan-50: #DEFEFF;
   --brand-cyan: #2EE4FF;
   --brand-lime: #A2FF00;
+  --highlight-start: #67E8F9;
+  --highlight-end: #C4B5FD;
+  --highlight-surface-start: #103C49;
+  --highlight-surface-end: #30254B;
   color-scheme: dark;
 }
 /* Compatibility aliases keep the portfolio's content and native controls intact. */
@@ -252,3 +260,22 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .eyebrow,.caps,.fsel-lab,.cs-label,.sk-kicker,.project-toolbar .fsel-lab { text-transform:none; letter-spacing:normal; }
 .project-toolbar .fsel-lab { font-size:14px; line-height:20px; }
 [data-theme] .project-gantt-milestone { color:var(--accent-foreground); }
+
+/* Selected highlights use a cyan-to-violet accent, with readable stops per theme. */
+.hero-name .l2 { width:fit-content; max-width:100%; }
+[data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text { color:var(--highlight-start); }
+@supports ((background-clip:text) or (-webkit-background-clip:text)) {
+  [data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text {
+    background:linear-gradient(110deg,var(--highlight-start) 8%,var(--highlight-end) 88%);
+    background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+}
+.cap.c-ai .cap-ico,.cap.is-ai .cap-ico,.kit .skill-tools {
+  background:linear-gradient(135deg,var(--highlight-surface-start),var(--highlight-surface-end));
+}
+.plate::before { background:linear-gradient(100deg,var(--highlight-start),var(--highlight-end)); }
+@media (forced-colors:active),print {
+  [data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text {
+    color:CanvasText; background:none; -webkit-text-fill-color:currentColor;
+  }
+}
