@@ -296,6 +296,7 @@ section.alt { background:var(--canvas-alt); border-top:1px solid var(--hairline)
 /* ---------- Footer ---------- */
 footer { background:var(--canvas-alt); border-top:1px solid var(--hairline); padding:var(--space-5) 0; font-size:14px; line-height:20px; color:var(--ink-subtle); }
 footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--space-3); }
+.footer-copyright { flex:1 1 320px; min-width:0; margin-left:auto; text-align:right; }
 footer .wordmark { font-size:18px; }
 .stripe { height:4px; width:120px; border-radius:var(--rounded-pill); background:var(--grad-finish); margin-top:var(--space-2); }
 

@@ -213,7 +213,6 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .ds-theme-control select { height:36px; max-width:240px; padding:0 10px; font-size:14px; }
 .ds-theme-menu { border-top:1px solid var(--border); margin-top:12px; padding:16px 0; flex-wrap:wrap; }
 .ds-theme-menu select { width:100%; max-width:none; }
-.ds-theme-footer { margin-left:auto; }
 @media (max-width:767px) {
   :root { --gutter:16px; }
   .display-xl,.page-head h1 { font-size:22px; line-height:1.25; }
@@ -227,7 +226,6 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
   .nav .logo-text { display:none; }
   .nav .wrap > nav { display:none; }
   .project-toolbar .project-view-tabs { align-self:stretch; }
-  .ds-theme-footer { width:100%; margin-left:0; justify-content:space-between; }
   .pcard .feat { gap:16px; }
   .project-group-toggle { min-height:44px; }
   .project-record-link { display:inline-flex; align-items:center; min-height:44px; }

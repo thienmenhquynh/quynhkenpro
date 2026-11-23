@@ -42,8 +42,6 @@
     }
     var menu = document.getElementById('mobile-menu');
     if (menu) menu.appendChild(control('ds-theme-menu'));
-    var footer = document.querySelector('footer .wrap');
-    if (footer) footer.appendChild(control('ds-theme-footer'));
     function sync() {
       var en = window.I18N && I18N.lang === 'en';
       var labels = en ? ['Light', 'Dark'] : ['Sáng', 'Tối'];
