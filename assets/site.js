@@ -15,18 +15,17 @@
 
   I18N.init();
 
-  /* ---------- Foundation 9tek theme; keep high contrast when toggling light/dark ---------- */
+  /* ---------- Foundation 9tek light/dark theme ---------- */
   var themeBtn = $('.theme-toggle');
   function themeLabel() {
-    var dark = /dark$/.test(root.getAttribute('data-theme'));
+    var dark = root.getAttribute('data-theme') === 'dark';
     themeBtn.setAttribute('aria-pressed', String(dark));
     themeBtn.setAttribute('aria-label', I18N.t(dark ? 'ui.toLight' : 'ui.toDark'));
   }
   themeBtn.addEventListener('click', function () {
     var currentTheme = root.getAttribute('data-theme');
-    var dark = !/dark$/.test(currentTheme);
-    var highContrast = /^hc/.test(currentTheme);
-    var nextTheme = highContrast ? (dark ? 'hc-dark' : 'hc') : (dark ? 'dark' : 'light');
+    var dark = currentTheme !== 'dark';
+    var nextTheme = dark ? 'dark' : 'light';
     if (window.QKTheme) QKTheme.set(nextTheme); else root.setAttribute('data-theme', nextTheme);
     themeBtn.setAttribute('aria-pressed', String(dark));
     themeLabel();

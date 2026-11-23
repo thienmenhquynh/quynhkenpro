@@ -75,83 +75,6 @@
   --brand-lime: #A2FF00;
   color-scheme: dark;
 }
-[data-theme="hc"] {
-  --background: #FFFFFF;
-  --foreground: #0B1220;
-  --card: #FFFFFF;
-  --card-foreground: var(--foreground);
-  --popover: var(--card);
-  --popover-foreground: var(--foreground);
-  --primary: #0A5468;
-  --primary-foreground: #FFFFFF;
-  --secondary: #E6EBF2;
-  --secondary-foreground: #0B1220;
-  --muted: #EEF2F6;
-  --muted-foreground: #2B3445;
-  --accent: #D3F3F9;
-  --accent-foreground: #064152;
-  --destructive: #9B1C14;
-  --destructive-foreground: #FFFFFF;
-  --border: #5B6575;
-  --input: #5B6575;
-  --ring: #0A5468;
-  --sidebar: var(--card);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--accent);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
-  --chart-1: #0086A8;
-  --chart-2: #C2410C;
-  --chart-3: #5B45D6;
-  --chart-4: #9A6700;
-  --chart-5: #B8326B;
-  --brand-cyan-50: #DEFEFF;
-  --brand-cyan: #2EE4FF;
-  --brand-lime: #A2FF00;
-  color-scheme: light;
-}
-[data-theme="hc-dark"] {
-  --background: #000000;
-  --foreground: #FFFFFF;
-  --card: #0D0F12;
-  --card-foreground: var(--foreground);
-  --popover: var(--card);
-  --popover-foreground: var(--foreground);
-  --primary: #5CEBFF;
-  --primary-foreground: #000000;
-  --secondary: #1A1E23;
-  --secondary-foreground: #FFFFFF;
-  --muted: #14171B;
-  --muted-foreground: #D5DDE0;
-  --accent: #003845;
-  --accent-foreground: #7FF0FF;
-  --destructive: #FF7B72;
-  --destructive-foreground: #000000;
-  --border: #8A949E;
-  --input: #8A949E;
-  --ring: #7FF0FF;
-  --sidebar: var(--card);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--accent);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
-  --chart-1: #1597B5;
-  --chart-2: #D95926;
-  --chart-3: #9085E9;
-  --chart-4: #C98500;
-  --chart-5: #D55181;
-  --brand-cyan-50: #DEFEFF;
-  --brand-cyan: #2EE4FF;
-  --brand-lime: #A2FF00;
-  color-scheme: dark;
-}
-
 /* Compatibility aliases keep the portfolio's content and native controls intact. */
 :root, [data-theme] {
   --font-heading:"Lexend","Be Vietnam Pro",system-ui,sans-serif;
@@ -193,6 +116,7 @@ h1,h2,h3,h4,h5,h6 { font-family:var(--font-heading); font-stretch:normal; }
 .hero-name { font-size:clamp(28px,4vw,48px); line-height:1.2; animation:none; }
 .hero-name *, .hero-name::before, .hero-name::after { animation:none !important; }
 .hero-name .l2,.grad-text { color:var(--foreground); background:none; -webkit-text-fill-color:currentColor; }
+.hero .lead-strong .hl,.closing .grad-text,.plate .plate-role .role-type { color:var(--primary); background:none; -webkit-text-fill-color:currentColor; }
 .hero-name .l1::before,.hero-name .l1::after,.hero-name .l2::before,.hero-name .l2::after,.hero-name .speed { display:none; }
 .lead,.about-text,.pc-lead,.cs-lead { font:400 16px/24px var(--font-body); }
 .data-lg,.big,.page-stats .num,.story-num b { font:600 24px/32px var(--font-heading); font-variant-numeric:tabular-nums; }
@@ -213,6 +137,9 @@ h1,h2,h3,h4,h5,h6 { font-family:var(--font-heading); font-stretch:normal; }
 .band-light,.band-deep,.band,.closing { background:var(--background); color:var(--foreground); }
 .band-glow::before,.closing::after { background:none; }
 .band-dots { background-image:none; }
+.sec-head { margin-bottom:32px; }
+.kit { border-top:0; }
+@media (max-width:820px) { .sec-head { margin-bottom:24px; } }
 .btn { height:36px; font:500 14px/20px var(--font-body); border-radius:var(--radius-md); box-shadow:var(--shadow-xs); }
 .btn-primary { background:var(--primary); color:var(--primary-foreground); border-color:transparent; }
 .btn-primary:hover { background:color-mix(in srgb,var(--primary) 90%,transparent); border-color:transparent; }
@@ -227,6 +154,7 @@ button:disabled,input:disabled,select:disabled,textarea:disabled { opacity:.5; c
 svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .badge,.badge-neutral,.chips li,.sk-tag,.pill-code { background:var(--secondary); color:var(--secondary-foreground); border:1px solid var(--border); border-radius:var(--radius-md); font:500 12px/16px var(--font-body); padding:4px 8px; }
 .badge-mint,.badge-lime { background:var(--accent); color:var(--accent-foreground); }
+.area-chip { background:var(--secondary); color:var(--foreground); }
 .work-code { border-radius:var(--radius-md); background:var(--card); color:var(--foreground); border-color:var(--border); }
 .pcard[data-theme],.feat,.tactic,.tactic.lg,.cap,.area,.side-card,.codewin,.skill,.contact-cards a,.story,.runner-card,.plate,.board-wrap,.vw-info { background:var(--card); color:var(--foreground); border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow-sm); padding:16px; }
 .cap.c-ai { background:var(--card); border-color:var(--border); animation:none; }
@@ -287,15 +215,6 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .ds-theme-menu { border-top:1px solid var(--border); margin-top:12px; padding:16px 0; flex-wrap:wrap; }
 .ds-theme-menu select { width:100%; max-width:none; }
 .ds-theme-footer { margin-left:auto; }
-[data-theme="hc-dark"] .theme-toggle .sun { display:none; }
-[data-theme="hc-dark"] .theme-toggle .moon { display:block; }
-[data-theme="hc"] a,[data-theme="hc-dark"] a { text-decoration:underline; text-underline-offset:3px; }
-[data-theme^="hc"] :where(a,button,input,select,textarea,[tabindex]):focus-visible { outline-width:3px; }
-[data-theme^="hc"] :is(.btn,.badge,.lang,.project-view-tabs,.pcard,.cap,.story,.codewin,.contact-cards a,.vw-info) { border:1px solid var(--border); box-shadow:none; }
-[data-theme^="hc"] :is([role="tab"][aria-selected="true"],button[aria-pressed="true"],a[aria-current]) { box-shadow:inset 0 0 0 2px var(--accent-foreground); }
-[data-theme^="hc"] .project-gantt-today { opacity:1; }
-[data-theme^="hc"] :is(.browser,.plate,.runner-card,.skill,.board-wrap,.area,.side-card,.tactic) { box-shadow:none; }
-[data-theme^="hc"] :is(.project-table-scroll,.project-gantt-scroll) { box-shadow:none; }
 @media (max-width:767px) {
   :root { --gutter:16px; }
   .display-xl,.page-head h1 { font-size:22px; line-height:1.25; }

@@ -1,23 +1,24 @@
-/* Foundation 9tek themes: light, dark, hc and hc-dark. */
+/* Foundation 9tek themes: light and dark. */
 (function () {
   'use strict';
   var root = document.documentElement;
-  var themes = ['light', 'dark', 'hc', 'hc-dark'];
-  var contrast = matchMedia('(prefers-contrast: more)');
-  var dark = matchMedia('(prefers-color-scheme: dark)');
+  var themes = ['light', 'dark'];
   var preference = null;
-  try { preference = localStorage.getItem('qk-theme'); } catch (error) { /* Use system accessibility settings. */ }
+  try { preference = localStorage.getItem('qk-theme'); } catch (error) { /* Use the default light theme. */ }
+  // Keep the brightness of previously saved high-contrast preferences.
+  if (preference === 'hc' || preference === 'hc-dark') {
+    preference = preference === 'hc-dark' ? 'dark' : 'light';
+    try { localStorage.setItem('qk-theme', preference); } catch (error) { /* Use the migrated theme for this visit. */ }
+  }
   if (themes.indexOf(preference) === -1) preference = null;
   function apply(theme) {
     root.setAttribute('data-theme', theme);
-    root.classList.toggle('dark', theme === 'dark' || theme === 'hc-dark');
-    root.classList.toggle('hc', theme === 'hc');
-    root.classList.toggle('hc-dark', theme === 'hc-dark');
-    root.style.colorScheme = theme === 'dark' || theme === 'hc-dark' ? 'dark' : 'light';
+    root.classList.toggle('dark', theme === 'dark');
+    root.classList.remove('hc', 'hc-dark');
+    root.style.colorScheme = theme;
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = { light: '#F8FAFC', dark: '#0F1113', hc: '#FFFFFF', 'hc-dark': '#000000' }[theme];
+    if (meta) meta.content = { light: '#F8FAFC', dark: '#0F1113' }[theme];
   }
-  function automaticTheme() { return contrast.matches ? (dark.matches ? 'hc-dark' : 'hc') : 'light'; }
   window.QKTheme = {
     set: function (theme) {
       if (themes.indexOf(theme) === -1) return;
@@ -27,9 +28,7 @@
     },
     get: function () { return root.getAttribute('data-theme'); }
   };
-  apply(preference || automaticTheme());
-  function systemChanged() { if (!preference) apply(automaticTheme()); }
-  contrast.addEventListener('change', systemChanged); dark.addEventListener('change', systemChanged);
+  apply(preference || 'light');
   document.addEventListener('DOMContentLoaded', function () {
     var controls = [];
     function control(className) {
@@ -47,7 +46,7 @@
     if (footer) footer.appendChild(control('ds-theme-footer'));
     function sync() {
       var en = window.I18N && I18N.lang === 'en';
-      var labels = en ? ['Light', 'Dark', 'High contrast', 'High contrast dark'] : ['Sáng', 'Tối', 'Tương phản cao', 'Tương phản cao · Tối'];
+      var labels = en ? ['Light', 'Dark'] : ['Sáng', 'Tối'];
       controls.forEach(function (item) {
         item.label.textContent = en ? 'Appearance' : 'Giao diện';
         Array.from(item.select.options).forEach(function (option, index) { option.textContent = labels[index]; });
@@ -55,7 +54,7 @@
       });
       var button = document.querySelector('.theme-toggle');
       if (button) {
-        var isDark = /dark$/.test(QKTheme.get());
+        var isDark = QKTheme.get() === 'dark';
         button.setAttribute('aria-pressed', String(isDark));
         button.setAttribute('aria-label', en ? (isDark ? 'Switch to light theme' : 'Switch to dark theme') : (isDark ? 'Bật giao diện sáng' : 'Bật giao diện tối'));
       }
