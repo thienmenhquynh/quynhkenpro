@@ -134,6 +134,14 @@ h1,h2,h3,h4,h5,h6 { font-family:var(--font-heading); font-stretch:normal; }
 .hero-bg { opacity:.65; }
 .hero-name .l1,.hero-name .l2 { white-space:normal; }
 .band-light,.band-deep,.band,.closing { background:var(--background); color:var(--foreground); }
+/* Section rhythm uses the same semantic surfaces in light and dark. */
+main > section.band-light { background:var(--card); }
+main > section.band-light.band-dots { background:var(--muted); }
+main > section.band-lanes { background-color:var(--background); }
+main > section.alt { background:var(--card); }
+main > section.band:not(.closing):not(.cs-hero) { background:var(--secondary); }
+main > section.page-head,main > section.cs-hero { background:var(--secondary); }
+main > section.closing { background:var(--accent); border-top:1px solid var(--border); }
 .band-glow::before,.closing::after { background:none; }
 .band-dots { background-image:none; }
 .sec-head { margin-bottom:32px; }

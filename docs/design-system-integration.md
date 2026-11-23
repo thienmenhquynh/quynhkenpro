@@ -14,3 +14,4 @@ This portfolio remains a static HTML/CSS/JavaScript site. `assets/design-system.
 
 - Section headings use a 32px gap before content on desktop and 24px on tablet/mobile.
 - `assets/hero.css` and `assets/hero.js` add decorative circuit paths, grid and light fields to page heroes. SVG effects pause offscreen or in hidden tabs, and remain static with reduced motion; mobile omits moving data pulses.
+- Section backgrounds alternate semantic `card`, `muted`, `background` and `secondary` surfaces; the contact section uses `accent`. The landing hero's brand field stays around the portrait and fades before the copy. Both themes retain their own tokens and all sections continue to follow the selected theme.
