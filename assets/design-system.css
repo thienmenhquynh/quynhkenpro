@@ -190,7 +190,7 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .work-title { font-size:16px; line-height:22px; }
 .work-sub { font-size:14px; line-height:20px; }
 .work-body { gap:8px; }
-.project-toolbar { background:var(--background); }
+.project-toolbar,#project-shared-tools { background:var(--card); }
 .project-toolbar .project-view-tabs,.lang { background:var(--muted); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:none; }
 .project-toolbar .project-view-tabs button { min-height:36px; font-size:14px; font-weight:500; }
 .project-view-tabs button[aria-selected="true"],.lang button[aria-pressed="true"] { color:var(--accent-foreground); background:var(--accent); box-shadow:var(--shadow-sm); }
