@@ -19,7 +19,7 @@
     var wires = paths.map(function (path) { return '<path class="wire" d="' + path + '"/>'; }).join('');
     var pulses = [paths[0],paths[1]].map(function (path) { return '<path class="pulse" d="' + path + '"/>'; }).join('');
     var points = nodes.map(function (point,index) { return '<circle class="' + (index % 3 ? 'junction' : 'node') + '" cx="' + point[0] + '" cy="' + point[1] + '" r="' + (index % 3 ? 2 : 5) + '"/>'; }).join('');
-    layer.innerHTML = '<svg class="hero-circuit" viewBox="0 0 1440 780" preserveAspectRatio="xMidYMid slice" focusable="false"><circle class="halo" cx="1124" cy="100" r="90"/><circle class="halo" cx="830" cy="580" r="110"/>' + wires + pulses + points + '</svg>';
+    layer.innerHTML = '<span class="hero-brand-field"></span><svg class="hero-circuit" viewBox="0 0 1440 780" preserveAspectRatio="xMidYMid slice" focusable="false"><circle class="halo" cx="1124" cy="100" r="90"/><circle class="halo" cx="830" cy="580" r="110"/>' + wires + pulses + points + '</svg>';
     section.prepend(layer);
   });
   if (!('IntersectionObserver' in window)) return;

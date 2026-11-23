@@ -1,26 +1,29 @@
 /* Technical atmosphere: quiet behind copy, luminous around the portrait. */
 :is(.hero,.page-head,.cs-hero) {
-  --hero-grid:rgb(14 116 144 / .10);
-  --hero-wire:rgb(14 116 144 / .20);
-  --hero-glow:rgb(8 145 178 / .16);
-  --hero-glow-alt:rgb(98 80 214 / .12);
+  --hero-grid:color-mix(in srgb,var(--primary) 10%,transparent);
+  --hero-wire:color-mix(in srgb,var(--primary) 20%,transparent);
+  --hero-glow:var(--accent);
   position:relative;
   isolation:isolate;
   overflow:hidden;
   background:var(--background);
 }
 [data-theme="dark"] :is(.hero,.page-head,.cs-hero) {
-  --hero-grid:rgb(46 228 255 / .08);
-  --hero-wire:rgb(46 228 255 / .23);
-  --hero-glow:rgb(8 145 178 / .24);
-  --hero-glow-alt:rgb(98 80 214 / .19);
+  --hero-grid:color-mix(in srgb,var(--primary) 8%,transparent);
+  --hero-wire:color-mix(in srgb,var(--primary) 23%,transparent);
 }
 :is(.hero,.page-head,.cs-hero) > .wrap { position:relative; z-index:1; }
 .hero::before,.page-head::before,.hero-bg { display:none; }
 .hero-tech {
   position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-  background:radial-gradient(ellipse at 77% 43%,var(--hero-glow),transparent 54%),radial-gradient(ellipse at 98% 5%,var(--hero-glow-alt),transparent 47%);
+  background:none;
 }
+.hero-brand-field { display:none; }
+.hero .hero-brand-field {
+  display:block; position:absolute; inset:0; background:var(--brand-gradient); opacity:.12;
+  mask-image:radial-gradient(ellipse at 78% 42%,#000,transparent 68%);
+}
+[data-theme="dark"] .hero .hero-brand-field { opacity:.14; }
 .hero-tech::before {
   content:""; position:absolute; inset:0;
   background-image:linear-gradient(var(--hero-grid) 1px,transparent 1px),linear-gradient(90deg,var(--hero-grid) 1px,transparent 1px);
@@ -43,12 +46,13 @@
 .hero-circuit .node { fill:var(--background); stroke:currentColor; stroke-width:1; opacity:.5; }
 .hero-circuit .junction { fill:currentColor; opacity:.3; }
 .hero-circuit .halo { fill:var(--hero-glow); }
-.hero .runner-card { border-color:color-mix(in srgb,var(--primary) 22%,var(--border)); box-shadow:0 24px 64px -40px rgb(8 145 178 / .5),var(--shadow-sm); }
+.hero .runner-card { border-color:color-mix(in srgb,var(--primary) 22%,var(--border)); box-shadow:var(--shadow-lg); }
 .hero .hero-track .lane { stroke:var(--hero-wire); }
 .hero .hero-strip,.race-head .rb-strip {
   height:1px; opacity:1;
-  background:linear-gradient(90deg,transparent,var(--highlight-start) 40%,var(--highlight-end) 75%,transparent);
+  background:var(--border);
 }
+.hero .hero-strip { background:var(--brand-gradient); }
 .page-head .hero-tech,.cs-hero .hero-tech { opacity:.65; }
 .page-head .hero-tech::after,.cs-hero .hero-tech::after { display:none; }
 .hero-tech .pulse,.hero-tech .halo { animation-play-state:paused; }

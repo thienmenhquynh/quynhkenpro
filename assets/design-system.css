@@ -35,10 +35,6 @@
   --brand-cyan-50: #DEFEFF;
   --brand-cyan: #2EE4FF;
   --brand-lime: #A2FF00;
-  --highlight-start: #0E7490;
-  --highlight-end: #6353B5;
-  --highlight-surface-start: #D5F5FA;
-  --highlight-surface-end: #F2ECFF;
   color-scheme: light;
 }
 [data-theme="dark"] {
@@ -77,10 +73,6 @@
   --brand-cyan-50: #DEFEFF;
   --brand-cyan: #2EE4FF;
   --brand-lime: #A2FF00;
-  --highlight-start: #67E8F9;
-  --highlight-end: #C4B5FD;
-  --highlight-surface-start: #103C49;
-  --highlight-surface-end: #30254B;
   color-scheme: dark;
 }
 /* Compatibility aliases keep the portfolio's content and native controls intact. */
@@ -101,8 +93,8 @@
   --periwinkle-soft:var(--secondary); --periwinkle-ink:var(--foreground);
   --success-ink:var(--primary); --success-soft:var(--accent);
   --lime:var(--secondary); --mint:var(--secondary); --sky:var(--secondary); --orchid:var(--secondary); --periwinkle:var(--secondary);
-  --grad-finish:linear-gradient(var(--primary),var(--primary)); --grad-bloom:var(--grad-finish); --grad-podium:var(--grad-finish); --grad-recovery:var(--grad-finish);
-  --grad-night:linear-gradient(var(--card),var(--background)); --grad-glow-cyan:none;
+  --grad-finish:var(--primary); --grad-bloom:var(--grad-finish); --grad-podium:var(--grad-finish); --grad-recovery:var(--grad-finish);
+  --grad-night:var(--card); --grad-glow-cyan:none;
   --brand-gradient:linear-gradient(100deg,#DEFEFF 0%,#2EE4FF 48%,#A2FF00 100%);
   --radius:.625rem; --radius-sm:6px; --radius-md:8px; --radius-lg:10px; --radius-xl:14px;
   --rounded-badge:var(--radius-md); --rounded-btn:var(--radius-md); --rounded-sm:var(--radius-sm); --rounded-card:var(--radius-xl);
@@ -138,7 +130,6 @@ h1,h2,h3,h4,h5,h6 { font-family:var(--font-heading); font-stretch:normal; }
 .logo-mark::before { background:none; }
 .logo-mark b { color:var(--foreground); font-family:var(--font-heading); font-weight:600; }
 .logo-mark s { background:var(--brand-gradient); }
-.hero::before { background:var(--brand-gradient); opacity:.07; }
 .hero-dots { opacity:.35; }
 .hero-bg { opacity:.65; }
 .hero-name .l1,.hero-name .l2 { white-space:normal; }
@@ -261,21 +252,8 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .project-toolbar .fsel-lab { font-size:14px; line-height:20px; }
 [data-theme] .project-gantt-milestone { color:var(--accent-foreground); }
 
-/* Selected highlights use a cyan-to-violet accent, with readable stops per theme. */
+/* Emphasis uses semantic text tokens; the brand gradient stays decorative. */
 .hero-name .l2 { width:fit-content; max-width:100%; }
-[data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text { color:var(--highlight-start); }
-@supports ((background-clip:text) or (-webkit-background-clip:text)) {
-  [data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text {
-    background:linear-gradient(110deg,var(--highlight-start) 8%,var(--highlight-end) 88%);
-    background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  }
-}
-.cap.c-ai .cap-ico,.cap.is-ai .cap-ico,.kit .skill-tools {
-  background:linear-gradient(135deg,var(--highlight-surface-start),var(--highlight-surface-end));
-}
-.plate::before { background:linear-gradient(100deg,var(--highlight-start),var(--highlight-end)); }
-@media (forced-colors:active),print {
-  [data-theme] .hero-name .l2,[data-theme] :is(h1,h2) .grad-text {
-    color:CanvasText; background:none; -webkit-text-fill-color:currentColor;
-  }
+[data-theme] .grad-text,[data-theme] .hero-name .l2 {
+  color:var(--primary); background:none; -webkit-text-fill-color:currentColor;
 }
