@@ -156,7 +156,7 @@ window.I18N = (function () {
     'ct.lead': 'Open to conversations about Product Manager / Product Owner roles, or a product problem that needs someone to lead it.',
     'ct.phone': 'Phone',
     'ft.copy': '© 2026 Hoang Xuan Quynh · Product Manager',
-    'ft.ds': 'Built on the NetRace Design System',
+    'ft.ds': 'Built on 9Proptech Design System v2.1',
 
     'pj.eyebrow': 'Projects',
     'pj.title': 'Products that crossed the line',
