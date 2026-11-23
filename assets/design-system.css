@@ -229,6 +229,10 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .badge-mint,.badge-lime { background:var(--accent); color:var(--accent-foreground); }
 .work-code { border-radius:var(--radius-md); background:var(--card); color:var(--foreground); border-color:var(--border); }
 .pcard[data-theme],.feat,.tactic,.tactic.lg,.cap,.area,.side-card,.codewin,.skill,.contact-cards a,.story,.runner-card,.plate,.board-wrap,.vw-info { background:var(--card); color:var(--foreground); border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow-sm); padding:16px; }
+.cap.c-ai { background:var(--card); border-color:var(--border); animation:none; }
+.cap::after,.cap.c-ai::before { display:none; }
+.cap.c-ai .cap-ico,.cap.is-ai .cap-ico { background:var(--accent); color:var(--accent-foreground); border:1px solid var(--border); animation:none; }
+.cap.c-ai .cap-ico svg { animation:none; }
 .pcard .feat { background:none; border:0; border-radius:0; box-shadow:none; padding:0; }
 .codewin { padding:0; }
 .contact-cards a:hover,.story:hover { border-color:var(--primary); }
@@ -255,7 +259,7 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
 .project-toolbar .project-view-tabs,.lang { background:var(--muted); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:none; }
 .project-toolbar .project-view-tabs button { min-height:36px; font-size:14px; font-weight:500; }
 .project-view-tabs button[aria-selected="true"],.lang button[aria-pressed="true"] { color:var(--accent-foreground); background:var(--accent); box-shadow:var(--shadow-sm); }
-.project-toolbar .fsel-lab { position:static; width:auto; height:auto; margin:0 0 4px; clip-path:none; font:500 12px/16px var(--font-body); }
+.project-toolbar .fsel-lab { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; font:500 12px/16px var(--font-body); }
 .project-toolbar .fsel select { height:36px; border-color:var(--input); font-size:14px; box-shadow:var(--shadow-xs); }
 .project-toolbar { align-items:flex-end; }
 .project-toolbar .project-view-tabs { align-self:flex-end; }
@@ -311,7 +315,6 @@ svg[stroke],svg [stroke="currentColor"] { stroke-width:2; }
   .project-record-link { display:inline-flex; align-items:center; min-height:44px; }
 }
 @media (max-width:740px) {
-  .project-toolbar .fsel-lab { margin-bottom:4px; }
   .project-toolbar .project-view-tabs button { font-size:13px; padding:8px 6px; }
 }
 @media (max-width:360px) {
