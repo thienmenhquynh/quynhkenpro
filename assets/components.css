@@ -1,0 +1,163 @@
+/* Component finishing: clear surface hierarchy, quiet supporting information. */
+:root,[data-theme] {
+  --elevation-quiet:var(--shadow-xs);
+  --elevation-card:var(--shadow-sm);
+  --elevation-raised:var(--shadow-lg);
+  --elevation-media:0 12px 28px -16px rgb(15 23 42 / .22),var(--shadow-md);
+  --edge-raised:color-mix(in srgb,var(--foreground) 14%,var(--card));
+}
+[data-theme="dark"] {
+  --elevation-quiet:0 1px 2px rgb(0 0 0 / .16);
+  --elevation-card:0 2px 6px -3px rgb(0 0 0 / .4);
+  --elevation-raised:0 12px 28px -14px rgb(0 0 0 / .65),0 3px 8px -4px rgb(0 0 0 / .5);
+  --elevation-media:0 18px 32px -18px rgb(0 0 0 / .7),var(--shadow-md);
+}
+
+/* Navigation and controls sit above the page; only the primary CTA is raised. */
+.nav { box-shadow:var(--elevation-quiet); }
+.nav .wordmark { letter-spacing:-.035em; }
+.nav .logo-mark { border-color:var(--border); box-shadow:var(--elevation-quiet); }
+.nav .wordmark:hover .logo-mark { transform:none; box-shadow:var(--elevation-card); }
+.mobile-menu { box-shadow:var(--elevation-raised); }
+.btn { font-weight:600; transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease; }
+.btn-primary { box-shadow:var(--shadow-md); }
+.btn-secondary,.btn-ghost { box-shadow:none; }
+.btn-icon { box-shadow:var(--elevation-quiet); }
+.lang { box-shadow:none; }
+
+/* A consistent type hierarchy without changing section or grid structure. */
+.eyebrow { font-size:12px; line-height:20px; font-weight:500; }
+.sec-no { color:var(--primary); }
+.sec-head .display-md,.closing .display-md { font-size:clamp(23px,2.2vw,28px); line-height:1.25; letter-spacing:-.025em; }
+.sec-head .lead { font-size:15px; line-height:24px; }
+.profile-title { max-width:900px; margin:16px 0 36px; font-size:clamp(28px,3vw,40px); line-height:1.2; letter-spacing:-.03em; }
+.feat-head .headline { font-size:24px; line-height:32px; letter-spacing:-.025em; }
+.headline { letter-spacing:-.018em; }
+.work-title { font-size:18px; line-height:25px; }
+.work-sub,.pc-lead { line-height:1.65; }
+main > section.band-lanes { background-image:none; }
+.finish-line { height:1px; background:var(--border); opacity:1; }
+.finish-line rect { display:none; }
+
+/* Profile: the narrative is the anchor, capability cards stay secondary. */
+.codewin { border-color:var(--edge-raised); box-shadow:var(--elevation-raised); }
+.codewin-bar { background:var(--muted); border-bottom-color:var(--border); }
+.codewin .md-fm { background:var(--muted); color:var(--foreground); border-bottom-style:solid; }
+.codewin .md-fm dt { color:var(--primary); }
+.codewin .md-sec { border-color:var(--border); }
+.caps .cap {
+  padding:20px; background:var(--muted); color:var(--foreground);
+  border:1px solid transparent; box-shadow:none;
+}
+.caps .cap .headline { font-size:16px; line-height:23px; }
+.caps .cap p { font-size:14px; line-height:22px; }
+.caps .cap .cap-ico {
+  width:38px; height:38px; margin-bottom:8px;
+  background:var(--card); color:var(--primary); border:1px solid var(--border);
+  box-shadow:var(--elevation-quiet);
+}
+.caps .cap.c-ai { background:var(--card); border-color:var(--edge-raised); box-shadow:var(--elevation-card); }
+.caps .cap.c-ai .cap-ico { background:var(--accent); color:var(--accent-foreground); border-color:var(--border); }
+.cap:hover,.cap:hover .cap-ico { transform:none; }
+.cap:hover { border-color:var(--border); }
+
+/* Supporting cards use a fine edge; feature narratives have real elevation. */
+.side-card,.area,.tactic,.skill,.build { box-shadow:var(--elevation-quiet); border-color:var(--border); }
+.side-card .headline,.area .headline { font-size:17px; line-height:24px; }
+.tactic.lg,.story,section .cs-meta.cap { border:1px solid var(--edge-raised); background:var(--card); box-shadow:var(--elevation-raised); }
+section .cs-meta.cap { padding:24px; }
+.story .story-num b,section .cs-meta .story-num b { font-size:32px; line-height:40px; color:var(--foreground); }
+.cs-shot { border-color:var(--border); box-shadow:var(--elevation-card); }
+.cs-toc a { box-shadow:var(--elevation-quiet); }
+.cs-toc a:hover { transform:none; box-shadow:var(--elevation-card); }
+.win { border-left:2px solid var(--primary); border-radius:var(--radius-sm); }
+
+/* Skills: skill name, supporting tags, then a discreet progress meter. */
+.kit .skill { padding:20px; border-color:var(--border); box-shadow:var(--elevation-card); }
+.kit .skill:hover { transform:none; border-color:var(--edge-raised); box-shadow:var(--elevation-card); }
+.kit .skill h3 { font-size:17px; line-height:24px; }
+.kit .sk-val { font-size:14px; color:var(--primary); }
+.kit .sk-bar { height:4px; }
+.kit .chips li { background:var(--muted); border-color:transparent; font-size:12px; line-height:18px; }
+.kit .chips li.chip-hl { background:var(--accent); color:var(--accent-foreground); }
+.kit .skill-tools { background:var(--accent); color:var(--accent-foreground); border-color:color-mix(in srgb,var(--primary) 18%,var(--border)); }
+.kit .skill-tools .chips li { background:var(--card); color:var(--foreground); border-color:var(--border); }
+
+/* Product overview, selected feature and image have three distinct levels. */
+.pcard[data-theme] { padding:24px; border-color:var(--edge-raised); box-shadow:var(--elevation-raised); }
+.pc-head { margin-bottom:24px; padding-bottom:20px; }
+.pc-name { font-size:24px; line-height:32px; letter-spacing:-.025em; }
+.pcard .feat { box-shadow:none; }
+.pcard[data-theme] .feat-item { padding:14px; background:transparent; border-color:transparent; box-shadow:none; }
+.pcard[data-theme] .feat-item:hover { background:var(--muted); border-color:var(--border); }
+.pcard[data-theme] .feat-item[aria-selected="true"] {
+  background:var(--accent); color:var(--accent-foreground); border-color:color-mix(in srgb,var(--primary) 35%,var(--border));
+  box-shadow:inset 3px 0 0 var(--primary),var(--elevation-quiet);
+}
+.pcard .fi-no { font-size:12px; line-height:22px; }
+.pcard .fi-title { font-size:15px; line-height:22px; }
+.pcard .fi-desc { font-size:14px; line-height:22px; }
+.pcard[data-theme] .browser { border-color:var(--edge-raised); border-radius:var(--radius-lg); box-shadow:var(--elevation-media); }
+.pcard[data-theme] .br-bar { background:var(--muted); }
+.pcard[data-theme] .br-url { border-color:transparent; box-shadow:none; }
+.pcard .br-mock { background:var(--card); }
+.work-media { border-color:var(--border); box-shadow:var(--elevation-card); transition:box-shadow .2s ease,border-color .2s ease; }
+.work-link:hover .work-media,.work-link:focus-visible .work-media { box-shadow:var(--elevation-media); border-color:var(--edge-raised); }
+.work-link:hover .work-media img,.work-link:focus-visible .work-media img { transform:scale(1.015); }
+.work-tags .badge { box-shadow:none; }
+.board-wrap { border-color:var(--edge-raised); box-shadow:var(--elevation-raised); }
+.board th { text-transform:none; letter-spacing:normal; }
+.board .big { font-size:28px; line-height:36px; }
+
+/* Opaque toolbar and table layers retain their sticky positioning and free height. */
+.project-toolbar,#project-shared-tools { background:var(--card); }
+.project-toolbar .project-view-tabs { border-color:var(--input); box-shadow:none; }
+.project-toolbar .project-view-tabs button { font-weight:500; }
+.project-toolbar .project-view-tabs button[aria-selected="true"] { box-shadow:var(--elevation-card); }
+.project-toolbar .fsel select { border-color:var(--input); box-shadow:var(--elevation-quiet); }
+.project-table-scroll,.project-gantt-scroll { border-color:var(--edge-raised); box-shadow:var(--elevation-card); }
+.project-lark-table thead th,.project-gantt-table thead th,
+.project-gantt-table thead .gantt-name,.project-gantt-table thead .gantt-progress {
+  background:var(--muted); color:var(--foreground); font-weight:600;
+}
+.project-group-toggle { font-weight:500; }
+.project-domain-chip { border-color:transparent; }
+.project-data-row td,.project-gantt-row > td { background:var(--card); }
+.viewer .vw-info { border-color:var(--edge-raised); box-shadow:var(--elevation-raised); }
+.viewer .vw-demo { box-shadow:var(--elevation-quiet); }
+
+/* Contact retains its centered two-column composition. */
+.contact-cards a { padding:18px; border-color:var(--border); box-shadow:var(--elevation-card); }
+.contact-cards small { font-size:12px; line-height:18px; }
+.contact-cards b { font-weight:500; line-height:23px; }
+.contact-cards a:hover { border-color:var(--primary); box-shadow:var(--elevation-raised); }
+footer { font-size:12px; line-height:20px; }
+footer .stripe { width:64px; height:2px; margin-top:8px; }
+
+@media (max-width:980px) {
+  .pcard[data-theme] { padding:20px; }
+}
+@media (max-width:767px) {
+  .sec-head .display-md,.closing .display-md { font-size:23px; line-height:30px; }
+  .profile-title { font-size:28px; line-height:36px; margin-bottom:28px; }
+  .caps .cap { padding:18px; }
+  .kit .skill { padding:18px; }
+  .pcard[data-theme] { padding:16px; }
+  .pc-name { font-size:22px; line-height:30px; }
+  .pc-head { margin-bottom:20px; padding-bottom:16px; }
+  .pcard[data-theme] .feat-item { padding:12px; }
+  .contact-cards a { padding:16px; }
+  .feat-head .headline { font-size:22px; line-height:30px; }
+  .board .big { font-size:24px; line-height:32px; }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .btn-primary:hover { box-shadow:var(--elevation-raised); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .work-link:hover .work-media img,.work-link:focus-visible .work-media img { transform:none; }
+}
+@media (forced-colors:active) {
+  .codewin,.caps .cap,.pcard[data-theme],.pcard[data-theme] .browser,.kit .skill,.work-media,.contact-cards a,
+  .project-table-scroll,.project-gantt-scroll,.viewer .vw-info { box-shadow:none; border-color:CanvasText; }
+  .pcard[data-theme] .feat-item[aria-selected="true"] { box-shadow:none; outline:2px solid Highlight; outline-offset:-2px; }
+}

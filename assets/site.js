@@ -148,20 +148,10 @@
     }
   })();
 
-  /* ---------- Tấm BIB: dòng vai trò gõ như code ---------- */
+  /* ---------- Stable role label in the portrait identity card ---------- */
   (function () {
     var el = $('#role-type'); if (!el) return;
-    var roles = (el.getAttribute('data-roles') || 'Product Manager|Product Owner').split('|');
-    if (reduce.matches || STATIC) { el.textContent = roles[0]; return; }
-    var r = 0, n = roles[0].length, del = true;
-    function tick() {
-      var w = roles[r];
-      if (del) { n--; if (n <= 0) { n = 0; del = false; r = (r + 1) % roles.length; } }
-      else { n++; if (n >= roles[r].length) { del = true; el.textContent = roles[r]; return setTimeout(tick, 1800); } }
-      el.textContent = (del ? w : roles[r]).slice(0, n);
-      setTimeout(tick, del ? 38 : 75);
-    }
-    setTimeout(tick, 1800);                                    // giữ chữ đầu một nhịp rồi mới xoá
+    el.textContent = (el.getAttribute('data-roles') || 'Product Manager|Product Owner').split('|')[0];
   })();
 
   /* ---------- Case study (trang Dự án): bộ lọc + trình xem kiểu Behance ---------- */
@@ -537,28 +527,12 @@
         .from('.hero .lead-strong', {}, '<0.25')
         .from('.hero .btn-row .btn', { y: 16, stagger: 0.08 }, '<0.2')
         .from('.split', { y: 12, stagger: 0.06, duration: 0.5 }, '<0.1')
-        .from('.hero-dots', { y: 0, duration: 1.2, ease: 'power2.out' }, 0)
-        .from('.runner-card', { y: 48, rotationX: 10, duration: 0.9 }, 0.3)
+        .from('.runner-card', { y: 20, duration: 0.7 }, 0.3)
         .from('.plate', { y: 16, duration: 0.5 }, 0.85);
       $$('.split .num').forEach(function (el) {
         var t = countUp(el, { paused: true });
         if (t) hero.add(t.play(), 0.6);
       });
-
-      // Card nghiêng nhẹ theo con trỏ (chỉ chuột/trackpad)
-      var heroEl = $('.hero'), card = $('.runner-card');
-      if (card && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        var rY = gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power3.out' });
-        var rX = gsap.quickTo(card, 'rotationX', { duration: 0.6, ease: 'power3.out' });
-        gsap.set('.hero-track', { xPercent: -50, yPercent: -50, x: 0, y: 0 });   // giữ căn giữa theo % khi GSAP điều khiển transform
-        var tX = gsap.quickTo('.hero-track', 'x', { duration: 0.9, ease: 'power3.out' });
-        heroEl.addEventListener('pointermove', function (e) {
-          var r = heroEl.getBoundingClientRect();
-          var nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
-          rY(nx * 8); rX(ny * -6); tX(nx * -24);
-        });
-        heroEl.addEventListener('pointerleave', function () { rY(0); rX(0); tX(0); });
-      }
     }
   });
 

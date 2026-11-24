@@ -106,7 +106,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/design-system.css">
 <link rel="stylesheet" href="assets/hero.css">
-<script src="assets/hero.js" defer></script>
+<link rel="stylesheet" href="assets/components.css">
 <script src="assets/design-system.js"></script>
 <script src="assets/i18n.js"></script>
 <script src="assets/analytics.js" defer></script>
@@ -252,9 +252,6 @@
 
   <!-- ============ HERO: Race 3D ============ -->
   <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-dots"></div>
-      </div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <p class="hello" data-i18n="hero.hello">// Xin chào, tôi là</p>
@@ -272,9 +269,7 @@
         </div>
       </div>
 
-      <!-- Sân khấu 3D: các cổng checkpoint = các chặng sự nghiệp, lao về phía người xem.
-           Không JS / reduced-motion: cổng đứng yên ở vị trí --z, cảnh vẫn hoàn chỉnh. -->
-      <!-- Card ảnh VĐV — nền hero (lưới chấm + đường đua) nằm phía sau -->
+      <!-- Portrait and identity card; decorative background is handled in CSS. -->
       <figure class="avatar-stage">
           <svg class="hero-track" viewBox="0 0 760 1000" fill="none" aria-hidden="true">
             <g class="lanes"><path class="lane" d="M30.0 380.0 A350.0 350.0 0 0 1 730.0 380.0 V620.0 A350.0 350.0 0 0 1 30.0 620.0 Z"/><path class="lane" d="M56.0 380.0 A324.0 324.0 0 0 1 704.0 380.0 V620.0 A324.0 324.0 0 0 1 56.0 620.0 Z"/><path class="lane lane-mid" d="M82.0 380.0 A298.0 298.0 0 0 1 678.0 380.0 V620.0 A298.0 298.0 0 0 1 82.0 620.0 Z"/><path class="lane" d="M108.0 380.0 A272.0 272.0 0 0 1 652.0 380.0 V620.0 A272.0 272.0 0 0 1 108.0 620.0 Z"/><path class="lane" d="M134.0 380.0 A246.0 246.0 0 0 1 626.0 380.0 V620.0 A246.0 246.0 0 0 1 134.0 620.0 Z"/></g>
