@@ -32,29 +32,77 @@
     x * Math.cos(angle) + z * Math.sin(angle), y, z * Math.cos(angle) - x * Math.sin(angle)
   ];
 
-  function raceFlag(u, v, w) {
-    if (w < .12) {
-      return [-.88 + (v - .5) * .026 + u * .09, u * 1.74 - .79, (v - .5) * .04];
-    }
+  function particleContour(paths) {
+    let length = 0;
+    const edges = paths.flatMap(path => path.slice(1).map((end, index) => {
+      const start = path[index];
+      const distance = Math.hypot(end[0] - start[0], end[1] - start[1]);
+      length += distance;
+      return { start, end, distance, finish: length };
+    }));
+    return (u, v, w) => {
+      const position = u * length;
+      const edge = edges.find(edge => edge.finish > position);
+      const t = 1 - (edge.finish - position) / edge.distance;
+      return [
+        lerp(edge.start[0], edge.end[0], t) + (v - .5) * .026,
+        lerp(edge.start[1], edge.end[1], t) + (w - .5) * .026,
+        (v - .5) * .23
+      ];
+    };
+  }
 
-    let x, y;
-    if (w < .24) {
-      x = v < .5 ? u : v < .75 ? 0 : 1;
-      y = v < .25 ? 0 : v < .5 ? 1 : u;
-    } else {
-      // Fill alternating fabric squares, leaving the other squares open.
-      const tile = Math.floor(u * 12);
-      const row = Math.floor(tile / 3);
-      const column = tile % 3 * 2 + row % 2;
-      x = (column + v) / 6;
-      y = (row + (w - .24) / .76) / 4;
-    }
+  const carContour = particleContour([
+    // Low body, front wing and rear wing.
+    [[-1.07, .21], [-.95, .13], [-.63, .14], [-.41, -.04], [-.28, -.08],
+      [-.16, .04], [.10, .07], [.48, .18], [1.04, .23], [1.10, .34],
+      [.65, .34], [.40, .31], [.18, .40], [-.29, .40], [-.49, .34], [-1.06, .32], [-1.07, .21]],
+    [[-1.09, -.11], [-.77, -.11], [-.74, -.03], [-1.06, -.03], [-1.09, -.11]],
+    [[-.92, -.03], [-.92, .14]],
+    [[-.72, -.03], [-.69, .15]],
+    [[.87, .34], [1.11, .34], [1.12, .40], [.88, .40]],
+    // Open cockpit and edge highlights along the chassis.
+    [[-.48, .05], [-.35, -.03], [-.26, -.02], [-.17, .08], [-.02, .11], [.10, .08]],
+    [[-.97, .25], [-.46, .21], [-.16, .19], [.20, .22], [.49, .25], [.93, .28]],
+    [[-.41, .34], [-.14, .31], [.27, .29], [.54, .35]]
+  ]);
+  const towerContour = particleContour([
+    // The three receding floors, archways and low island of Tháp Rùa.
+    [[-.38, -.17], [-.27, -.21], [-.16, -.21], [-.13, -.27], [.45, -.27], [.49, -.21], [.65, -.21]],
+    [[-.13, -.27], [-.13, -.49], [.45, -.49], [.45, -.27]],
+    [[-.16, -.50], [-.08, -.54], [.40, -.54], [.48, -.50]],
+    [[-.07, -.54], [-.07, -.69], [.39, -.69], [.39, -.54]],
+    [[-.10, -.70], [-.03, -.74], [.35, -.74], [.42, -.70]],
+    [[.01, -.74], [.01, -.85], [.31, -.85], [.31, -.74]],
+    [[-.02, -.85], [.04, -.89], [.16, -.94], [.28, -.89], [.34, -.85]],
+    [[-.06, -.28], [-.06, -.40], [-.02, -.44], [.02, -.40], [.02, -.28]],
+    [[.12, -.28], [.12, -.40], [.16, -.44], [.20, -.40], [.20, -.28]],
+    [[.30, -.28], [.30, -.40], [.34, -.44], [.38, -.40], [.38, -.28]],
+    [[.01, -.55], [.01, -.63], [.06, -.66], [.11, -.63], [.11, -.55]],
+    [[.21, -.55], [.21, -.63], [.26, -.66], [.31, -.63], [.31, -.55]],
+    [[.12, -.75], [.12, -.81], [.16, -.83], [.20, -.81], [.20, -.75]]
+  ]);
+  const speedContour = particleContour([
+    [[-1.10, .53], [-.97, .53], [-.82, .50]],
+    [[-1.14, .67], [-.68, .70], [-.33, .70], [-.03, .67]],
+    [[.20, .71], [.55, .73], [.94, .73], [1.10, .69]]
+  ]);
 
-    return [
-      x * 1.76 - .83,
-      y * 1.02 - .75 + Math.sin(x * tau) * .065,
-      Math.sin(x * tau * 1.2 + y * .7) * x * .19
-    ];
+  function raceScene(u, v, w) {
+    if (w < .31) {
+      const rear = u < .52;
+      const ring = w < .22 ? .96 : .55;
+      const radius = (rear ? .218 : .199) * (ring + (u * 2 % 1 - .5) * .10);
+      const angle = v * tau;
+      return [
+        (rear ? -.70 : .62) + Math.cos(angle) * radius,
+        .43 + Math.sin(angle) * radius,
+        .24 + (u - .5) * .12
+      ];
+    }
+    if (w < .73) return carContour(u, v, w);
+    if (w < .94) return towerContour(u, v, w);
+    return speedContour(u, v, w);
   }
 
   function orbit(u, v, w) {
@@ -105,16 +153,22 @@
     ], -.28);
   }
 
-  const forms = [raceFlag, orbit, helix, cube, diamond, infinity];
+  const forms = [raceScene, orbit, helix, cube, diamond, infinity];
   const particles = Array.from({ length: 4740 }, () => {
     const u = random(), v = random(), w = random();
     const dust = random() < .22;
     const radius = 1.07 + Math.pow(w, 1.6) * 1.63;
     const dustPoint = [Math.cos(u * tau) * radius, Math.sin(u * tau) * radius * .73, v - .5];
+    const size = .48 + Math.pow(random(), 2.8) * 1.95;
+    const shade = random(), phase = random() * tau;
+    const scatterDistance = (dust ? .10 : .35) * (.52 + shade * .48);
     return {
       targets: dust ? forms.map(() => dustPoint) : forms.map(form => form(u, v, w)),
-      dust, size: .48 + Math.pow(random(), 2.8) * 1.95,
-      shade: random(), phase: random() * tau, offsetX: 0, offsetY: 0
+      dust, size, shade, phase,
+      raceColor: w >= .73 && w < .94 ? 3 : v < .72 ? 0 : 1,
+      scatterX: Math.cos(phase) * scatterDistance,
+      scatterY: Math.sin(phase) * scatterDistance * .85,
+      offsetX: 0, offsetY: 0
     };
   });
 
@@ -130,6 +184,7 @@
   let driftAngle = Math.random() * tau;
   let driftFrom = { x: 0, y: 0 };
   let driftTo = nextDriftPoint();
+  let nextScatter = 5.5;
 
   function nextDriftPoint() {
     driftAngle += 1.6 + Math.random() * 2.2;
@@ -145,6 +200,18 @@
     }
     const t = ease((elapsed - driftStarted) / driftDuration);
     return { x: lerp(driftFrom.x, driftTo.x, t), y: lerp(driftFrom.y, driftTo.y, t) };
+  }
+
+  function scatterAmount() {
+    const age = elapsed - nextScatter;
+    if (age < 0) return 0;
+    const release = .55;
+    const duration = 1.85;
+    if (age >= duration) {
+      nextScatter += duration + 7 + Math.random() * 4;
+      return 0;
+    }
+    return age < release ? ease(age / release) : 1 - ease((age - release) / (duration - release));
   }
 
   function measure() {
@@ -197,11 +264,11 @@
       const mobile = width < 560;
       const portraitEdge = portraitBox.center + portraitBox.width / 2;
       const room = width - portraitEdge;
-      const y = portraitBox.top + portraitBox.height * (mobile ? 1 : .47) + (mobile ? 99 : 0);
+      const y = portraitBox.top + portraitBox.height * (mobile ? 1 : .66) + (mobile ? 99 : 0);
       return {
-        x: mobile ? width * .76 : portraitEdge + room * .53,
+        x: mobile ? width * .74 : portraitEdge + room * .52,
         y: clamp(y - (still ? 0 : scroll), height * .25, height * .77),
-        size: mobile ? width * .23 : clamp(room * .465, 56, 134)
+        size: mobile ? width * .218 : clamp(room * .445, 56, 134)
       };
     }
     const left = narrow ? .30 : .235;
@@ -225,24 +292,25 @@
     const start = pose(from, still), end = pose(to, still);
     const size = lerp(start.size, end.size, t);
     const morph = Math.sin(t * Math.PI);
+    const scatter = still ? 0 : scatterAmount() * (1 - morph * .78);
+    const spreadSize = size * (1 + scatter * .14);
     const offset = still ? { x: 0, y: 0 } : drift();
-    const flagStrength = lerp(from === 0 ? 1 : 0, to === 0 ? 1 : 0, t);
-    const driftWidth = Math.min(width * .078, 86) * lerp(1, .24, flagStrength);
-    const driftHeight = Math.min(height * .075, 66) * lerp(1, .52, flagStrength);
-    const margin = size * lerp(.74, .98, flagStrength);
+    const raceStrength = lerp(from === 0 ? 1 : 0, to === 0 ? 1 : 0, t);
+    const driftWidth = Math.min(width * .078, 86) * lerp(1, .24, raceStrength);
+    const driftHeight = Math.min(height * .075, 66) * lerp(1, .52, raceStrength);
+    const margin = size * lerp(.74, 1.13, raceStrength);
     const x = clamp(lerp(start.x, end.x, t) + offset.x * driftWidth, margin, width - margin);
     const y = clamp(lerp(start.y, end.y, t) + offset.y * driftHeight + morph * height * .08, size * .62, height - size * .62);
     const sway = Math.sin(elapsed * .28) * .16;
     const cos = Math.cos(sway), sin = Math.sin(sway);
     const fade = clamp((mainBottom - scroll) / (height * .67));
-    // The hero track stays readable over the flag's particles.
-    const opacity = fade * lerp(.70, .64, flagStrength);
+    const opacity = fade * lerp(.70, .68, raceStrength);
     const bottom = Math.min(height, mainBottom - scroll);
     ctx.save();
     ctx.beginPath();
     ctx.rect(0, 0, width, bottom);
     ctx.clip();
-    paintAura(x, y, size, opacity * lerp(1, .60, flagStrength));
+    paintAura(x, y, spreadSize, opacity * lerp(1, .60, raceStrength) * (1 - scatter * .20));
     const hoverRadius = width < 980 ? 73 : 118;
     const cursor = !still && pointer;
     const smoothing = 1 - Math.exp(-step * 11);
@@ -253,15 +321,13 @@
       const a = point.targets[from], b = point.targets[to];
       const travel = ease(clamp(t + morph * (point.shade - .5) * .28));
       const px = lerp(a[0], b[0], travel) + morph * Math.cos(point.phase) * .27;
-      const wave = point.dust || !flagStrength ? 0 : clamp((px + .82) / 1.74) * flagStrength;
-      const fold = Math.sin(elapsed * 1.75 - px * 4.1) * wave;
-      const py = lerp(a[1], b[1], travel) + morph * Math.sin(point.phase) * .25 + fold * .066;
-      const pz = lerp(a[2], b[2], travel) + fold * .18;
+      const py = lerp(a[1], b[1], travel) + morph * Math.sin(point.phase) * .25;
+      const pz = lerp(a[2], b[2], travel);
       const z = pz * cos - px * sin;
       const perspective = 1 + z * .10;
       const flutter = Math.sin(elapsed * (.65 + point.shade * .55) + point.phase);
-      const homeX = x + ((px * cos + pz * sin) * perspective + flutter * .014) * size;
-      const homeY = y + (py * perspective + flutter * .011) * size;
+      const homeX = x + ((px * cos + pz * sin) * perspective + flutter * .014 + point.scatterX * scatter) * spreadSize;
+      const homeY = y + (py * perspective + flutter * .011 + point.scatterY * scatter) * spreadSize;
       let repelX = 0, repelY = 0, force = 0;
       if (cursor) {
         const dx = homeX - cursor.x, dy = homeY - cursor.y;
@@ -280,11 +346,11 @@
       if (drawX < -3 || drawX > width + 3 || drawY < -3 || drawY > bottom + 3) continue;
 
       const particleSize = point.size * displayScale * (perspective + force * .42);
-      const strength = point.dust ? .22 : lerp(.48, .88, flagStrength);
+      const strength = point.dust ? .22 : lerp(.48, .88, raceStrength);
       const brightness = clamp(strength * (.67 + .25 * flutter + .23 * perspective) + force * .5);
       ctx.globalAlpha = brightness * opacity;
       const shade = clamp(Math.floor((point.shade * .72 + (py + 1) * .12) * 5), 0, palette.length - 1);
-      ctx.fillStyle = palette[point.dust ? 1 : point.shade < flagStrength * .78 ? 0 : shade];
+      ctx.fillStyle = palette[point.dust ? 1 : point.shade < raceStrength * .94 ? point.raceColor : shade];
       if (!point.dust && particleSize > 1.8) {
         // A broad soft pixel around the brightest grains adds depth to the cluster.
         ctx.globalAlpha *= .23;
