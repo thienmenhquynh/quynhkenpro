@@ -1,0 +1,32 @@
+#top > section:has(> .nano-seam) {
+  position:relative;
+}
+
+#top > section > .nano-seam {
+  position:absolute;
+  z-index:2;
+  top:-57px;
+  left:50%;
+  width:min(520px, calc(100% - 32px));
+  height:124px;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+#top > .closing > .nano-seam {
+  top:-64px;
+  height:102px;
+}
+
+@media (max-width:820px) {
+  #top > section > .nano-seam,
+  #top > .closing > .nano-seam {
+    top:-45px;
+    height:73px;
+    width:min(400px, calc(100% - 24px));
+  }
+}
+
+@media print, (forced-colors: active) {
+  .nano-seam { display:none; }
+}
