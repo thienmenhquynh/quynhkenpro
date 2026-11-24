@@ -17,3 +17,5 @@ This portfolio remains a static HTML/CSS/JavaScript site. `assets/design-system.
 - Section backgrounds alternate semantic `card`, `muted`, `background` and `secondary` surfaces; the contact section uses `accent`. The landing hero's brand field stays around the portrait and fades before the copy. Both themes retain their own tokens and all sections continue to follow the selected theme.
 
 - `assets/components.css` defines distinct quiet, card, raised and media elevations in each theme. Supporting capability cards stay subdued; profile narratives, featured products and screenshots carry the main visual weight. Component grids, native interactions and sticky offsets are unchanged.
+
+- The hero career lap has five native SVG gradient trails with staggered phases and lap times. Motion runs independently of GSAP, pauses offscreen/in hidden tabs, respects live reduced-motion changes, and renders a stable frame for static previews.

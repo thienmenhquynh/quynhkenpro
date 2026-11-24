@@ -94,7 +94,7 @@
     var svg = $('.hero-track'), path = $('#hero-trail');
     if (!svg || !path || !path.getTotalLength) return;
     var NS = 'http://www.w3.org/2000/svg';
-    var L = path.getTotalLength(), SEG = L * 0.14;
+    var L = path.getTotalLength();
     var cps = [
       { f: 0.20, code: 'CP1', year: '2015', name: 'VCCorp' },
       { f: 0.31, code: 'CP2', year: '2019', name: 'Funtap' },
@@ -122,30 +122,62 @@
     }); }
     names(); document.addEventListener('langchange', names);
 
-    var head = $('#hero-head'), live = $('#race-live'), last = -1;
-    path.style.strokeDasharray = SEG + ' ' + L;
-    function render(p) {                                          // p: vị trí đầu vệt sáng, 0..1
-      var at = (p * L) % L;
-      path.style.strokeDashoffset = -(at - SEG);
-      var pt = path.getPointAtLength(at); head.setAttribute('cx', pt.x); head.setAttribute('cy', pt.y);
-      var hit = -1;
-      cps.forEach(function (c, i) { var on = p >= c.f; c.el.classList.toggle('is-hit', on); if (on) hit = i; });
-      if (hit !== last && hit > -1) {
-        last = hit; var c = cps[hit];
+    // Five independent runners share the brand gradient and travel on real lanes.
+    var defs = document.createElementNS(NS, 'defs');
+    defs.innerHTML = '<linearGradient id="hero-race-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="433" x2="760" y2="567"><stop offset="0%" stop-color="#DEFEFF"/><stop offset="48%" stop-color="#2EE4FF"/><stop offset="100%" stop-color="#A2FF00"/></linearGradient>';
+    svg.insertBefore(defs, svg.firstChild);
+    var runnersGroup = document.createElementNS(NS, 'g');
+    runnersGroup.setAttribute('class', 'race-runners');
+    svg.insertBefore(runnersGroup, g);
+    var durations = [14, 11.7, 15.4, 12.8, 10.5];
+    var runners = $$('.lane', svg).map(function (lane, i) {
+      var trail = document.createElementNS(NS, 'path');
+      trail.setAttribute('class', 'race-runner-trail');
+      trail.setAttribute('d', lane.getAttribute('d'));
+      trail.setAttribute('stroke', 'url(#hero-race-gradient)');
+      var length = lane.getTotalLength(), segment = length * (0.075 + i % 3 * 0.015);
+      trail.style.strokeDasharray = segment + ' ' + (length - segment);
+      var dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('class', 'race-runner-dot'); dot.setAttribute('r', '4');
+      runnersGroup.appendChild(trail); runnersGroup.appendChild(dot);
+      return { lane: lane, trail: trail, dot: dot, length: length, segment: segment, phase: 0.14 + i * 0.17, duration: durations[i] };
+    });
+    var live = $('#race-live'), last = -1;
+    function render(elapsed) {
+      runners.forEach(function (runner) {
+        var progress = (runner.phase + elapsed / runner.duration) % 1;
+        var distance = progress * runner.length;
+        runner.trail.style.strokeDashoffset = -(distance - runner.segment);
+        var point = runner.lane.getPointAtLength(distance);
+        runner.dot.setAttribute('cx', point.x); runner.dot.setAttribute('cy', point.y);
+      });
+      var progress = (0.64 + elapsed / durations[0]) % 1, hit = -1;
+      cps.forEach(function (c, i) { var on = progress >= c.f; c.el.classList.toggle('is-hit', on); if (on) hit = i; });
+      if (hit !== last) {
+        last = hit;
+        var c = cps[hit < 0 ? 4 : hit];
         live.textContent = c.code + ' · ' + c.nameEl.textContent;
-        if (window.gsap && !reduce.matches) gsap.fromTo(live, { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.3, ease: 'power2.out', overwrite: true });
       }
     }
-    svg.classList.add('ready');
-    var still = 0.64;                                             // đứng yên sau CP5 (không GSAP / giảm chuyển động)
-    if (!window.gsap || reduce.matches || STATIC) { render(still); return; }
-    var st = { p: 0 };
-    var lap = gsap.to(st, { p: 0.98, duration: 11, ease: 'none', repeat: -1, repeatDelay: 1.2,
-      onUpdate: function () { render(st.p); }, onRepeat: function () { last = -1; } });
-    render(0);
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { es[0].isIntersecting ? lap.resume() : lap.pause(); }).observe($('.hero'));
+    svg.classList.add('ready'); render(0);
+    var frame = 0, elapsed = 0, previous = 0, painted = 0, visible = true;
+    function tick(now) {
+      elapsed += Math.min((now - previous) / 1000, 0.1); previous = now;
+      if (now - painted >= 32) { render(elapsed); painted = now; }
+      frame = requestAnimationFrame(tick);
     }
+    function sync() {
+      if (frame) { cancelAnimationFrame(frame); frame = 0; }
+      if (!STATIC && !reduce.matches && visible && !document.hidden) {
+        previous = performance.now(); frame = requestAnimationFrame(tick);
+      }
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }).observe($('.hero'));
+    }
+    document.addEventListener('visibilitychange', sync);
+    reduce.addEventListener('change', sync);
+    sync();
   })();
 
   /* ---------- Stable role label in the portrait identity card ---------- */
