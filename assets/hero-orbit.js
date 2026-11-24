@@ -6,12 +6,15 @@
   const cards = [...products.children];
   const toggle = stage.querySelector('.galaxy-motion');
   const core = stage.querySelector('.galaxy-core');
+  const scene = stage.querySelector('.galaxy-scene');
+  const portrait = stage.querySelector('.hero-portrait');
+  const wide = matchMedia('(min-width:981px)');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const hover = matchMedia('(hover: hover) and (pointer: fine)');
   const staticView = new URLSearchParams(location.search).has('static');
   const turn = 2 * Math.PI;
   let angle = -1.06;
-  let horizontal = 0, vertical = 0, tilt = 0;
+  let horizontal = 0, vertical = 0;
   let frame = 0, last = 0, visible = true;
   let hovered = false, focused = false, paused = false;
 
@@ -30,24 +33,24 @@
       const phase = angle + index * turn / cards.length;
       const depth = (Math.sin(phase) + 1) / 2;
       const side = Math.cos(phase);
-      const scale = .79 + depth * .21;
+      const scale = .88 + depth * .12;
       const x = horizontal * side;
-      const y = Math.sin(phase) * vertical + side * tilt;
-      card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(${scale}) rotate(${side * 5}deg)`;
-      card.style.zIndex = depth < .31 ? '2' : String(4 + Math.round(depth * 9));
-      card.style.setProperty('--orbit-opacity', String(.74 + depth * .26));
+      const y = Math.sin(phase) * vertical;
+      card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(${scale})`;
+      card.style.zIndex = String(Math.round(depth * 9));
+      card.style.setProperty('--orbit-opacity', String(.86 + depth * .14));
     });
   }
 
   function tick(now) {
-    if (last) angle = (angle + Math.min(now - last, 60) * turn / 33000) % turn;
+    if (last) angle = (angle + Math.min(now - last, 60) * turn / 46500) % turn;
     last = now;
     paint();
     frame = requestAnimationFrame(tick);
   }
 
   function sync() {
-    const still = staticView || motion.matches;
+    const still = staticView || motion.matches || !wide.matches || stage.clientWidth < 540;
     stage.classList.toggle('is-orbit-ready', !still);
     toggle.hidden = still;
     if (frame) cancelAnimationFrame(frame);
@@ -61,16 +64,12 @@
       });
       return;
     }
+    const pad = cards[0].offsetWidth / 2 + 12;
+    const x = core.offsetLeft;
+    horizontal = Math.min(x - portrait.offsetLeft - portrait.offsetWidth - pad, scene.clientWidth - x - pad);
+    vertical = Math.min(core.offsetTop, scene.clientHeight - core.offsetTop) - cards[0].offsetHeight / 2 - 23;
     paint();
     if (!paused && !hovered && !focused && visible && !document.hidden) frame = requestAnimationFrame(tick);
-  }
-
-  function resize() {
-    const height = stage.clientHeight;
-    horizontal = Math.max(0, stage.clientWidth - core.offsetLeft - cards[0].offsetWidth / 2 - 8);
-    vertical = Math.max(0, Math.min(height * .28, core.offsetTop - cards[0].offsetHeight / 2 - 11));
-    tilt = height * .035;
-    sync();
   }
 
   toggle.addEventListener('click', () => {
@@ -107,6 +106,7 @@
     sync();
   });
   motion.addEventListener('change', sync);
+  wide.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   document.addEventListener('langchange', labels);
   if ('IntersectionObserver' in window) {
@@ -115,7 +115,7 @@
       sync();
     }).observe(stage);
   }
-  new ResizeObserver(resize).observe(stage);
+  new ResizeObserver(sync).observe(stage);
   labels();
-  resize();
+  sync();
 })();
