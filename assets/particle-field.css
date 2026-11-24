@@ -1,0 +1,66 @@
+#top > .hero {
+  --hero-cyan:rgb(46 228 255 / .24);
+  --hero-violet:rgb(125 116 238 / .17);
+  --hero-mint:rgb(104 229 153 / .19);
+  --hero-base:#f0f5fc;
+  --hero-light-center:76% 47%;
+  --hero-violet-center:60% 8%;
+  --hero-mint-center:98% 80%;
+  background:
+    radial-gradient(ellipse 49% 72% at var(--hero-light-center),var(--hero-cyan),transparent 78%),
+    radial-gradient(ellipse 45% 64% at var(--hero-violet-center),var(--hero-violet),transparent 80%),
+    radial-gradient(ellipse 46% 62% at var(--hero-mint-center),var(--hero-mint),transparent 78%),
+    linear-gradient(120deg,var(--background) 17%,var(--hero-base) 100%);
+}
+
+#top > .hero::before { content:none; }
+
+[data-theme="dark"] #top > .hero {
+  --hero-cyan:rgb(15 158 187 / .26);
+  --hero-violet:rgb(101 74 208 / .24);
+  --hero-mint:rgb(52 166 127 / .18);
+  --hero-base:#101b28;
+}
+
+@media (max-width:980px) {
+  #top > .hero {
+    --hero-light-center:54% 25%;
+    --hero-violet-center:13% 10%;
+    --hero-mint-center:98% 36%;
+  }
+}
+
+.particle-field {
+  display:none;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+}
+
+#top.has-particle-field {
+  position:relative;
+  isolation:isolate;
+}
+
+.has-particle-field > .particle-field { display:block; }
+#top.has-particle-field > .hero { isolation:auto; }
+
+#top.has-particle-field > section > .wrap {
+  position:relative;
+  z-index:2;
+}
+
+@media (min-width:981px) {
+  #top.has-particle-field .avatar-stage {
+    width:min(330px, 100%);
+    justify-self:end;
+  }
+}
+
+@media print, (forced-colors: active) {
+  #top > .hero { background:var(--background); }
+  #top.has-particle-field > .particle-field { display:none; }
+}
