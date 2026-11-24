@@ -18,4 +18,6 @@ This portfolio remains a static HTML/CSS/JavaScript site. `assets/design-system.
 
 - `assets/components.css` defines distinct quiet, card, raised and media elevations in each theme. Supporting capability cards stay subdued; profile narratives, featured products and screenshots carry the main visual weight. Component grids, native interactions and sticky offsets are unchanged.
 
-- The hero career lap has five native SVG gradient trails with staggered phases and lap times. Motion runs independently of GSAP, pauses offscreen/in hidden tabs, respects live reduced-motion changes, and renders a stable frame for static previews.
+- The hero career lap has seven native SVG gradient trails with staggered phases and lap times. Motion runs independently of GSAP, pauses offscreen/in hidden tabs, respects live reduced-motion changes, and renders a stable frame for static previews.
+
+- The portrait retains its existing front content inside a collectible-card shell, with a subtle brand foil edge/sweep and an occasional 24-second flip cycle. Its decorative back repeats existing name, BIB, role and metrics; no new facts are introduced. Motion pauses offscreen/in hidden tabs and uses a static front for reduced motion. Race trails use thinner strokes at 50% opacity.

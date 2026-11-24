@@ -122,14 +122,20 @@
     }); }
     names(); document.addEventListener('langchange', names);
 
-    // Five independent runners share the brand gradient and travel on real lanes.
+    // Seven independent runners share the brand gradient and travel on real lanes.
     var defs = document.createElementNS(NS, 'defs');
     defs.innerHTML = '<linearGradient id="hero-race-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="433" x2="760" y2="567"><stop offset="0%" stop-color="#DEFEFF"/><stop offset="48%" stop-color="#2EE4FF"/><stop offset="100%" stop-color="#A2FF00"/></linearGradient>';
     svg.insertBefore(defs, svg.firstChild);
     var runnersGroup = document.createElementNS(NS, 'g');
     runnersGroup.setAttribute('class', 'race-runners');
     svg.insertBefore(runnersGroup, g);
-    var durations = [14, 11.7, 15.4, 12.8, 10.5];
+    [337, 259].forEach(function (radius) {
+      var lane = document.createElementNS(NS, 'path');
+      lane.setAttribute('class', 'lane');
+      lane.setAttribute('d', 'M' + (380 - radius) + ' 380 A' + radius + ' ' + radius + ' 0 0 1 ' + (380 + radius) + ' 380 V620 A' + radius + ' ' + radius + ' 0 0 1 ' + (380 - radius) + ' 620 Z');
+      svg.querySelector('.lanes').appendChild(lane);
+    });
+    var durations = [14, 11.7, 15.4, 12.8, 10.5, 13.6, 16.2];
     var runners = $$('.lane', svg).map(function (lane, i) {
       var trail = document.createElementNS(NS, 'path');
       trail.setAttribute('class', 'race-runner-trail');
@@ -138,7 +144,7 @@
       var length = lane.getTotalLength(), segment = length * (0.075 + i % 3 * 0.015);
       trail.style.strokeDasharray = segment + ' ' + (length - segment);
       var dot = document.createElementNS(NS, 'circle');
-      dot.setAttribute('class', 'race-runner-dot'); dot.setAttribute('r', '4');
+      dot.setAttribute('class', 'race-runner-dot'); dot.setAttribute('r', '3');
       runnersGroup.appendChild(trail); runnersGroup.appendChild(dot);
       return { lane: lane, trail: trail, dot: dot, length: length, segment: segment, phase: 0.14 + i * 0.17, duration: durations[i] };
     });

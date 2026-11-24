@@ -89,9 +89,9 @@
 .hero .cp-mark.is-next .ring { animation:none; opacity:.4; }
 @media (max-width:640px) { .hero .cp-mark text { display:none; } }
 
-/* Five staggered gradient trails are the only continuously moving hero effect. */
+/* Seven staggered gradient trails are the only continuously moving hero effect. */
 .hero .hero-track #hero-trail,.hero .hero-track #hero-head { display:none; }
-.hero .race-runner-trail { fill:none; stroke-width:3.5; stroke-linecap:round; opacity:.9; }
-.hero .race-runner-dot { fill:var(--primary); stroke:var(--background); stroke-width:1.5; }
-@media (max-width:640px) { .hero .race-runner-trail { stroke-width:3; } }
+.hero .race-runner-trail { fill:none; stroke-width:2.5; stroke-linecap:round; opacity:.5; }
+.hero .race-runner-dot { fill:var(--primary); stroke:var(--background); stroke-width:1.5; opacity:.65; }
+@media (max-width:640px) { .hero .race-runner-trail { stroke-width:2; } }
 @media (forced-colors:active) { .hero .race-runner-trail { stroke:CanvasText; } }
