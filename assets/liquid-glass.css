@@ -14,6 +14,7 @@
 }
 
 .nav.cv-menu {
+  --nav-control-size:var(--touch-target);
   background:var(--card);
   border-color:var(--glass-edge);
   box-shadow:inset 0 1px var(--glass-highlight), 0 5px 20px var(--glass-shadow);
@@ -33,7 +34,13 @@
   box-shadow:inset 0 1px var(--glass-highlight), 0 2px 7px var(--glass-shadow);
 }
 
+.nav.cv-menu :is(.nav-tools .btn-icon, .lang, .logo-mark) {
+  block-size:var(--nav-control-size);
+}
+
 .nav.cv-menu .lang {
+  padding:2px;
+  align-items:stretch;
   background:var(--muted);
   border-radius:var(--radius-xl);
 }
@@ -43,7 +50,19 @@
   border-radius:var(--radius-xl);
 }
 
-.nav.cv-menu .lang button { border-radius:var(--radius-lg); }
+.nav.cv-menu :is(.nav-tools .btn-icon, .logo-mark) {
+  inline-size:var(--nav-control-size);
+  aspect-ratio:1;
+}
+
+.nav.cv-menu .logo-mark b { font-size:16px; }
+.nav.cv-menu .logo-mark s { inset-inline:12px; inset-block-end:8px; }
+
+.nav.cv-menu .lang button {
+  block-size:auto;
+  min-block-size:0;
+  border-radius:var(--radius-lg);
+}
 
 .nav.cv-menu .lang button[aria-pressed="true"],
 .nav.cv-menu .nav-tools .menu-btn[aria-expanded="true"] {
