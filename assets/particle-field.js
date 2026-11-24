@@ -105,14 +105,37 @@
   // The world layer sits between section backgrounds and their content.
   let palette, glowColors;
   let width = 0, height = 0, density = 1, count = 0, frame = 0;
-  let sectionTops = [], portraitBox, mainBottom = 0;
+  let sectionTops = [], portraitBox, mainBottom = 0, scrollLimit = 0;
   let pointer, scroll = window.scrollY, previousFrame = 0, elapsed = 0;
   let sceneIndex = 0, sceneChanged = true, lastPaint = 0;
+
+  const driftDuration = 2.8;
+  let driftStarted = 0;
+  let driftAngle = Math.random() * tau;
+  let driftFrom = { x: 0, y: 0 };
+  let driftTo = nextDriftPoint();
+
+  function nextDriftPoint() {
+    driftAngle += 1.6 + Math.random() * 2.2;
+    const radius = .72 + Math.random() * .28;
+    return { x: Math.cos(driftAngle) * radius, y: Math.sin(driftAngle) * radius };
+  }
+
+  function drift() {
+    if (elapsed - driftStarted >= driftDuration) {
+      driftStarted += driftDuration;
+      driftFrom = driftTo;
+      driftTo = nextDriftPoint();
+    }
+    const t = ease((elapsed - driftStarted) / driftDuration);
+    return { x: lerp(driftFrom.x, driftTo.x, t), y: lerp(driftFrom.y, driftTo.y, t) };
+  }
 
   function measure() {
     const offset = window.scrollY;
     sectionTops = sections.map(section => section.getBoundingClientRect().top + offset);
     mainBottom = main.getBoundingClientRect().bottom + offset;
+    scrollLimit = document.documentElement.scrollHeight - window.innerHeight;
     const box = portrait.getBoundingClientRect();
     portraitBox = { center: box.left + box.width / 2, top: box.top + offset, width: box.width, height: box.height };
     sceneChanged = true;
@@ -135,11 +158,12 @@
   function viewportScene(still) {
     let from = 0, to = 0, t = 0;
     for (let i = 1; i < sectionTops.length; i++) {
-      const seam = sectionTops[i] - scroll;
-      if (seam >= height * .89) break;
+      const finish = Math.min(sectionTops[i] - height * .27, scrollLimit);
+      const start = Math.min(sectionTops[i] - height * .89, finish - height * .35);
+      if (scroll <= start) break;
       to = i;
-      if (seam > height * .27) {
-        t = ease(clamp((height * .89 - seam) / (height * .62)));
+      if (scroll < finish) {
+        t = ease((scroll - start) / (finish - start));
         break;
       }
       from = to;
@@ -155,14 +179,15 @@
     const narrow = width < 981;
     if (!index) {
       return {
-        x: narrow ? portraitBox.center + Math.min(width * .14, 54) : portraitBox.center + 77,
+        x: narrow ? portraitBox.center + Math.min(width * .14, 54) : portraitBox.center + 62,
         y: clamp(portraitBox.top + portraitBox.height * .47 - (still ? 0 : scroll), height * .25, height * .67),
         size: narrow ? Math.min(width * .43, 236) : Math.min(width * .183, height * .33, 278)
       };
     }
-    const x = narrow ? [.58, .56, .58, .52, .59][index - 1] : [.76, .71, .73, .74, .74][index - 1];
+    const left = narrow ? .30 : .235;
+    const x = index % 2 === 1 ? left : 1 - left;
     const y = still ? height * .45 : clamp(sectionTops[index] - scroll + 58, height * .32, height * .77);
-    return { x: width * x, y, size: narrow ? Math.min(width * .34, 184) : Math.min(width * .168, height * .29, 250) };
+    return { x: width * x, y, size: narrow ? Math.min(width * .30, 184) : Math.min(width * .168, height * .29, 250) };
   }
 
   function paintAura(x, y, radius, alpha) {
@@ -189,9 +214,13 @@
   function render(still, { from, to, t }, step) {
     ctx.clearRect(0, 0, width, height);
     const start = pose(from, still), end = pose(to, still);
-    const x = lerp(start.x, end.x, t), y = lerp(start.y, end.y, t);
     const size = lerp(start.size, end.size, t);
     const morph = Math.sin(t * Math.PI);
+    const offset = still ? { x: 0, y: 0 } : drift();
+    const driftWidth = Math.min(width * .078, 86);
+    const driftHeight = Math.min(height * .075, 66);
+    const x = clamp(lerp(start.x, end.x, t) + offset.x * driftWidth, size * .74, width - size * .74);
+    const y = clamp(lerp(start.y, end.y, t) + offset.y * driftHeight + morph * height * .08, size * .62, height - size * .62);
     const sway = Math.sin(elapsed * .28) * .16;
     const cos = Math.cos(sway), sin = Math.sin(sway);
     const fade = clamp((mainBottom - scroll) / (height * .67));
