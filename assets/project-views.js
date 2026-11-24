@@ -291,7 +291,7 @@
     else if (view === 'gantt') renderGantt(data);
     scheduleStickyHeaders();
   }
-  function select(next, focus) {
+  function select(next, focus, transient) {
     if (!Object.prototype.hasOwnProperty.call(panels, next)) return;
     var restoreTabFocus = focus || tabs.contains(document.activeElement);
     view = next;
@@ -306,7 +306,9 @@
     else { shared.appendChild(viewToolbar); shared.appendChild(empty); }
     render();
     if (restoreTabFocus) buttons.find(function (button) { return button.dataset.view === view; }).focus();
-    try { localStorage.setItem('qk-project-view', view); } catch (error) { /* Storage may be disabled. */ }
+    if (!transient) {
+      try { localStorage.setItem('qk-project-view', view); } catch (error) { /* Storage may be disabled. */ }
+    }
     if (window.ScrollTrigger) ScrollTrigger.refresh();
   }
   buttons.forEach(function (button, index) {
@@ -329,5 +331,13 @@
   tabs.hidden = false;
   var saved = 'current';
   try { saved = localStorage.getItem('qk-project-view') || 'current'; } catch (error) { /* Use current view. */ }
-  select(Object.prototype.hasOwnProperty.call(panels, saved) ? saved : 'current');
+  function revealLinkedProject() {
+    var target = document.getElementById(location.hash.slice(1));
+    if (!target || !target.matches('.work[id^="project-"]') || !panels.current.contains(target)) return false;
+    select('current', false, true);
+    requestAnimationFrame(function () { target.scrollIntoView({block:'start'}); });
+    return true;
+  }
+  if (!revealLinkedProject()) select(Object.prototype.hasOwnProperty.call(panels, saved) ? saved : 'current');
+  window.addEventListener('hashchange', revealLinkedProject);
 })();

@@ -121,3 +121,5 @@
   .project-gantt-table .gantt-name .project-record-link { max-width:165px; }
 }
 @media (max-width:640px) { .project-view-tabs { width:100%; } .project-view-tabs button { flex:1; justify-content:center; gap:6px; padding:10px 8px; font-size:12px; } }
+
+.work[id^="project-"] { scroll-margin-top:48px; }

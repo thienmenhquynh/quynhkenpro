@@ -304,7 +304,9 @@
     const sway = Math.sin(elapsed * .28) * .16;
     const cos = Math.cos(sway), sin = Math.sin(sway);
     const fade = clamp((mainBottom - scroll) / (height * .67));
-    const opacity = fade * lerp(.70, .68, raceStrength);
+    // The galaxy has its own particle layer before the first scroll transition.
+    const opacity = fade * .70 * (1 - raceStrength);
+    if (opacity < .004) return;
     const bottom = Math.min(height, mainBottom - scroll);
     ctx.save();
     ctx.beginPath();
