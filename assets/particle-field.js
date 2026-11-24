@@ -32,13 +32,29 @@
     x * Math.cos(angle) + z * Math.sin(angle), y, z * Math.cos(angle) - x * Math.sin(angle)
   ];
 
-  function orb(u, v, w) {
-    const angle = u * tau;
-    const z = (2 * v - 1) * (w < .27 ? .37 : 1);
-    const ring = Math.sqrt(1 - z * z);
-    const wave = Math.sin(angle * 7 + z * 10) * .025;
-    const radius = 1 + wave + (w - .5) * .055;
-    return [Math.cos(angle) * ring * radius, Math.sin(angle) * ring * radius, z * radius];
+  function raceFlag(u, v, w) {
+    if (w < .12) {
+      return [-.88 + (v - .5) * .026 + u * .09, u * 1.74 - .79, (v - .5) * .04];
+    }
+
+    let x, y;
+    if (w < .24) {
+      x = v < .5 ? u : v < .75 ? 0 : 1;
+      y = v < .25 ? 0 : v < .5 ? 1 : u;
+    } else {
+      // Fill alternating fabric squares, leaving the other squares open.
+      const tile = Math.floor(u * 12);
+      const row = Math.floor(tile / 3);
+      const column = tile % 3 * 2 + row % 2;
+      x = (column + v) / 6;
+      y = (row + (w - .24) / .76) / 4;
+    }
+
+    return [
+      x * 1.76 - .83,
+      y * 1.02 - .75 + Math.sin(x * tau) * .065,
+      Math.sin(x * tau * 1.2 + y * .7) * x * .19
+    ];
   }
 
   function orbit(u, v, w) {
@@ -89,7 +105,7 @@
     ], -.28);
   }
 
-  const forms = [orb, orbit, helix, cube, diamond, infinity];
+  const forms = [raceFlag, orbit, helix, cube, diamond, infinity];
   const particles = Array.from({ length: 4740 }, () => {
     const u = random(), v = random(), w = random();
     const dust = random() < .22;
@@ -178,10 +194,14 @@
   function pose(index, still) {
     const narrow = width < 981;
     if (!index) {
+      const mobile = width < 560;
+      const portraitEdge = portraitBox.center + portraitBox.width / 2;
+      const room = width - portraitEdge;
+      const y = portraitBox.top + portraitBox.height * (mobile ? 1 : .47) + (mobile ? 99 : 0);
       return {
-        x: narrow ? portraitBox.center + Math.min(width * .14, 54) : portraitBox.center + 62,
-        y: clamp(portraitBox.top + portraitBox.height * .47 - (still ? 0 : scroll), height * .25, height * .67),
-        size: narrow ? Math.min(width * .43, 236) : Math.min(width * .183, height * .33, 278)
+        x: mobile ? width * .76 : portraitEdge + room * .53,
+        y: clamp(y - (still ? 0 : scroll), height * .25, height * .77),
+        size: mobile ? width * .23 : clamp(room * .465, 56, 134)
       };
     }
     const left = narrow ? .30 : .235;
@@ -200,39 +220,29 @@
     ctx.fillRect(x - radius * 1.65, y - radius * 1.65, radius * 3.3, radius * 3.3);
   }
 
-  function paintRim(x, y, radius, alpha) {
-    const glow = ctx.createRadialGradient(x, y, radius * .82, x, y, radius * 1.08);
-    glow.addColorStop(0, 'transparent');
-    glow.addColorStop(.58, glowColors.rim);
-    glow.addColorStop(.72, glowColors.rimEdge);
-    glow.addColorStop(1, 'transparent');
-    ctx.fillStyle = glow;
-    ctx.globalAlpha = alpha;
-    ctx.fillRect(x - radius * 1.08, y - radius * 1.08, radius * 2.16, radius * 2.16);
-  }
-
   function render(still, { from, to, t }, step) {
     ctx.clearRect(0, 0, width, height);
     const start = pose(from, still), end = pose(to, still);
     const size = lerp(start.size, end.size, t);
     const morph = Math.sin(t * Math.PI);
     const offset = still ? { x: 0, y: 0 } : drift();
-    const driftWidth = Math.min(width * .078, 86);
-    const driftHeight = Math.min(height * .075, 66);
-    const x = clamp(lerp(start.x, end.x, t) + offset.x * driftWidth, size * .74, width - size * .74);
+    const flagStrength = lerp(from === 0 ? 1 : 0, to === 0 ? 1 : 0, t);
+    const driftWidth = Math.min(width * .078, 86) * lerp(1, .24, flagStrength);
+    const driftHeight = Math.min(height * .075, 66) * lerp(1, .52, flagStrength);
+    const margin = size * lerp(.74, .98, flagStrength);
+    const x = clamp(lerp(start.x, end.x, t) + offset.x * driftWidth, margin, width - margin);
     const y = clamp(lerp(start.y, end.y, t) + offset.y * driftHeight + morph * height * .08, size * .62, height - size * .62);
     const sway = Math.sin(elapsed * .28) * .16;
     const cos = Math.cos(sway), sin = Math.sin(sway);
     const fade = clamp((mainBottom - scroll) / (height * .67));
-    const orbStrength = lerp(from === 0 ? 1 : 0, to === 0 ? 1 : 0, t);
-    const opacity = fade * lerp(.70, .97, orbStrength);
+    // The hero track stays readable over the flag's particles.
+    const opacity = fade * lerp(.70, .64, flagStrength);
     const bottom = Math.min(height, mainBottom - scroll);
     ctx.save();
     ctx.beginPath();
     ctx.rect(0, 0, width, bottom);
     ctx.clip();
-    paintAura(x, y, size, opacity);
-    if (orbStrength > .01) paintRim(x, y, size, opacity * orbStrength);
+    paintAura(x, y, size, opacity * lerp(1, .60, flagStrength));
     const hoverRadius = width < 980 ? 73 : 118;
     const cursor = !still && pointer;
     const smoothing = 1 - Math.exp(-step * 11);
@@ -243,8 +253,10 @@
       const a = point.targets[from], b = point.targets[to];
       const travel = ease(clamp(t + morph * (point.shade - .5) * .28));
       const px = lerp(a[0], b[0], travel) + morph * Math.cos(point.phase) * .27;
-      const py = lerp(a[1], b[1], travel) + morph * Math.sin(point.phase) * .25;
-      const pz = lerp(a[2], b[2], travel);
+      const wave = point.dust || !flagStrength ? 0 : clamp((px + .82) / 1.74) * flagStrength;
+      const fold = Math.sin(elapsed * 1.75 - px * 4.1) * wave;
+      const py = lerp(a[1], b[1], travel) + morph * Math.sin(point.phase) * .25 + fold * .066;
+      const pz = lerp(a[2], b[2], travel) + fold * .18;
       const z = pz * cos - px * sin;
       const perspective = 1 + z * .10;
       const flutter = Math.sin(elapsed * (.65 + point.shade * .55) + point.phase);
@@ -267,14 +279,14 @@
       const drawX = homeX + point.offsetX, drawY = homeY + point.offsetY;
       if (drawX < -3 || drawX > width + 3 || drawY < -3 || drawY > bottom + 3) continue;
 
-      const rim = 1 - clamp(Math.abs(z) * 1.38);
       const particleSize = point.size * displayScale * (perspective + force * .42);
-      const strength = point.dust ? .22 : .48 + rim * orbStrength * .33;
+      const strength = point.dust ? .22 : lerp(.48, .88, flagStrength);
       const brightness = clamp(strength * (.67 + .25 * flutter + .23 * perspective) + force * .5);
       ctx.globalAlpha = brightness * opacity;
-      ctx.fillStyle = palette[point.dust ? 1 : Math.min(4, Math.floor((point.shade * .72 + (py + 1) * .12) * 5))];
+      const shade = clamp(Math.floor((point.shade * .72 + (py + 1) * .12) * 5), 0, palette.length - 1);
+      ctx.fillStyle = palette[point.dust ? 1 : point.shade < flagStrength * .78 ? 0 : shade];
       if (!point.dust && particleSize > 1.8) {
-        // A broad soft pixel around the brightest grains keeps the rim luminous.
+        // A broad soft pixel around the brightest grains adds depth to the cluster.
         ctx.globalAlpha *= .23;
         ctx.fillRect(drawX - particleSize, drawY - particleSize, particleSize * 2, particleSize * 2);
         ctx.globalAlpha = brightness * opacity;
@@ -317,9 +329,7 @@
     palette = ['--primary', '--ring', '--chart-3', '--chart-4', '--chart-5'].map(color);
     glowColors = {
       ambient: color('--primary') + '24',
-      ambientEdge: color('--ring') + '14',
-      rim: color('--brand-cyan') + '24',
-      rimEdge: color('--brand-lime') + '24'
+      ambientEdge: color('--ring') + '14'
     };
     sceneChanged = true;
     schedule();

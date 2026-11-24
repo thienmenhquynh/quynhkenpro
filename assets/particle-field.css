@@ -40,13 +40,6 @@
   z-index:2;
 }
 
-@media (min-width:981px) {
-  #top.has-particle-field .avatar-stage {
-    width:min(330px, 100%);
-    justify-self:end;
-  }
-}
-
 @media print, (forced-colors: active) {
   #top > .hero::before { display:none; }
   #top.has-particle-field > .particle-field { display:none; }
