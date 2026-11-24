@@ -1,24 +1,36 @@
 /* A restrained foil finish in the existing cyan/lime brand palette. */
-.hero .runner-card.is-collectible { perspective:1400px; }
-.hero .runner-card.is-collectible::before {
+.hero .avatar-stage { perspective:1400px; perspective-origin:50% 45%; }
+.hero .runner-card.is-collectible {
+  --card-lift:-12px; --card-pitch:5deg;
+  perspective:1100px; padding:0; border:0; background:transparent; box-shadow:none; overflow:visible;
+  animation:portrait-lift 24s ease-in-out infinite paused;
+}
+.hero .runner-card.is-collectible .portrait-front::before {
   content:""; position:absolute; inset:0; z-index:4; padding:2px; border-radius:inherit; pointer-events:none;
   background:var(--brand-gradient); background-size:240% 240%; opacity:.6;
   mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); mask-composite:exclude;
   animation:portrait-edge-light 9s ease-in-out infinite paused;
 }
 .portrait-rotor { position:relative; transform-style:preserve-3d; animation:portrait-turn 24s ease-in-out infinite paused; }
-.portrait-front { position:relative; backface-visibility:hidden; }
+.portrait-front { position:relative; padding:8px; border:1px solid var(--input); border-radius:var(--radius-xl); background:var(--card); box-shadow:var(--portrait-shadow); backface-visibility:hidden; transform:translateZ(4px); }
+.portrait-rotor::before,.portrait-rotor::after {
+  content:""; position:absolute; top:0; bottom:0; width:8px; background:var(--secondary);
+  border:1px solid var(--input); transform:rotateY(90deg) translateX(-4px);
+  transform-origin:left center; backface-visibility:visible;
+}
+.portrait-rotor::before { left:0; }
+.portrait-rotor::after { left:100%; }
 .portrait-front::after {
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none; border-radius:var(--radius-lg);
   background:linear-gradient(115deg,transparent 30%,rgb(222 254 255 / .16) 45%,rgb(46 228 255 / .12) 50%,rgb(162 255 0 / .08) 55%,transparent 70%);
   background-size:300% 100%; animation:portrait-foil-light 8s ease-in-out infinite paused; opacity:.8;
 }
-.hero .portrait-front .live { top:12px; left:12px; z-index:2; }
-.hero .portrait-front .plate { left:12px; right:12px; bottom:12px; z-index:2; }
+.hero .portrait-front .live { top:20px; left:20px; z-index:2; }
+.hero .portrait-front .plate { left:20px; right:20px; bottom:20px; z-index:2; }
 .portrait-back {
   position:absolute; inset:0; padding:24px; display:flex; flex-direction:column; justify-content:space-between;
   border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--card); color:var(--foreground);
-  transform:rotateY(180deg); backface-visibility:hidden; overflow:hidden;
+  transform:rotateY(180deg) translateZ(4px); backface-visibility:hidden; overflow:hidden; box-shadow:var(--portrait-shadow);
 }
 .portrait-back::before { content:""; position:absolute; inset:0 0 auto; height:4px; background:var(--brand-gradient); }
 .portrait-back-top { display:flex; align-items:center; justify-content:space-between; }
@@ -32,15 +44,29 @@
 .portrait-back-stats div { display:grid; gap:6px; }
 .portrait-back-stats b { font:600 20px/26px var(--font-heading); }
 .portrait-back-stats span { color:var(--muted-foreground); font:400 10px/16px var(--font-body); }
-.hero .runner-card[data-card-motion="true"]::before,
+.hero .runner-card[data-card-motion="true"],
+.hero .runner-card[data-card-motion="true"] .portrait-front::before,
 [data-card-motion="true"] .portrait-rotor,
 [data-card-motion="true"] .portrait-front::after { animation-play-state:running; }
 @keyframes portrait-edge-light { 0%,100% { background-position:0% 0%; } 50% { background-position:100% 100%; } }
 @keyframes portrait-foil-light { 0%,65%,100% { background-position:150% 0; } 30%,45% { background-position:-50% 0; } }
-@keyframes portrait-turn { 0%,77% { transform:rotateY(0deg); } 82%,89% { transform:rotateY(180deg); } 94%,100% { transform:rotateY(360deg); } }
+@keyframes portrait-turn {
+  0%,73% { transform:translateZ(0) rotateX(0deg) rotateY(0deg); }
+  76% { transform:translateZ(12px) rotateX(-4deg) rotateY(-12deg); }
+  82% { transform:translateZ(24px) rotateX(6deg) rotateY(188deg); }
+  84%,89% { transform:translateZ(16px) rotateX(0deg) rotateY(180deg); }
+  93% { transform:translateZ(24px) rotateX(-5deg) rotateY(372deg); }
+  96%,100% { transform:translateZ(0) rotateX(0deg) rotateY(360deg); }
+}
+@keyframes portrait-lift {
+  0%,73%,97%,100% { transform:translateY(0) rotateX(0deg) rotateZ(0deg); }
+  78%,91% { transform:translateY(var(--card-lift)) rotateX(var(--card-pitch)) rotateZ(-2deg); }
+  94% { transform:translateY(-4px) rotateX(-2deg) rotateZ(1deg); }
+}
 @media (max-width:640px) {
-  .hero .portrait-front .live { top:8px; left:8px; }
-  .hero .portrait-front .plate { left:8px; right:8px; bottom:8px; }
+  .hero .runner-card.is-collectible { --card-lift:-8px; --card-pitch:3deg; }
+  .hero .portrait-front .live { top:16px; left:16px; }
+  .hero .portrait-front .plate { left:16px; right:16px; bottom:16px; }
   .portrait-back { padding:16px; }
   .portrait-back-identity { gap:6px; padding:12px 0; }
   .portrait-back-name { font-size:16px; line-height:22px; }
@@ -50,10 +76,11 @@
   .portrait-back-stats b { font-size:16px; line-height:22px; }
 }
 @media (prefers-reduced-motion:reduce),print {
-  .portrait-rotor { animation:none; transform:none; }
-  .portrait-front::after,.hero .runner-card.is-collectible::before { animation:none; opacity:0; }
+  .hero .runner-card.is-collectible,.portrait-rotor { animation:none; transform:none; }
+  .hero .portrait-front .live,.hero .portrait-front .plate { transform:none; }
+  .portrait-front::after,.hero .runner-card.is-collectible .portrait-front::before { animation:none; opacity:0; }
 }
-@media (forced-colors:active) { .portrait-front::after,.hero .runner-card.is-collectible::before { display:none; } }
+@media (forced-colors:active) { .portrait-front::after,.hero .runner-card.is-collectible .portrait-front::before { display:none; } }
 @media (max-width:360px) {
   .portrait-back { padding:12px; }
   .portrait-back-brand { width:28px; height:28px; font-size:14px; }

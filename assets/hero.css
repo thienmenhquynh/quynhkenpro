@@ -80,8 +80,8 @@
 @media (forced-colors:active),print { [data-theme] .hero::before { display:none; } }
 
 /* The career lap remains the single graphic around the portrait. */
-.hero .hero-track .lane { stroke:var(--border); stroke-width:1; }
-.hero .hero-track .lane:not(.lane-mid) { opacity:.4; }
+.hero .hero-track .lane { stroke:color-mix(in srgb,var(--foreground) 20%,transparent); stroke-width:1.15; }
+.hero .hero-track .lane:not(.lane-mid) { opacity:.85; }
 .hero .hero-track .start-line { opacity:.2; }
 .hero .hero-track .trail { stroke-width:2.5; }
 .hero .cp-mark text { font-size:12px; letter-spacing:0; }

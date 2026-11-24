@@ -21,3 +21,5 @@ This portfolio remains a static HTML/CSS/JavaScript site. `assets/design-system.
 - The hero career lap has seven native SVG gradient trails with staggered phases and lap times. Motion runs independently of GSAP, pauses offscreen/in hidden tabs, respects live reduced-motion changes, and renders a stable frame for static previews.
 
 - The portrait retains its existing front content inside a collectible-card shell, with a subtle brand foil edge/sweep and an occasional 24-second flip cycle. Its decorative back repeats existing name, BIB, role and metrics; no new facts are introduced. Motion pauses offscreen/in hidden tabs and uses a static front for reduced motion. Race trails use thinner strokes at 50% opacity.
+
+- The collectible flip includes a brief anticipation, 3D lift/pitch, a small settling turn, 8px card edges and raised front labels. Mobile uses smaller motion amplitudes. Neutral race lanes have a stronger semantic foreground tint; colored runner trails retain their softer 50% opacity.
