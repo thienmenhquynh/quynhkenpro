@@ -114,7 +114,7 @@ h1,h2,h3,h4,h5,h6 { font-family:var(--font-heading); font-stretch:normal; }
 .display-md { font-size:22px; line-height:1.35; }
 .headline,.pc-name { font-size:18px; line-height:24px; }
 .hero-name { font-size:clamp(28px,4vw,48px); line-height:1.2; animation:none; }
-.hero-name *, .hero-name::before, .hero-name::after { animation:none !important; }
+.hero-name *, .hero-name::before, .hero-name::after { animation:none; }
 .hero-name .l2,.grad-text { color:var(--foreground); background:none; -webkit-text-fill-color:currentColor; }
 .hero .lead-strong .hl,.closing .grad-text,.plate .plate-role .role-type { color:var(--primary); background:none; -webkit-text-fill-color:currentColor; }
 .hero-name .l1::before,.hero-name .l1::after,.hero-name .l2::before,.hero-name .l2::after,.hero-name .speed { display:none; }

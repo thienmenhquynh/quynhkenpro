@@ -1,0 +1,19 @@
+.hero .hero-role { font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace; min-height:24px; }
+.hero .hero-role [aria-hidden="true"][data-i18n] { min-width:0; overflow-wrap:anywhere; }
+.hero .hero-role .caret,.hero .plate-role .caret {
+  display:inline-block; width:2px; height:1em; margin-left:2px; flex:none; border-radius:0;
+  animation:hero-code-cursor 1.1s steps(1) infinite paused;
+}
+.hero[data-hero-text-motion="true"] .caret { animation-play-state:running; }
+.hero .hero-name .l2 { animation:hero-name-signal 8s ease-in-out infinite paused; }
+.hero[data-hero-text-motion="true"] .hero-name .l2 { animation-play-state:running; }
+@keyframes hero-code-cursor { 0%,48%,100% { opacity:1; } 49%,99% { opacity:0; } }
+@keyframes hero-name-signal {
+  0%,60%,100% { color:var(--foreground); transform:translateY(0); text-shadow:none; }
+  77% { color:var(--primary); transform:translateY(-2px); text-shadow:0 8px 24px color-mix(in srgb,var(--primary) 16%,transparent); }
+}
+@media (max-width:640px) { .hero .hero-role { font-size:13px; line-height:22px; } }
+@media (prefers-reduced-motion:reduce),print {
+  .hero .hero-name .l2 { animation:none; color:var(--foreground); transform:none; text-shadow:none; }
+  .hero .hero-role .caret,.hero .plate-role .caret { display:none; animation:none; }
+}

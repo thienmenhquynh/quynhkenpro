@@ -2,7 +2,7 @@
 :is(.hero,.page-head,.cs-hero) { position:relative; isolation:isolate; overflow:hidden; }
 .hero {
   --portrait-shadow:0 32px 64px -32px rgb(15 23 42 / .30),0 8px 24px -16px rgb(15 23 42 / .14);
-  padding:56px 0 64px; background:var(--background); border-bottom:1px solid var(--border);
+  padding:32px 0; background:var(--background); border-bottom:1px solid var(--border);
 }
 [data-theme="dark"] .hero { --portrait-shadow:0 32px 64px -24px rgb(0 0 0 / .7),0 0 0 1px rgb(230 238 240 / .04); }
 .hero::before {
@@ -14,26 +14,27 @@
 [data-theme="dark"] .hero::before { opacity:.08; }
 :is(.hero,.page-head,.cs-hero) > .wrap { position:relative; z-index:1; }
 .hero .hello {
-  display:inline-flex; margin:0 0 24px; padding:6px 10px;
+  display:inline-flex; margin:0 0 16px; padding:6px 10px;
   border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--card);
   color:var(--muted-foreground); font:500 13px/20px var(--font-body); letter-spacing:.01em;
 }
-.hero .hero-name { font:600 clamp(44px,4.7vw,68px)/1.08 var(--font-heading); letter-spacing:-.045em; }
+.hero .hero-name { font:600 clamp(40px,4.4vw,60px)/1.08 var(--font-heading); letter-spacing:-.045em; }
 [data-theme] .hero .hero-name .l2 { color:var(--foreground); }
 .hero .hero-role {
-  margin:20px 0 0; gap:8px; color:var(--foreground); font:500 16px/24px var(--font-body); white-space:normal;
+  margin:16px 0 0; gap:8px; color:var(--foreground); font:500 16px/24px var(--font-body); white-space:normal;
 }
 .hero .hero-role .prompt { color:var(--primary); }
 .hero .caret { display:none; }
-.hero .lead-strong { margin:24px 0 28px; max-width:540px; color:var(--muted-foreground); font:400 16px/28px var(--font-body); }
+.hero .lead-strong { margin:20px 0 24px; max-width:540px; color:var(--muted-foreground); font:400 16px/28px var(--font-body); }
 .hero .lead-strong b { color:var(--foreground); font-weight:600; }
 .hero .btn-row { gap:12px; }
 .hero .btn { min-height:44px; padding:0 20px; }
-.hero .splits { margin-top:32px; padding-top:24px; border-top:1px solid var(--border); border-bottom:0; gap:20px; }
+.hero .splits { margin-top:24px; padding-top:16px; border-top:1px solid var(--border); border-bottom:0; gap:20px; }
 .hero .split,.hero .split + .split { padding:0; border:0; }
 .hero .splits .num { color:var(--foreground); font:600 28px/36px var(--font-heading); letter-spacing:-.025em; }
 .hero .split p { margin-top:4px; color:var(--muted-foreground); font:400 12px/18px var(--font-body); }
-.hero .avatar-stage { perspective:none; }
+.hero .avatar-stage { width:min(360px,100%); perspective:none; }
+.hero .hero-track { width:144%; }
 .hero .runner-card {
   padding:8px; overflow:hidden; border:1px solid var(--input); border-radius:var(--radius-xl);
   background:var(--card); box-shadow:var(--portrait-shadow);
@@ -54,21 +55,21 @@
 .hero .plate .role-type::before { content:none; }
 .hero .hero-strip,.race-head .rb-strip { height:1px; background:var(--border); opacity:1; }
 .page-head::before { display:none; }
-@media (min-width:981px) { .hero .hero-grid { min-height:720px; } }
+@media (min-width:981px) { .hero .hero-grid { min-height:620px; } }
 @media (max-width:980px) {
-  .hero { padding:40px 0 48px; }
-  .hero .avatar-stage { margin:96px auto 88px; }
+  .hero { padding:28px 0 36px; }
+  .hero .avatar-stage { width:min(280px,80%); margin:64px auto 56px; }
   .hero::before { inset:0 0 45%; mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 68%); }
 }
 @media (max-width:640px) {
-  .hero { padding:32px 0 40px; }
-  .hero .avatar-stage { margin:48px auto 48px; }
+  .hero { padding:24px 0 32px; }
+  .hero .avatar-stage { width:min(250px,78%); margin:32px auto 28px; }
   .hero .hero-track { width:132%; }
-  .hero .hero-name { font-size:40px; line-height:1.12; }
-  .hero .hello { margin-bottom:20px; font-size:12px; }
+  .hero .hero-name { font-size:36px; line-height:1.12; }
+  .hero .hello { margin-bottom:16px; font-size:12px; }
   .hero .hero-role { margin-top:16px; font-size:14px; line-height:22px; }
-  .hero .lead-strong { margin:20px 0 24px; font-size:15px; line-height:26px; }
-  .hero .splits { margin-top:28px; gap:12px; padding-top:20px; }
+  .hero .lead-strong { margin:16px 0 20px; font-size:15px; line-height:26px; }
+  .hero .splits { margin-top:24px; gap:12px; padding-top:16px; }
   .hero .splits .num { font-size:24px; line-height:30px; }
   .hero .split p { font-size:11px; line-height:16px; }
   .hero .plate { left:16px; right:16px; bottom:16px; padding:12px 10px; gap:10px; }

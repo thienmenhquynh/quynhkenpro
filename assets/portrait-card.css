@@ -92,3 +92,22 @@
   .portrait-back-stats b { font-size:14px; line-height:20px; }
   .portrait-back-stats span { font-size:9px; line-height:12px; }
 }
+
+/* Pointer tilt is independent of the automatic lift and flip transforms. */
+.portrait-hover {
+  position:relative; transform-style:preserve-3d;
+  transform:none;
+  transition:transform .28s cubic-bezier(.2,.7,.2,1);
+}
+.hero .runner-card[data-card-hover="true"] .portrait-hover {
+  transform:rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateZ(var(--tilt-z,0px));
+  will-change:transform;
+}
+.hero .runner-card[data-card-hover="true"] .portrait-front,
+.hero .runner-card[data-card-hover="true"] .portrait-back { box-shadow:0 36px 64px -28px rgb(0 0 0 / .35),var(--shadow-lg); }
+.hero .runner-card[data-card-hover="true"] .portrait-front::after {
+  animation:none; background-position:var(--foil-x,50%) 0; opacity:1;
+}
+.hero .runner-card[data-card-hover="true"][data-card-inspect="true"],
+[data-card-hover="true"][data-card-inspect="true"] .portrait-rotor { animation-play-state:paused; }
+@media (prefers-reduced-motion:reduce),print { .portrait-hover { transform:none; transition:none; } }

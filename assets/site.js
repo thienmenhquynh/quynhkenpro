@@ -186,7 +186,7 @@
     sync();
   })();
 
-  /* ---------- Stable role label in the portrait identity card ---------- */
+  /* ---------- Initial role label; lifecycle-aware typing is handled by hero-type.js ---------- */
   (function () {
     var el = $('#role-type'); if (!el) return;
     el.textContent = (el.getAttribute('data-roles') || 'Product Manager|Product Owner').split('|')[0];
