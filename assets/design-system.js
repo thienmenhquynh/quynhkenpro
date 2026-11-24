@@ -4,7 +4,7 @@
   var root = document.documentElement;
   var themes = ['light', 'dark'];
   var preference = null;
-  try { preference = localStorage.getItem('qk-theme'); } catch (error) { /* Use the default light theme. */ }
+  try { preference = localStorage.getItem('qk-theme'); } catch (error) { /* Use the default theme. */ }
   // Keep the brightness of previously saved high-contrast preferences.
   if (preference === 'hc' || preference === 'hc-dark') {
     preference = preference === 'hc-dark' ? 'dark' : 'light';
@@ -28,7 +28,7 @@
     },
     get: function () { return root.getAttribute('data-theme'); }
   };
-  apply(preference || 'light');
+  apply(preference || 'dark');
   document.addEventListener('DOMContentLoaded', function () {
     function sync() {
       var en = window.I18N && I18N.lang === 'en';

@@ -1,7 +1,6 @@
 /* ============================================================
    NetRace Design System — tokens
-   Light là mặc định. Dark chỉ bật khi người xem tự chọn,
-   không ghi nhớ, không theo theme hệ điều hành.
+   Dark là mặc định. Lựa chọn giao diện được ghi nhớ trên trình duyệt.
    Ngôn ngữ: VN mặc định, EN khi người xem chọn (có ghi nhớ).
    Token đặt theo [data-theme] (không chỉ :root) để một section
    tự mang theme riêng (hai dải tối: bảng thành tích, vạch đích).

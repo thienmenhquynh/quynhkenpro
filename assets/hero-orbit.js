@@ -3,73 +3,64 @@
   if (!stage) return;
 
   const products = stage.querySelector('.galaxy-products');
-  const cards = [...products.children];
+  const cards = [...products.querySelectorAll('.galaxy-card')];
   const toggle = stage.querySelector('.galaxy-motion');
-  const core = stage.querySelector('.galaxy-core');
-  const scene = stage.querySelector('.galaxy-scene');
-  const portrait = stage.querySelector('.hero-portrait');
-  const wide = matchMedia('(min-width:981px)');
+  const ring = stage.querySelector('.galaxy-satellites');
+  const satellites = [...ring.children];
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const hover = matchMedia('(hover: hover) and (pointer: fine)');
+  const wide = matchMedia('(min-width:981px)');
   const staticView = new URLSearchParams(location.search).has('static');
   const turn = 2 * Math.PI;
-  let angle = -1.06;
-  let horizontal = 0, vertical = 0;
-  let frame = 0, last = 0, visible = true;
-  let hovered = false, focused = false, paused = false;
+  const slope = -16 * Math.PI / 180;
+  const cos = Math.cos(slope), sin = Math.sin(slope);
+  let phase = -.58, radiusX = 0, radiusY = 0;
+  let frame = 0, last = 0, visible = true, paused = false;
+  let hovered, focused;
 
   function labels() {
     const english = document.documentElement.lang === 'en';
     products.setAttribute('aria-label', english ? 'Selected products' : 'Sản phẩm tiêu biểu');
-    toggle.setAttribute('aria-label', english ? 'Pause product orbit' : 'Tạm dừng chuyển động sản phẩm');
+    toggle.setAttribute('aria-label', english ? 'Pause orbit' : 'Tạm dừng quỹ đạo');
     toggle.setAttribute('aria-pressed', String(paused));
     toggle.title = paused
-      ? english ? 'Resume product orbit' : 'Tiếp tục chuyển động sản phẩm'
+      ? english ? 'Resume orbit' : 'Tiếp tục quỹ đạo'
       : toggle.getAttribute('aria-label');
   }
 
   function paint() {
-    cards.forEach((card, index) => {
-      const phase = angle + index * turn / cards.length;
-      const depth = (Math.sin(phase) + 1) / 2;
-      const side = Math.cos(phase);
-      const scale = .88 + depth * .12;
-      const x = horizontal * side;
-      const y = Math.sin(phase) * vertical;
-      card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) scale(${scale})`;
-      card.style.zIndex = String(Math.round(depth * 9));
-      card.style.setProperty('--orbit-opacity', String(.86 + depth * .14));
+    satellites.forEach((satellite, index) => {
+      const angle = phase + index * turn / satellites.length;
+      const x = radiusX * Math.cos(angle);
+      const y = radiusY * Math.sin(angle);
+      const depth = .78 + .22 * Math.sin(angle);
+      satellite.style.transform = `translate3d(calc(-50% + ${x * cos - y * sin}px), calc(-50% + ${x * sin + y * cos}px), 0) scale(${depth})`;
     });
   }
 
   function tick(now) {
-    if (last) angle = (angle + Math.min(now - last, 60) * turn / 46500) % turn;
+    if (last) phase = (phase + Math.min(now - last, 60) * turn / 42000) % turn;
     last = now;
     paint();
     frame = requestAnimationFrame(tick);
   }
 
   function sync() {
-    const still = staticView || motion.matches || !wide.matches || stage.clientWidth < 540;
-    stage.classList.toggle('is-orbit-ready', !still);
-    toggle.hidden = still;
+    const canAnimate = wide.matches && !motion.matches && !staticView;
+    toggle.hidden = !canAnimate;
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
     last = 0;
-    if (still) {
-      cards.forEach(card => {
-        card.style.removeProperty('transform');
-        card.style.removeProperty('z-index');
-        card.style.removeProperty('--orbit-opacity');
-      });
-      return;
-    }
-    const pad = cards[0].offsetWidth / 2 + 12;
-    const x = core.offsetLeft;
-    horizontal = Math.min(x - portrait.offsetLeft - portrait.offsetWidth - pad, scene.clientWidth - x - pad);
-    vertical = Math.min(core.offsetTop, scene.clientHeight - core.offsetTop) - cards[0].offsetHeight / 2 - 23;
+    radiusX = ring.clientWidth * .42;
+    radiusY = ring.clientHeight * .28;
     paint();
-    if (!paused && !hovered && !focused && visible && !document.hidden) frame = requestAnimationFrame(tick);
+    if (canAnimate && !paused && !hovered && !focused && visible && !document.hidden) {
+      frame = requestAnimationFrame(tick);
+    }
+  }
+
+  function linkSatellite() {
+    satellites.forEach((satellite, index) => satellite.classList.toggle('is-linked', cards[index] === (focused || hovered)));
+    sync();
   }
 
   toggle.addEventListener('click', () => {
@@ -78,33 +69,28 @@
     sync();
   });
 
+  function productAt(target) {
+    return target instanceof Element ? target.closest('.galaxy-card') : null;
+  }
+
   products.addEventListener('pointerover', event => {
-    if (!hover.matches || event.pointerType === 'touch' || hovered || !event.target.closest('.galaxy-card')) return;
-    hovered = true;
-    sync();
+    if (event.pointerType === 'touch') return;
+    hovered = productAt(event.target);
+    linkSatellite();
   });
-
   products.addEventListener('pointerout', event => {
-    if (!hovered || (event.relatedTarget instanceof Element && event.relatedTarget.closest('.galaxy-card'))) return;
-    hovered = false;
-    sync();
+    hovered = productAt(event.relatedTarget);
+    linkSatellite();
   });
-
-  products.addEventListener('focusin', () => {
-    focused = true;
-    sync();
+  products.addEventListener('focusin', event => {
+    focused = productAt(event.target);
+    linkSatellite();
   });
-
   products.addEventListener('focusout', event => {
-    if (products.contains(event.relatedTarget)) return;
-    focused = false;
-    sync();
+    focused = productAt(event.relatedTarget);
+    linkSatellite();
   });
 
-  hover.addEventListener('change', () => {
-    hovered = false;
-    sync();
-  });
   motion.addEventListener('change', sync);
   wide.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);

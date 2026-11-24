@@ -1,0 +1,115 @@
+/* Glass treatment for navigation and the homepage's secondary action. */
+:root {
+  --glass-highlight:rgb(255 255 255 / .85);
+  --glass-fade:rgb(255 255 255 / .15);
+  --glass-edge:rgb(15 23 42 / .15);
+  --glass-shadow:rgb(15 23 42 / .08);
+}
+
+:root[data-theme="dark"] {
+  --glass-highlight:rgb(255 255 255 / .13);
+  --glass-fade:rgb(255 255 255 / .015);
+  --glass-edge:rgb(230 238 240 / .18);
+  --glass-shadow:rgb(0 0 0 / .27);
+}
+
+.nav.cv-menu {
+  background:var(--card);
+  border-color:var(--glass-edge);
+  box-shadow:inset 0 1px var(--glass-highlight), 0 5px 20px var(--glass-shadow);
+}
+
+.nav.cv-menu .nav-links a {
+  border-radius:var(--radius-lg);
+}
+
+.nav.cv-menu .nav-links a::after { display:none; }
+.nav.cv-menu .nav-links a:hover { background-color:var(--secondary); }
+
+.nav.cv-menu :is(.nav-tools .btn-icon, .lang, .logo-mark),
+[data-page="home"] #top > .hero .btn-secondary {
+  border-color:var(--glass-edge);
+  background:linear-gradient(160deg,var(--glass-highlight),var(--glass-fade) 76%),var(--card);
+  box-shadow:inset 0 1px var(--glass-highlight), 0 2px 7px var(--glass-shadow);
+}
+
+.nav.cv-menu .lang {
+  background:var(--muted);
+  border-radius:var(--radius-xl);
+}
+
+.nav.cv-menu :is(.nav-tools .btn-icon, .logo-mark),
+[data-page="home"] #top > .hero .btn-secondary {
+  border-radius:var(--radius-xl);
+}
+
+.nav.cv-menu .lang button { border-radius:var(--radius-lg); }
+
+.nav.cv-menu .lang button[aria-pressed="true"],
+.nav.cv-menu .nav-tools .menu-btn[aria-expanded="true"] {
+  background:linear-gradient(145deg,var(--glass-highlight),transparent 85%),var(--accent);
+  color:var(--accent-foreground);
+  box-shadow:inset 0 0 0 1px var(--glass-edge);
+}
+
+.nav.cv-menu .nav-tools .btn-icon:hover,
+[data-page="home"] #top > .hero .btn-secondary:hover {
+  background-color:var(--accent);
+  color:var(--accent-foreground);
+}
+
+.nav.cv-menu .mobile-menu {
+  border-color:var(--glass-edge);
+  background:var(--popover);
+  box-shadow:inset 0 1px var(--glass-highlight), 0 16px 38px var(--glass-shadow);
+}
+
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) and (color:color-mix(in srgb, black, white)) {
+  .nav.cv-menu { background:transparent; }
+
+  .nav.cv-menu::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:
+      linear-gradient(180deg,color-mix(in srgb,var(--glass-highlight) 48%,transparent),transparent 74%),
+      color-mix(in srgb,var(--card) 86%,transparent);
+    -webkit-backdrop-filter:blur(18px) saturate(145%);
+    backdrop-filter:blur(18px) saturate(145%);
+  }
+
+  .nav.cv-menu .mobile-menu {
+    background:
+      linear-gradient(165deg,var(--glass-highlight),transparent 53%),
+      color-mix(in srgb,var(--popover) 92%,transparent);
+    -webkit-backdrop-filter:blur(22px) saturate(145%);
+    backdrop-filter:blur(22px) saturate(145%);
+  }
+
+  [data-page="home"] #top > .hero .btn-secondary {
+    background-color:color-mix(in srgb,var(--card) 73%,transparent);
+    -webkit-backdrop-filter:blur(12px) saturate(145%);
+    backdrop-filter:blur(12px) saturate(145%);
+  }
+
+  [data-page="home"] #top > .hero .btn-secondary:hover { background-color:var(--accent); }
+}
+
+@media (prefers-reduced-transparency:reduce), (forced-colors:active) {
+  .nav.cv-menu {
+    background:var(--card);
+    box-shadow:none;
+  }
+
+  .nav.cv-menu::before { display:none; }
+
+  .nav.cv-menu :is(.mobile-menu, .nav-tools .btn-icon, .lang, .logo-mark),
+  [data-page="home"] #top > .hero .btn-secondary {
+    background:var(--card);
+    box-shadow:none;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}
