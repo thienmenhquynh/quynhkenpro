@@ -103,13 +103,10 @@
   });
 
   // The world layer sits between section backgrounds and their content.
-  const colors = {
-    light: ['#08798a', '#2198ad', '#6d63b2', '#bd805f', '#864ca0'],
-    dark: ['#2bc6db', '#98edf6', '#8b84e9', '#ffb884', '#d99ffd']
-  };
+  let palette, glowColors;
   let width = 0, height = 0, density = 1, count = 0, frame = 0;
   let sectionTops = [], portraitBox, mainBottom = 0;
-  let pointer, dark = false, scroll = window.scrollY, previousFrame = 0, elapsed = 0;
+  let pointer, scroll = window.scrollY, previousFrame = 0, elapsed = 0;
   let sceneIndex = 0, sceneChanged = true, lastPaint = 0;
 
   function measure() {
@@ -170,8 +167,8 @@
 
   function paintAura(x, y, radius, alpha) {
     const halo = ctx.createRadialGradient(x, y, radius * .15, x, y, radius * 1.65);
-    halo.addColorStop(0, dark ? 'rgba(47, 159, 179, .19)' : 'rgba(44, 177, 204, .16)');
-    halo.addColorStop(.52, dark ? 'rgba(120, 78, 169, .14)' : 'rgba(123, 106, 203, .14)');
+    halo.addColorStop(0, glowColors.ambient);
+    halo.addColorStop(.52, glowColors.ambientEdge);
     halo.addColorStop(1, 'transparent');
     ctx.globalAlpha = alpha;
     ctx.fillStyle = halo;
@@ -181,8 +178,8 @@
   function paintRim(x, y, radius, alpha) {
     const glow = ctx.createRadialGradient(x, y, radius * .82, x, y, radius * 1.08);
     glow.addColorStop(0, 'transparent');
-    glow.addColorStop(.58, dark ? 'rgba(64, 213, 231, .13)' : 'rgba(78, 153, 201, .13)');
-    glow.addColorStop(.72, dark ? 'rgba(139, 119, 227, .16)' : 'rgba(130, 102, 206, .15)');
+    glow.addColorStop(.58, glowColors.rim);
+    glow.addColorStop(.72, glowColors.rimEdge);
     glow.addColorStop(1, 'transparent');
     ctx.fillStyle = glow;
     ctx.globalAlpha = alpha;
@@ -197,7 +194,6 @@
     const morph = Math.sin(t * Math.PI);
     const sway = Math.sin(elapsed * .28) * .16;
     const cos = Math.cos(sway), sin = Math.sin(sway);
-    const palette = dark ? colors.dark : colors.light;
     const fade = clamp((mainBottom - scroll) / (height * .67));
     const orbStrength = lerp(from === 0 ? 1 : 0, to === 0 ? 1 : 0, t);
     const opacity = fade * lerp(.70, .97, orbStrength);
@@ -287,7 +283,15 @@
   }
 
   function theme() {
-    dark = document.documentElement.dataset.theme === 'dark';
+    const style = getComputedStyle(main);
+    const color = name => style.getPropertyValue(name).trim();
+    palette = ['--primary', '--ring', '--chart-3', '--chart-4', '--chart-5'].map(color);
+    glowColors = {
+      ambient: color('--primary') + '24',
+      ambientEdge: color('--ring') + '14',
+      rim: color('--brand-cyan') + '24',
+      rimEdge: color('--brand-lime') + '24'
+    };
     sceneChanged = true;
     schedule();
   }
