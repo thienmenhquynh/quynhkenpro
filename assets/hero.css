@@ -28,7 +28,6 @@
 .hero .lead-strong { margin:20px 0 24px; max-width:540px; color:var(--muted-foreground); font:400 16px/28px var(--font-body); }
 .hero .lead-strong b { color:var(--foreground); font-weight:600; }
 .hero .btn-row { gap:12px; }
-.hero .btn { min-height:44px; padding:0 20px; }
 .hero .splits { margin-top:24px; padding-top:16px; border-top:1px solid var(--border); border-bottom:0; gap:20px; }
 .hero .split,.hero .split + .split { padding:0; border:0; }
 .hero .splits .num { color:var(--foreground); font:600 28px/36px var(--font-heading); letter-spacing:-.025em; }

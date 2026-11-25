@@ -22,16 +22,16 @@
   const bell = () => random() + random() + random() - 1.5;
 
   function makeStar() {
-    const halo = random() < .13;
-    const radius = halo ? Math.pow(random(), .53) * 1.12 : .045 + Math.pow(random(), .78) * .96;
+    const halo = random() < .26;
+    const radius = halo ? .12 + Math.pow(random(), .66) * 1.10 : .04 + Math.pow(random(), .77) * 1.02;
     const arm = Math.floor(random() * 2);
-    const angle = halo ? random() * turn : arm * Math.PI + radius * 5.5 + bell() * (.34 + radius * 1.28);
+    const angle = halo ? random() * turn : arm * Math.PI + radius * 5.5 + bell() * (.34 + radius * 1.43);
     const roll = random();
     return {
       radius, angle,
-      lift: bell() * (halo ? .35 : .06),
+      lift: bell() * (halo ? .51 : .08),
       tone: roll < .13 ? 2 : roll > .67 ? 1 : 0,
-      alpha: (.15 + Math.pow(random(), 1.85) * .69) * (halo ? .36 : 1 - radius * .51),
+      alpha: (.15 + Math.pow(random(), 1.85) * .69) * (halo ? .32 : 1 - radius * .48),
       size: .43 + Math.pow(random(), 3.7) * 1.49,
       phase: random() * turn
     };
@@ -51,7 +51,7 @@
   function point(radius, angle, lift, size) {
     const across = Math.cos(angle) * radius;
     const along = Math.sin(angle) * radius;
-    const up = along * .43 + lift * .9;
+    const up = along * .49 + lift * .9;
     const depth = along * .9 - lift * .43;
     const scale = size * (1 + depth * .17);
     return {
@@ -77,7 +77,7 @@
 
   function paint(still) {
     context.clearRect(0, 0, width, height);
-    const radius = Math.min(width * .437, height * .71);
+    const radius = Math.min(width * .451, height * .68);
     const time = still ? 0 : elapsed;
     const rotation = .86 + time * .085;
     const centerX = width * .5, centerY = height * .51;
@@ -90,7 +90,7 @@
       cloud(knot.x, knot.y, radius * nebula.width, .61, nebula.warm ? colors.warm : colors.star, opacity);
     });
 
-    const count = width < 470 ? 3000 : width < 680 ? 3900 : stars.length;
+    const count = width < 320 ? 2900 : width < 470 ? 3800 : stars.length;
     for (let i = 0; i < count; i++) {
       const star = stars[i];
       const drift = Math.sin(time * .21 + star.radius * 4) * .025;

@@ -165,7 +165,6 @@
     return {
       targets: dust ? forms.map(() => dustPoint) : forms.map(form => form(u, v, w)),
       dust, size, shade, phase,
-      raceColor: w >= .73 && w < .94 ? 3 : v < .72 ? 0 : 1,
       scatterX: Math.cos(phase) * scatterDistance,
       scatterY: Math.sin(phase) * scatterDistance * .85,
       offsetX: 0, offsetY: 0
@@ -351,8 +350,8 @@
       const strength = point.dust ? .22 : lerp(.48, .88, raceStrength);
       const brightness = clamp(strength * (.67 + .25 * flutter + .23 * perspective) + force * .5);
       ctx.globalAlpha = brightness * opacity;
-      const shade = clamp(Math.floor((point.shade * .72 + (py + 1) * .12) * 5), 0, palette.length - 1);
-      ctx.fillStyle = palette[point.dust ? 1 : point.shade < raceStrength * .94 ? point.raceColor : shade];
+      const tint = clamp(.5 + (px * .985 + py * .174) * .40 + (point.shade - .5) * .12);
+      ctx.fillStyle = palette[Math.round(tint * (palette.length - 1))];
       if (!point.dust && particleSize > 1.8) {
         // A broad soft pixel around the brightest grains adds depth to the cluster.
         ctx.globalAlpha *= .23;
@@ -391,13 +390,29 @@
     if (!still) schedule();
   }
 
+  function brandPalette(stops) {
+    const colors = stops.map(hex => {
+      const value = Number.parseInt(hex.slice(1), 16);
+      return [value >> 16, (value >> 8) & 255, value & 255];
+    });
+    // Match the 48% middle stop of the design system gradient.
+    return Array.from({ length:101 }, (_, index) => {
+      const t = index / 100;
+      const start = t <= .48 ? 0 : 1;
+      const amount = start === 0 ? t / .48 : (t - .48) / .52;
+      const channels = colors[start].map((channel, i) => Math.round(lerp(channel, colors[start + 1][i], amount)));
+      return `rgb(${channels.join(',')})`;
+    });
+  }
+
   function theme() {
     const style = getComputedStyle(main);
     const color = name => style.getPropertyValue(name).trim();
-    palette = ['--primary', '--ring', '--chart-3', '--chart-4', '--chart-5'].map(color);
+    const stops = ['--brand-cyan-50', '--brand-cyan', '--brand-lime'].map(color);
+    palette = brandPalette(stops);
     glowColors = {
-      ambient: color('--primary') + '24',
-      ambientEdge: color('--ring') + '14'
+      ambient: stops[1] + '24',
+      ambientEdge: stops[2] + '14'
     };
     sceneChanged = true;
     schedule();

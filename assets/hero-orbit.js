@@ -8,7 +8,6 @@
   const ring = stage.querySelector('.galaxy-satellites');
   const satellites = [...ring.children];
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const wide = matchMedia('(min-width:981px)');
   const staticView = new URLSearchParams(location.search).has('static');
   const turn = 2 * Math.PI;
   const slope = -16 * Math.PI / 180;
@@ -32,20 +31,21 @@
       const angle = phase + index * turn / satellites.length;
       const x = radiusX * Math.cos(angle);
       const y = radiusY * Math.sin(angle);
-      const depth = .78 + .22 * Math.sin(angle);
-      satellite.style.transform = `translate3d(calc(-50% + ${x * cos - y * sin}px), calc(-50% + ${x * sin + y * cos}px), 0) scale(${depth})`;
+      const depth = (Math.sin(angle) + 1) / 2;
+      satellite.style.opacity = String(.62 + .38 * depth);
+      satellite.style.transform = `translate3d(calc(-50% + ${x * cos - y * sin}px), calc(-50% + ${x * sin + y * cos}px), 0) scale(${.70 + .30 * depth})`;
     });
   }
 
   function tick(now) {
-    if (last) phase = (phase + Math.min(now - last, 60) * turn / 42000) % turn;
+    if (last) phase = (phase + Math.min(now - last, 60) * turn / 40000) % turn;
     last = now;
     paint();
     frame = requestAnimationFrame(tick);
   }
 
   function sync() {
-    const canAnimate = wide.matches && !motion.matches && !staticView;
+    const canAnimate = !motion.matches && !staticView;
     toggle.hidden = !canAnimate;
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
@@ -92,7 +92,6 @@
   });
 
   motion.addEventListener('change', sync);
-  wide.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   document.addEventListener('langchange', labels);
   if ('IntersectionObserver' in window) {

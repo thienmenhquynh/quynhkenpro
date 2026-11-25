@@ -7,7 +7,9 @@
   position:relative;
   isolation:isolate;
   overflow:hidden;
+  overflow:clip;
   width:100%;
+  min-inline-size:0;
   margin:0;
   border:1px solid rgb(222 254 255 / .17);
   border-radius:24px;
@@ -104,57 +106,84 @@
   position:absolute;
   top:var(--orbit-center-y);
   left:var(--orbit-center-x);
-  width:60%;
-  height:94%;
   transform:translate(-50%, -50%);
   pointer-events:none;
 }
 
-.hero-universe .galaxy-core { z-index:2; }
+.hero-universe .galaxy-core {
+  width:76%;
+  height:104%;
+  z-index:2;
+}
 
 .galaxy-nucleus {
   position:absolute;
   left:50%;
   top:51%;
-  width:43%;
+  width:31%;
   aspect-ratio:1;
-  border:1px solid rgb(222 254 255 / .28);
   border-radius:50%;
   transform:translate(-50%, -50%);
   background:
     radial-gradient(ellipse at 30% 22%, rgb(222 254 255 / .42), transparent 23%),
     radial-gradient(ellipse at 74% 79%, rgb(162 255 0 / .18), transparent 49%),
     linear-gradient(151deg, rgb(94 162 190 / .24), rgb(6 17 24 / .78) 47%, rgb(18 73 82 / .33));
-  box-shadow:inset 0 1px 9px rgb(222 254 255 / .27), 0 0 31px rgb(46 228 255 / .18);
+  box-shadow:inset 0 2px 11px rgb(222 254 255 / .20), 0 0 31px rgb(46 228 255 / .18);
 }
 
-.galaxy-satellites { z-index:3; }
-
-.galaxy-satellites::before {
-  content:"";
-  position:absolute;
-  inset:22% 8%;
-  border:1px solid rgb(222 254 255 / .13);
-  border-radius:50%;
-  transform:rotate(-16deg);
+.galaxy-satellites {
+  width:65%;
+  height:94%;
+  z-index:3;
 }
 
-.galaxy-satellites i {
+.galaxy-signal {
+  --planet-size:clamp(12px, 1.7vw, 24px);
+  --planet-light:var(--brand-cyan-50);
+  --planet-color:var(--brand-cyan);
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 23%,var(--background));
   position:absolute;
   top:50%;
   left:50%;
-  width:7px;
-  height:7px;
-  border:1px solid rgb(222 254 255 / .56);
+  inline-size:var(--planet-size);
+  aspect-ratio:1;
   border-radius:50%;
-  background:var(--brand-cyan);
-  box-shadow:0 0 10px rgb(46 228 255 / .44);
+  background:
+    radial-gradient(ellipse at 29% 25%,rgb(255 255 255 / .46),transparent 23%),
+    radial-gradient(circle at 35% 29%,var(--planet-light),var(--planet-color) 30%,var(--planet-shadow) 72%,#090e17 100%);
+  box-shadow:inset 0 0 1px 1px rgb(222 254 255 / .18), 0 0 8px color-mix(in srgb,var(--planet-color) 38%,transparent);
 }
 
-.galaxy-satellites i:nth-child(2n) { background:var(--brand-lime); }
-.galaxy-satellites i.is-linked {
-  outline:2px solid rgb(222 254 255 / .58);
-  outline-offset:3px;
+.galaxy-signal:nth-child(2) {
+  --planet-size:clamp(10px, 1.2vw, 18px);
+  --planet-light:color-mix(in srgb,var(--brand-lime) 29%,var(--brand-cyan-50));
+  --planet-color:var(--brand-lime);
+  --planet-shadow:color-mix(in srgb,var(--brand-lime) 20%,var(--background));
+}
+
+.galaxy-signal:nth-child(3) {
+  --planet-size:clamp(13px, 1.9vw, 27px);
+  --planet-light:var(--brand-cyan-50);
+  --planet-color:color-mix(in srgb,var(--brand-cyan) 48%,var(--brand-cyan-50));
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 14%,var(--background));
+}
+
+.galaxy-signal:nth-child(4) {
+  --planet-size:clamp(9px, 1vw, 14px);
+  --planet-light:color-mix(in srgb,var(--brand-lime) 47%,var(--brand-cyan-50));
+  --planet-color:color-mix(in srgb,var(--brand-lime) 68%,var(--brand-cyan));
+  --planet-shadow:color-mix(in srgb,var(--brand-lime) 17%,var(--background));
+}
+
+.galaxy-signal:nth-child(5) {
+  --planet-size:clamp(10px, 1.35vw, 19px);
+  --planet-light:var(--brand-cyan-50);
+  --planet-color:color-mix(in srgb,var(--brand-lime) 35%,var(--brand-cyan));
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 18%,var(--background));
+}
+
+.galaxy-signal.is-linked {
+  box-shadow:inset 0 0 1px 1px rgb(222 254 255 / .46), 0 0 13px var(--planet-color);
 }
 
 .galaxy-products {
@@ -229,14 +258,9 @@
   right:14px;
   top:14px;
   z-index:5;
-  width:44px;
-  height:44px;
-  border:1px solid rgb(222 254 255 / .15);
-  border-radius:50%;
-  background:linear-gradient(155deg,rgb(222 254 255 / .13),rgb(222 254 255 / .045));
-  color:var(--foreground);
-  cursor:pointer;
 }
+
+.galaxy-motion[hidden] { display:none; }
 
 .galaxy-motion::before {
   content:"";
