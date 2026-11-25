@@ -4,6 +4,13 @@
 .hero .hero-universe {
   --orbit-center-x:69%;
   --orbit-center-y:49%;
+  --galaxy-panel:var(--card);
+  --galaxy-panel-shadow:rgb(15 38 50 / .14);
+  --nucleus-glint:rgb(255 255 255 / .84);
+  --nucleus-bright:rgb(222 254 255 / .89);
+  --nucleus-middle:rgb(46 228 255 / .15);
+  --nucleus-edge:rgb(68 170 178 / .24);
+  --planet-shade-base:var(--foreground);
   position:relative;
   isolation:isolate;
   overflow:hidden;
@@ -11,17 +18,27 @@
   width:100%;
   min-inline-size:0;
   margin:0;
-  border:1px solid rgb(222 254 255 / .17);
+  border:1px solid var(--glass-edge);
   border-radius:24px;
   background:
     radial-gradient(ellipse at 73% 36%, rgb(46 228 255 / .10), transparent 65%),
     radial-gradient(ellipse at 93% 51%, rgb(162 255 0 / .055), transparent 58%),
-    var(--background);
+    var(--galaxy-panel);
   box-shadow:
-    inset 0 1px 0 rgb(222 254 255 / .16),
+    inset 0 1px 0 var(--glass-highlight),
     inset 0 -1px 0 rgb(162 255 0 / .06),
-    0 18px 52px rgb(0 8 14 / .31);
+    0 18px 52px var(--galaxy-panel-shadow);
   color:var(--foreground);
+}
+
+[data-theme="dark"] .hero .hero-universe {
+  --galaxy-panel:var(--background);
+  --galaxy-panel-shadow:rgb(0 8 14 / .31);
+  --nucleus-glint:rgb(222 254 255 / .42);
+  --nucleus-bright:rgb(94 162 190 / .24);
+  --nucleus-middle:rgb(6 17 24 / .78);
+  --nucleus-edge:rgb(18 73 82 / .33);
+  --planet-shade-base:var(--background);
 }
 
 .hero-universe::before {
@@ -63,9 +80,9 @@
 
 .hero .hero-portrait .runner-card {
   padding:4px;
-  border-color:rgb(222 254 255 / .20);
-  background:linear-gradient(148deg,rgb(222 254 255 / .15),rgb(222 254 255 / .065));
-  box-shadow:inset 0 1px 0 rgb(222 254 255 / .20), 0 12px 26px rgb(0 0 0 / .28);
+  border-color:var(--glass-edge);
+  background:linear-gradient(148deg,var(--glass-highlight),var(--glass-fade)),var(--card);
+  box-shadow:inset 0 1px 0 var(--glass-highlight),0 12px 26px var(--glass-shadow);
 }
 
 .hero .hero-portrait .plate {
@@ -75,15 +92,15 @@
   grid-template-columns:1fr;
   gap:4px;
   padding:8px;
-  border-color:rgb(222 254 255 / .18);
-  background:linear-gradient(151deg,rgb(34 53 62 / .88),rgb(9 18 24 / .90));
+  border-color:var(--glass-edge);
+  background:linear-gradient(151deg,var(--card),var(--accent));
   color:var(--foreground);
-  box-shadow:inset 0 1px 0 rgb(222 254 255 / .14);
+  box-shadow:inset 0 1px 0 var(--glass-highlight);
 }
 
 @supports ((backdrop-filter:blur(10px)) or (-webkit-backdrop-filter:blur(10px))) {
   .hero .hero-portrait .plate {
-    background:linear-gradient(151deg,rgb(29 52 62 / .71),rgb(9 18 24 / .82));
+    background:linear-gradient(151deg,color-mix(in srgb,var(--card) 90%,transparent),color-mix(in srgb,var(--accent) 89%,transparent));
     -webkit-backdrop-filter:blur(10px) saturate(135%);
     backdrop-filter:blur(10px) saturate(135%);
   }
@@ -125,9 +142,9 @@
   border-radius:50%;
   transform:translate(-50%, -50%);
   background:
-    radial-gradient(ellipse at 30% 22%, rgb(222 254 255 / .42), transparent 23%),
-    radial-gradient(ellipse at 74% 79%, rgb(162 255 0 / .18), transparent 49%),
-    linear-gradient(151deg, rgb(94 162 190 / .24), rgb(6 17 24 / .78) 47%, rgb(18 73 82 / .33));
+    radial-gradient(ellipse at 30% 22%,var(--nucleus-glint),transparent 23%),
+    radial-gradient(ellipse at 74% 79%,rgb(162 255 0 / .18),transparent 49%),
+    linear-gradient(151deg,var(--nucleus-bright),var(--nucleus-middle) 47%,var(--nucleus-edge));
   box-shadow:inset 0 2px 11px rgb(222 254 255 / .20), 0 0 31px rgb(46 228 255 / .18);
 }
 
@@ -141,7 +158,7 @@
   --planet-size:clamp(12px, 1.7vw, 24px);
   --planet-light:var(--brand-cyan-50);
   --planet-color:var(--brand-cyan);
-  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 23%,var(--background));
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 23%,var(--planet-shade-base));
   position:absolute;
   top:50%;
   left:50%;
@@ -158,28 +175,28 @@
   --planet-size:clamp(10px, 1.2vw, 18px);
   --planet-light:color-mix(in srgb,var(--brand-lime) 29%,var(--brand-cyan-50));
   --planet-color:var(--brand-lime);
-  --planet-shadow:color-mix(in srgb,var(--brand-lime) 20%,var(--background));
+  --planet-shadow:color-mix(in srgb,var(--brand-lime) 20%,var(--planet-shade-base));
 }
 
 .galaxy-signal:nth-child(3) {
   --planet-size:clamp(13px, 1.9vw, 27px);
   --planet-light:var(--brand-cyan-50);
   --planet-color:color-mix(in srgb,var(--brand-cyan) 48%,var(--brand-cyan-50));
-  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 14%,var(--background));
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 14%,var(--planet-shade-base));
 }
 
 .galaxy-signal:nth-child(4) {
   --planet-size:clamp(9px, 1vw, 14px);
   --planet-light:color-mix(in srgb,var(--brand-lime) 47%,var(--brand-cyan-50));
   --planet-color:color-mix(in srgb,var(--brand-lime) 68%,var(--brand-cyan));
-  --planet-shadow:color-mix(in srgb,var(--brand-lime) 17%,var(--background));
+  --planet-shadow:color-mix(in srgb,var(--brand-lime) 17%,var(--planet-shade-base));
 }
 
 .galaxy-signal:nth-child(5) {
   --planet-size:clamp(10px, 1.35vw, 19px);
   --planet-light:var(--brand-cyan-50);
   --planet-color:color-mix(in srgb,var(--brand-lime) 35%,var(--brand-cyan));
-  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 18%,var(--background));
+  --planet-shadow:color-mix(in srgb,var(--brand-cyan) 18%,var(--planet-shade-base));
 }
 
 .galaxy-signal.is-linked {
@@ -195,8 +212,8 @@
   margin:0;
   padding:12px;
   list-style:none;
-  border-top:1px solid rgb(222 254 255 / .12);
-  background:linear-gradient(120deg,rgb(222 254 255 / .075),rgb(222 254 255 / .018));
+  border-top:1px solid var(--glass-edge);
+  background:linear-gradient(120deg,var(--glass-highlight),var(--glass-fade));
   scroll-padding-inline:12px;
   scroll-snap-type:x proximity;
   scrollbar-width:thin;
@@ -207,10 +224,10 @@
 .galaxy-card {
   display:block;
   padding:5px;
-  border:1px solid rgb(222 254 255 / .17);
-  border-radius:11px;
-  background:linear-gradient(151deg,rgb(222 254 255 / .115),rgb(222 254 255 / .035));
-  box-shadow:inset 0 1px 0 rgb(222 254 255 / .11);
+  border:1px solid var(--glass-edge);
+  border-radius:var(--compact-button-radius);
+  background:linear-gradient(151deg,var(--glass-highlight),var(--glass-fade)),var(--card);
+  box-shadow:inset 0 1px 0 var(--glass-highlight);
   color:var(--foreground);
   text-decoration:none;
 }
