@@ -1155,11 +1155,15 @@ p, li, small { text-wrap:pretty; }
 }
 
 /* ---------- Trang Case study ---------- */
-.cs-hero { padding-top:calc(var(--nav-h, 72px) + 48px); padding-bottom:56px; }
-.cs-hero h1 { margin:12px 0 16px; }
+.cs-hero { padding-block:clamp(32px,5vw,64px) 56px; }
+.cs-hero h1 {
+  margin:0 0 16px;
+  font-size:clamp(28px,4vw,44px);
+  line-height:1.2;
+  text-wrap:wrap;
+}
+.cs-hero h1 .grad-text { white-space:nowrap; }
 .cs-hero .lead { max-width:680px; }
-.cs-back { display:inline-flex; align-items:center; gap:6px; color:inherit; text-decoration:none; }
-.cs-back:hover { color:var(--ink); }
 .cs-toc { list-style:none; margin:32px 0 0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px; }
 .cs-toc a { display:flex; gap:12px; align-items:flex-start; height:100%; padding:14px 16px; border-radius:var(--rounded-card); background:var(--surface-2); border:1px solid var(--hairline); text-decoration:none; transition:border-color .15s ease, transform .15s ease; }
 .cs-toc a:hover { border-color:var(--accent-cyan); transform:translateY(-2px); }
