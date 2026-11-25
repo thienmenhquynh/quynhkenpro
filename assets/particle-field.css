@@ -1,22 +1,3 @@
-#top > .hero { background:var(--background); }
-
-#top > .hero::before {
-  content:"";
-  inset:0 0 0 24%;
-  background:var(--brand-gradient);
-  opacity:.40;
-  mask-image:radial-gradient(ellipse 77% 78% at 71% 46%, #000 18%, transparent 95%);
-}
-
-[data-theme="dark"] #top > .hero::before { opacity:.27; }
-
-@media (max-width:980px) {
-  #top > .hero::before {
-    inset:0;
-    mask-image:radial-gradient(ellipse 86% 52% at 61% 25%, #000 16%, transparent 96%);
-  }
-}
-
 .particle-field {
   display:none;
   position:fixed;
