@@ -198,3 +198,77 @@ footer .stripe { width:64px; height:2px; margin-top:8px; }
   .project-table-scroll,.project-gantt-scroll,.viewer .vw-info { box-shadow:none; border-color:CanvasText; }
   .pcard[data-theme] .feat-item[aria-selected="true"] { box-shadow:none; outline:2px solid Highlight; outline-offset:-2px; }
 }
+
+/* NetRace project detail */
+.vw-story { width:100%; min-width:0; }
+.vw-story[hidden] { display:none; }
+.viewer:has(.vw-story:not([hidden])) .vw-close { flex:none; }
+.vw-layout:has(> .vw-story:not([hidden])) { gap:16px; }
+.vw-story:not([hidden]) ~ .vw-gallery .vw-demo { display:none; }
+.nr-landing { max-width:1200px; margin:0 auto; }
+.nr-landing-hero,
+.nr-landing-panel,
+.nr-landing-card,
+.nr-landing-note,
+.nr-landing-metrics li {
+  min-width:0;
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  background:var(--card);
+}
+.nr-landing-hero {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+  align-items:center;
+  gap:clamp(20px,3vw,40px);
+  padding:clamp(20px,3.6vw,44px);
+  background:radial-gradient(ellipse at 90% 0%,var(--accent),transparent 68%),var(--card);
+  box-shadow:var(--elevation-card);
+}
+.nr-landing-hero img { display:block; width:100%; height:auto; border-radius:var(--radius-lg); }
+.nr-landing h3,.nr-landing h4,.nr-landing p { margin:0; }
+.nr-landing h3 { font-size:clamp(22px,3vw,32px); line-height:1.2; text-wrap:balance; }
+.nr-landing-hero h3 { margin:10px 0 14px; font-size:clamp(28px,4.2vw,52px); line-height:1.14; text-wrap:wrap; }
+.nr-landing h4 { margin-bottom:8px; font-size:18px; line-height:1.3; }
+.nr-landing p { color:var(--muted-foreground); font-size:15px; line-height:1.65; }
+.nr-landing .nr-landing-role { color:var(--primary); font-weight:700; }
+.nr-landing-hero .btn-row { margin-top:20px; gap:10px; }
+.nr-landing-metrics {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  padding:0;
+  margin:12px 0 0;
+  list-style:none;
+}
+.nr-landing-metrics li { display:grid; gap:4px; padding:clamp(12px,2vw,20px); }
+.nr-landing-metrics b { color:var(--primary); font:700 clamp(20px,3vw,34px)/1.15 var(--font-heading); }
+.nr-landing-metrics span { color:var(--muted-foreground); font-size:13px; line-height:1.35; }
+.nr-landing-section { margin-top:clamp(32px,5vw,64px); padding:0; scroll-margin-top:16px; }
+.nr-landing-section > h3 { margin-bottom:14px; }
+.nr-landing-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.nr-landing-panel,.nr-landing-note,.nr-landing-card > div { padding:clamp(16px,2.4vw,24px); }
+.nr-landing-note { border-inline-start:3px solid var(--primary); margin-top:12px; }
+.nr-landing-card { overflow:hidden; }
+.nr-landing-frame { display:block; background:var(--muted); }
+.nr-landing-frame:focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
+.nr-landing-frame img { display:block; inline-size:100%; aspect-ratio:8 / 5; height:auto; object-fit:contain; }
+.nr-landing-flow { display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:12px 0 16px; list-style:none; }
+.nr-landing-flow li { padding:6px 10px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--accent); color:var(--accent-foreground); font-size:13px; font-weight:600; }
+.nr-landing .nr-landing-gallery-title { margin-top:clamp(32px,5vw,64px); }
+.vw-story:not([hidden]) ~ .vw-gallery .vw-col {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  background:transparent;
+}
+.vw-story:not([hidden]) ~ .vw-gallery .vw-col .vw-fig { gap:8px; padding:10px; }
+.vw-story:not([hidden]) ~ .vw-gallery .vw-col img { aspect-ratio:8 / 5; object-fit:contain; }
+@media (max-width:760px) {
+  .nr-landing-hero { grid-template-columns:minmax(0,1fr); }
+  .vw-story:not([hidden]) ~ .vw-gallery .vw-col { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:560px) {
+  .nr-landing-grid { grid-template-columns:minmax(0,1fr); }
+  .nr-landing-metrics { gap:6px; }
+  .nr-landing-metrics span { font-size:12px; }
+}

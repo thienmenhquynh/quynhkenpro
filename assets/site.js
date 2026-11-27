@@ -271,6 +271,40 @@
       }
       /* Mô tả + con số của sản phẩm ở đầu trang xem trước */
       var vInfo = $('#vw-info'), vInfoD = $('#vw-info-d'), vStats = $('#vw-stats'), vInfoR = $('#vw-info-r'), vProfile = $('#vw-profile'), vKey = null;
+      var vStory = $('#vw-story');
+      if (vStory) vStory.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-story-jump]');
+        if (!button) return;
+        var section = vStory.querySelector('[data-story-section="' + button.dataset.storyJump + '"]');
+        if (!section) return;
+        section.focus({ preventScroll: true });
+        section.scrollIntoView({ behavior: reduce.matches ? 'instant' : 'smooth', block: 'start' });
+      });
+
+      function setStory(key, detail) {
+        if (!vStory) return false;
+        var template = detail && document.getElementById(key + '-story');
+        vStory.hidden = !template;
+        vStory.replaceChildren();
+        if (!template) return false;
+        var content = template.content.cloneNode(true);
+        var copy = Object.assign({}, detail.story, {
+          intro: detail.d, problem: detail.problem, lesson: detail.lesson,
+          pilotNumber: detail.s[0][0], pilotLabel: detail.s[0][1],
+          photoNumber: detail.s[1][0], photoLabel: detail.s[1][1],
+          pilotResult: detail.cases[0].text, photoResult: detail.cases[1].text
+        });
+        ['before', 'during', 'after', 'passport'].forEach(function (phase, index) {
+          var text = detail.f[index];
+          copy[phase] = text.slice(text.indexOf(': ') + 2);
+        });
+        content.querySelectorAll('[data-story-copy]').forEach(function (element) {
+          element.textContent = copy[element.dataset.storyCopy];
+        });
+        I18N.translate(content);
+        vStory.appendChild(content);
+        return true;
+      }
       function scrollToImage(n) {
         var imgs = [].slice.call(vEl.col.querySelectorAll('img')), target = imgs[n];
         if (!target) return;
@@ -302,18 +336,9 @@
         vKey = key;
         if (!vInfo) return;
         var all = window.PRODUCT_DETAILS || {}, it = all[key] && all[key][I18N.lang === 'en' ? 'en' : 'vi'];
-        var evidence = $('#vw-evidence'), template = document.getElementById(key + '-evidence');
-        if (evidence) {
-          evidence.hidden = !template;
-          evidence.replaceChildren();
-          if (template) {
-            var gallery = template.content.cloneNode(true);
-            I18N.translate(gallery);
-            evidence.appendChild(gallery);
-          }
-        }
-        vInfo.hidden = !it;
-        if (!it) return;
+        var hasStory = setStory(key, it);
+        vInfo.hidden = !it || hasStory;
+        if (vInfo.hidden) return;
         vInfoD.textContent = it.d;
         if (vProfile) {
           vProfile.replaceChildren();
@@ -327,7 +352,6 @@
           }
           paragraph(en ? 'Who it is for' : 'Đối tượng', it.a);
           paragraph(en ? 'Problem' : 'Bài toán', it.problem);
-          if (it.story) it.story.forEach(function (section) { paragraph(section[0], section[1]); });
           function detailTable(label, className) {
             var table = document.createElement('table'), caption = document.createElement('caption'), body = document.createElement('tbody');
             table.className = 'vw-detail-table ' + className;
@@ -342,7 +366,7 @@
             return content;
           }
           if (it.f && it.f.length) {
-            var featuresBody = detailTable(it.featureTitle || (en ? 'Key features' : 'Tính năng nổi bật'), 'vw-features');
+            var featuresBody = detailTable(en ? 'Key features' : 'Tính năng nổi bật', 'vw-features');
             it.f.forEach(function (text, index) {
               var separator = text.indexOf(': ');
               var featureCell = detailRow(featuresBody, separator > -1 ? text.slice(0, separator) : String(index + 1), separator > -1 ? text.slice(separator + 2) : text);
@@ -351,7 +375,7 @@
             });
           }
           if (it.cases && it.cases.length) {
-            var casesBody = detailTable(it.caseTitle || 'Case study', 'vw-cases');
+            var casesBody = detailTable('Case study', 'vw-cases');
             it.cases.forEach(function (item) {
               var content = detailRow(casesBody, item.name, item.text);
               if (item.url && /^https:\/\//.test(item.url)) {
@@ -362,7 +386,6 @@
               }
             });
           }
-          paragraph(en ? 'Lessons' : 'Bài học', it.lesson);
           if (it.source) {
             var source = document.createElement('p'), sourceLink = document.createElement('a');
             source.className = 'profile-source'; sourceLink.href = it.source;
@@ -384,7 +407,8 @@
       document.addEventListener('langchange', function () { if (viewer.open && vKey) setInfo(vKey); });
       function fillFeat(i) {
         var card = pcards[i];
-        vEl.code.textContent = card.querySelector('.feat-url').textContent;
+        var storyUrl = vStory && !vStory.hidden && card.getAttribute('data-demo');
+        vEl.code.textContent = storyUrl ? new URL(storyUrl).hostname : card.querySelector('.feat-url').textContent;
         vEl.title.textContent = card.querySelector('.pc-name').textContent;
         vEl.sub.textContent = card.querySelector('.pc-lead').textContent;
         setCount(seqPos({ p: card }));
@@ -400,7 +424,7 @@
         fillFeat(i);
         vEl.col.innerHTML = '';
         var detailCover = card.getAttribute('data-detail-cover');
-        if (detailCover) {
+        if (detailCover && (!vStory || vStory.hidden)) {
           var coverFigure = document.createElement('figure'), coverImage = new Image(), coverCaption = document.createElement('figcaption');
           coverFigure.className = 'vw-fig'; coverImage.src = detailCover;
           coverImage.alt = card.querySelector('.pc-name').textContent;
