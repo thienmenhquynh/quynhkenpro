@@ -302,6 +302,16 @@
         vKey = key;
         if (!vInfo) return;
         var all = window.PRODUCT_DETAILS || {}, it = all[key] && all[key][I18N.lang === 'en' ? 'en' : 'vi'];
+        var evidence = $('#vw-evidence'), template = document.getElementById(key + '-evidence');
+        if (evidence) {
+          evidence.hidden = !template;
+          evidence.replaceChildren();
+          if (template) {
+            var gallery = template.content.cloneNode(true);
+            I18N.translate(gallery);
+            evidence.appendChild(gallery);
+          }
+        }
         vInfo.hidden = !it;
         if (!it) return;
         vInfoD.textContent = it.d;

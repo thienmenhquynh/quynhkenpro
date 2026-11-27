@@ -354,6 +354,14 @@ window.I18N = (function () {
     'cs.prod3': 'Product portfolio',
     'cs.l1': 'View the NetRace demo', 'cs.l2': 'Open kol.gov.vn', 'cs.l4': 'View the case study on Behance',
     'cs.alt1': 'Overview of the NetRace platform', 'cs.alt2': 'KOL and MCN rankings on Kol.gov.vn', 'cs.alt4': 'KiotViet store website built with Page Builder',
+    'nr.evidenceAria': 'NetRace product evidence',
+    'nr.evidenceTitle': 'NetRace across the race journey',
+    'nr.evidenceTicketAlt': 'Open the NetRace ticketing screenshot',
+    'nr.evidenceTicket': 'Before the race · Ticket sales and event details',
+    'nr.evidenceOpsAlt': 'Open the NetRace OS dashboard screenshot',
+    'nr.evidenceOps': 'During the race · The organiser dashboard',
+    'nr.evidencePhotoAlt': 'Open the NetRace Photo gallery screenshot',
+    'nr.evidencePhoto': 'After the race · Photo search for runners',
     'nr.openDetail': 'View details',
     'nr.pilotStat': 'runners in the Vân Sơn pilot scope',
     'nr.intro': "NetRace connects organisers, runners and photographers before, during and after a race. Data collected at ticket purchase carries through race operations, photo delivery and the runner’s profile across events.",
@@ -608,15 +616,19 @@ window.I18N = (function () {
     else el.setAttribute(prop, v);
   }
 
+  function translate(root) {
+    root.querySelectorAll('[data-i18n]').forEach(function (el) { swap(el, el.getAttribute('data-i18n'), 'html'); });
+    root.querySelectorAll('[data-i18n-aria]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-aria'), 'aria-label'); });
+    root.querySelectorAll('[data-i18n-alt]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-alt'), 'alt'); });
+    root.querySelectorAll('[data-i18n-content]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-content'), 'content'); });
+    root.querySelectorAll('[data-i18n-href]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-href'), 'href'); });
+    root.querySelectorAll('[data-i18n-download]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-download'), 'download'); });
+  }
+
   function apply(l) {
     lang = l === 'en' ? 'en' : 'vi';
     document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(function (el) { swap(el, el.getAttribute('data-i18n'), 'html'); });
-    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-aria'), 'aria-label'); });
-    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-alt'), 'alt'); });
-    document.querySelectorAll('[data-i18n-content]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-content'), 'content'); });
-    document.querySelectorAll('[data-i18n-href]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-href'), 'href'); });
-    document.querySelectorAll('[data-i18n-download]').forEach(function (el) { swap(el, el.getAttribute('data-i18n-download'), 'download'); });
+    translate(document);
     document.querySelectorAll('.lang [data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
   }
@@ -624,6 +636,7 @@ window.I18N = (function () {
   return {
     init: function () { apply(readPref()); }, // luôn chạy để lưu bản VN gốc trước khi animation đổi chữ
     set: function (l) { savePref(l); apply(l); },
+    translate: translate,
     get lang() { return lang; },
     t: function (key) { return lang === 'en' ? EN[key] : VI_UI[key]; },
     /* văn bản cuối của một phần tử theo ngôn ngữ hiện tại (dùng cho count-up) */

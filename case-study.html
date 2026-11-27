@@ -76,10 +76,10 @@
 <link rel="stylesheet" href="assets/site.css?v=3">
 <link rel="stylesheet" href="assets/design-system.css?v=2">
 <link rel="stylesheet" href="assets/hero.css?v=2">
-<link rel="stylesheet" href="assets/components.css">
+<link rel="stylesheet" href="assets/components.css?v=2">
 <link rel="stylesheet" href="assets/liquid-glass.css?v=3">
 <script src="assets/design-system.js?v=2"></script>
-<script src="assets/i18n.js?v=2"></script>
+<script src="assets/i18n.js?v=3"></script>
 <script src="assets/analytics.js" defer></script>
 </head>
 <body>
@@ -251,6 +251,29 @@
         <div class="cs-block"><h3 class="cs-label" data-i18n="nr.roleLabel">Vai trò của tôi</h3><p data-i18n="nr.role">Tôi phụ trách PM kiêm Product Design: xác định phạm vi MVP, thiết kế luồng và quyết định thứ tự triển khai các phân hệ trước khi thống nhất với các bên liên quan và đối tác vận hành GreatRace. Team có sự đồng hành của Đỗ Hải Dũng, PO kiêm cố vấn sản phẩm, đồng nghiệp cũ của tôi tại WePay (VCCorp).</p></div>
         <div class="cs-block"><h3 class="cs-label" data-i18n="nr.pilotLabel">MVP Vân Sơn</h3><p data-i18n="nr.pilot">Tôi chọn Vân Sơn Hidden Charm ở Phú Thọ làm pilot đầu tiên. Đây là giải chạy đầu tiên tổ chức tại địa phương, với phạm vi thử luồng bán vé cho khoảng 300 vận động viên. Giải nhỏ và có GreatRace cùng vận hành giúp team đưa MVP vào một sự kiện thật trước khi mở rộng.</p></div>
         <div class="cs-block"><h3 class="cs-label" data-i18n="nr.journeyLabel">Giải pháp</h3><ul class="cs-list"><li data-i18n="nr.before">Trước giải: Sàn vé mở bán theo cự ly, đợt giá và thanh toán VietQR. NetRace OS giúp ban tổ chức cấu hình giải, quản lý đơn và danh sách vận động viên.</li><li data-i18n="nr.during">Trong giải: NetRace OS hỗ trợ phát race kit và check-in. Nhiếp ảnh gia tải ảnh lên NetRace Photo để đưa vào luồng xử lý.</li><li data-i18n="nr.after">Sau giải: Runner tìm ảnh bằng BIB hoặc khuôn mặt. NetRace ID tập hợp vé, kết quả và ảnh qua nhiều giải. AI CRM nằm trong lộ trình chăm sóc người chạy và nhắc họ quay lại mùa sau.</li><li data-i18n="nr.passport">Xuyên suốt: NetRace Passport là prototype app di động cho runner, kết hợp tìm giải, mua vé, chạy ảo, cộng đồng và hồ sơ NetRace ID.</li></ul></div>
+        <section class="nr-evidence" aria-label="Minh chứng sản phẩm NetRace" data-i18n-aria="nr.evidenceAria">
+          <h3 class="headline" data-i18n="nr.evidenceTitle">NetRace qua từng bước vận hành</h3>
+          <div class="nr-evidence-grid">
+            <figure>
+              <a href="assets/feat/nr2-event.jpg" target="_blank" rel="noopener">
+                <img src="assets/feat/nr2-event.jpg" width="3024" height="1890" loading="lazy" decoding="async" alt="Mở ảnh giao diện bán vé NetRace" data-i18n-alt="nr.evidenceTicketAlt">
+              </a>
+              <figcaption data-i18n="nr.evidenceTicket">Trước giải · Trang bán vé và thông tin sự kiện</figcaption>
+            </figure>
+            <figure>
+              <a href="assets/feat/nr4-info.jpg" target="_blank" rel="noopener">
+                <img src="assets/feat/nr4-info.jpg" width="3024" height="1496" loading="lazy" decoding="async" alt="Mở ảnh bảng điều hành NetRace OS" data-i18n-alt="nr.evidenceOpsAlt">
+              </a>
+              <figcaption data-i18n="nr.evidenceOps">Trong giải · Bảng điều hành cho ban tổ chức</figcaption>
+            </figure>
+            <figure>
+              <a href="assets/feat/nr2-photos.jpg" target="_blank" rel="noopener">
+                <img src="assets/feat/nr2-photos.jpg" width="3024" height="1890" loading="lazy" decoding="async" alt="Mở ảnh kho ảnh NetRace Photo" data-i18n-alt="nr.evidencePhotoAlt">
+              </a>
+              <figcaption data-i18n="nr.evidencePhoto">Sau giải · Kho ảnh để runner tìm ảnh của mình</figcaption>
+            </figure>
+          </div>
+        </section>
         <div class="cs-block"><h3 class="cs-label" data-i18n="nr.photoLabel">Quyết định sản phẩm</h3><p data-i18n="nr.photo">NetFoto đã có lõi nhận diện khuôn mặt để tìm ảnh sự kiện. Tôi chọn dùng lại lõi đó cho NetRace Photo và dành sprint để bổ sung đọc số BIB, tăng tốc xử lý và phân loại, rồi liên kết các ảnh qua tín hiệu BIB hoặc khuôn mặt. Ảnh rõ BIB có thể hỗ trợ tìm ảnh bị che số, trong khi ảnh rõ mặt giúp bổ sung các góc chụp khác. Team hoàn thiện phần NetRace Photo trong một sprint, khoảng 1–2 tuần.</p></div>
         <div class="cs-block"><h3 class="cs-label" data-i18n="nr.roadmapLabel">Lộ trình</h3><div><p data-i18n="nr.roadmap">Roadmap Q4/2026 bám lịch GreatRace: Vân Sơn cho bản đầu tiên, Phoenix Festival là mốc bản thứ hai và Yên Tử Heritage là mốc bản hoàn chỉnh theo kế hoạch. Sàn vé chia ba giai đoạn: giá vé theo đợt và thanh toán QR, tiếp đến mua nhóm, combo và coupon, rồi quản lý vé cá nhân và thanh toán thẻ.</p><figure class="cs-shot"><a href="assets/feat/nr-roadmap.jpg"><img src="assets/feat/nr-roadmap.jpg" width="1600" height="1131" alt="Lộ trình Quý 4/2026 của NetRace" data-i18n-alt="pf.race1a" loading="lazy"></a></figure></div></div>
         <div class="cs-block cs-result"><h3 class="cs-label" data-i18n="nr.resultLabel">Kết quả</h3><ul class="cs-list"><li data-i18n="nr.outcomePilot">Vân Sơn: MVP được đưa vào giải thật đầu tiên với phạm vi thử bán vé cho khoảng 300 vận động viên.</li><li data-i18n="nr.outcomePhoto">NetRace Photo: 30.000+ ảnh qua 3 giải, với 10.000+ người chạy. Riêng Amber Run As One 2026, 95,6% ảnh gắn đúng người chạy và ảnh được trả trong 24 giờ.</li></ul></div>
