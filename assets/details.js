@@ -3,46 +3,108 @@
 window.PRODUCT_DETAILS = {
   "pc-race": {
     "vi": {
-      "d": "NetRace là nền tảng số cho giải chạy, kết nối ban tổ chức, nhiếp ảnh gia và người chạy trong một hệ thống, giúp quản lý trọn trình trước – trong – sau giải chạy và tìm ảnh bằng số BIB nhanh chóng.",
-      "s": [],
-      "r": "PM sở hữu sản phẩm: định hình luồng, ưu tiên tính năng, chốt yêu cầu bằng prototype (Vibe Design), chủ trì UAT.",
-      "a": "Ban tổ chức giải chạy cần quản lý vận động viên tập trung, nhiếp ảnh gia tại nhiều giải, và vận động viên tham gia nhiều giải muốn lưu giữ thành tích trên một hồ sơ duy nhất.",
-      "f": [
-        "Race OS: Công cụ quản lý giải dành cho ban tổ chức, từ tạo giải đến quản lý danh sách vận động viên.",
-        "Kho ảnh giải chạy (NetRace Photo): Nhiếp ảnh gia tải ảnh lên; ảnh nhận diện theo BIB và khuôn mặt, lưu riêng cho từng người chạy, tải HD không đóng dấu.",
-        "Sàn bán vé online: Bán vé giải chạy trực tuyến ngay trên nền tảng.",
-        "Gửi tin Email & Zalo: Gửi thông báo đến vận động viên, chỉ gửi cho người đã đồng ý nhận tin.",
-        "NetRace ID & AI CRM: Một hồ sơ duy nhất cho mỗi người chạy, dùng xuyên suốt qua nhiều giải."
+      "d": "NetRace kết nối ban tổ chức, người chạy và nhiếp ảnh gia qua các bước trước, trong và sau giải. Dữ liệu từ lúc mua vé tiếp tục được dùng để vận hành giải, trả ảnh và xây dựng hồ sơ runner qua nhiều sự kiện.",
+      "s": [
+        [
+          "~300",
+          "VĐV trong phạm vi pilot Vân Sơn"
+        ],
+        [
+          "30.000+",
+          "ảnh qua 3 giải · NetRace Photo"
+        ]
       ],
-      "source": "https://netspace-profile.vercel.app/giai-phap.html",
+      "a": "Ban tổ chức giải chạy, vận động viên và nhiếp ảnh gia.",
+      "problem": "Một giải chạy có ngày tổ chức cố định và nhiều khâu nối tiếp nhau: bán vé, thu thông tin vận động viên, phát race kit, check-in, công bố kết quả và trả ảnh. AI giúp team rút ngắn thời gian làm bản chạy được, đồng thời tăng áp lực cạnh tranh. Với nguồn vốn có hạn, tôi cần chọn một MVP đủ nhỏ để thử ở giải thật và tìm cơ sở cho mô hình doanh thu.",
+      "story": [
+        [
+          "Vai trò của tôi",
+          "Tôi phụ trách PM kiêm Product Design: xác định phạm vi MVP, thiết kế luồng và quyết định thứ tự triển khai các phân hệ trước khi thống nhất với các bên liên quan và đối tác vận hành GreatRace. Team có sự đồng hành của Đỗ Hải Dũng, PO kiêm cố vấn sản phẩm, đồng nghiệp cũ của tôi tại WePay (VCCorp)."
+        ],
+        [
+          "MVP Vân Sơn",
+          "Tôi chọn Vân Sơn Hidden Charm ở Phú Thọ làm pilot đầu tiên. Đây là giải chạy đầu tiên tổ chức tại địa phương, với phạm vi thử luồng bán vé cho khoảng 300 vận động viên. Giải nhỏ và có GreatRace cùng vận hành giúp team đưa MVP vào một sự kiện thật trước khi mở rộng."
+        ],
+        [
+          "Quyết định sản phẩm",
+          "NetFoto đã có lõi nhận diện khuôn mặt để tìm ảnh sự kiện. Tôi chọn dùng lại lõi đó cho NetRace Photo và dành sprint để bổ sung đọc số BIB, tăng tốc xử lý và phân loại, rồi liên kết các ảnh qua tín hiệu BIB hoặc khuôn mặt. Ảnh rõ BIB có thể hỗ trợ tìm ảnh bị che số, trong khi ảnh rõ mặt giúp bổ sung các góc chụp khác. Team hoàn thiện phần NetRace Photo trong một sprint, khoảng 1–2 tuần."
+        ],
+        [
+          "Lộ trình",
+          "Roadmap Q4/2026 bám lịch GreatRace: Vân Sơn cho bản đầu tiên, Phoenix Festival là mốc bản thứ hai và Yên Tử Heritage là mốc bản hoàn chỉnh theo kế hoạch. Sàn vé chia ba giai đoạn: giá vé theo đợt và thanh toán QR, tiếp đến mua nhóm, combo và coupon, rồi quản lý vé cá nhân và thanh toán thẻ."
+        ]
+      ],
+      "featureTitle": "Giải pháp theo hành trình giải chạy",
+      "f": [
+        "Trước giải: Sàn vé mở bán theo cự ly, đợt giá và thanh toán VietQR. NetRace OS giúp ban tổ chức cấu hình giải, quản lý đơn và danh sách vận động viên.",
+        "Trong giải: NetRace OS hỗ trợ phát race kit và check-in. Nhiếp ảnh gia tải ảnh lên NetRace Photo để đưa vào luồng xử lý.",
+        "Sau giải: Runner tìm ảnh bằng BIB hoặc khuôn mặt. NetRace ID tập hợp vé, kết quả và ảnh qua nhiều giải. AI CRM nằm trong lộ trình chăm sóc người chạy và nhắc họ quay lại mùa sau.",
+        "Xuyên suốt: NetRace Passport là prototype app di động cho runner, kết hợp tìm giải, mua vé, chạy ảo, cộng đồng và hồ sơ NetRace ID."
+      ],
+      "caseTitle": "Kết quả",
       "cases": [
         {
-          "name": "Great Race Solution",
-          "text": "Chuỗi 3 giải: Vân Sơn Hidden Charm 2026 (24/10/2026, Phú Thọ), Yên Tử Heritage Marathon 2026 (29/11/2026, Quảng Ninh), Trà Cổ Half Marathon (19/12/2026, Quảng Ninh). NetRace hỗ trợ bán vé, quản lý vận động viên và tìm ảnh cho cả chuỗi.",
-          "url": "https://netrace.vn/giai-chay"
+          "name": "Vân Sơn Hidden Charm",
+          "text": "Vân Sơn: MVP được đưa vào giải thật đầu tiên với phạm vi thử bán vé cho khoảng 300 vận động viên."
+        },
+        {
+          "name": "NetRace Photo",
+          "text": "NetRace Photo: 30.000+ ảnh qua 3 giải, với 10.000+ người chạy. Riêng Amber Run As One 2026, 95,6% ảnh gắn đúng người chạy và ảnh được trả trong 24 giờ."
         }
-      ]
+      ],
+      "lesson": "Bài học của tôi là mỗi giải thật nên kiểm chứng một câu hỏi sản phẩm cụ thể. Khi mở rộng, tôi sẽ thống nhất trước với đối tác ba chỉ số: tỷ lệ đơn thanh toán thành công, thời gian xử lý thủ công và chi phí phục vụ một giải. Các chỉ số này giúp quyết định nên đầu tư tiếp vào luồng nào và kiểm chứng mô hình thu phí."
     },
     "en": {
-      "d": "A digital platform connecting race organisers, photographers and runners for operations before, during and after a race, including fast BIB-based photo search.",
-      "s": [],
-      "r": "PM and product owner: shaped the flows, prioritised features, locked requirements with working prototypes (Vibe Design), owned UAT.",
-      "a": "Race organisers, photographers covering multiple races and runners maintaining a single cross-race profile.",
-      "f": [
-        "Race OS: Create races and manage participant lists.",
-        "NetRace Photo: Upload photos, match by BIB and face, save them to each runner and download unwatermarked HD images.",
-        "Online ticketing: Sell running-race tickets on the platform.",
-        "Email and Zalo notifications: Send messages only to runners who have opted in.",
-        "NetRace ID and AI CRM: Maintain one runner profile across multiple races."
+      "d": "NetRace connects organisers, runners and photographers before, during and after a race. Data collected at ticket purchase carries through race operations, photo delivery and the runner’s profile across events.",
+      "s": [
+        [
+          "~300",
+          "runners in the Vân Sơn pilot scope"
+        ],
+        [
+          "30,000+",
+          "photos across 3 races · NetRace Photo"
+        ]
       ],
-      "source": "https://netspace-profile.vercel.app/giai-phap.html",
+      "a": "Race organisers, runners and photographers.",
+      "problem": "A race has a fixed date and a series of handoffs: ticket sales, participant information, race kit collection, check-in, results and photo delivery. AI made it faster to build a working product and raised competitive pressure. With limited funding, I needed an MVP small enough to test at a real race and start evaluating how the product could generate revenue.",
+      "story": [
+        [
+          "My role",
+          "I led product management and product design. I scoped the MVP, designed the workflows and set the order of delivery before aligning with stakeholders and GreatRace, our operations partner. The team worked with Đỗ Hải Dũng, a product owner and adviser and my former colleague at WePay (VCCorp)."
+        ],
+        [
+          "Vân Sơn MVP",
+          "I chose Vân Sơn Hidden Charm in Phú Thọ as the first pilot. It was the first race held in the locality, with a ticketing pilot scoped for about 300 runners. The small field and GreatRace’s involvement gave the team a way to try the MVP at a live event before expanding."
+        ],
+        [
+          "Product decision",
+          "NetFoto already had a face-matching core for event photos. I chose to reuse it for NetRace Photo and spend the sprint on BIB recognition, faster processing and sorting, and linking images by BIB or face. A readable BIB can help tie in photos where the number is obscured, and a clear face can help match photos from other angles. The team completed the NetRace Photo work in one sprint of around one to two weeks."
+        ],
+        [
+          "Roadmap",
+          "The Q4 2026 roadmap followed GreatRace’s event calendar: Vân Sơn for the first version, Phoenix Festival as the second-version milestone and Yên Tử Heritage as the planned complete version. Ticketing was split into three stages: pricing waves and QR payments, then group purchases, bundles and coupons, followed by personal ticket management and card payments."
+        ]
+      ],
+      "featureTitle": "Solution across the race journey",
+      "f": [
+        "Before the race: Online ticketing supports distances, pricing waves and VietQR payments. NetRace OS lets organisers configure the event and manage orders and participant lists.",
+        "During the race: NetRace OS supports race kit collection and check-in. Photographers upload images to NetRace Photo for processing.",
+        "After the race: Runners find photos by BIB or face. NetRace ID brings together tickets, results and photos across races. AI CRM is on the roadmap for runner follow-up and return invitations.",
+        "Across the journey: NetRace Passport is a mobile app prototype bringing together race discovery, ticketing, virtual running, community and the NetRace ID profile."
+      ],
+      "caseTitle": "Results",
       "cases": [
         {
-          "name": "Great Race Solution",
-          "text": "Three-race series: Van Son Hidden Charm (24 Oct 2026, Phu Tho), Yen Tu Heritage Marathon (29 Nov 2026, Quang Ninh) and Tra Co Half Marathon (19 Dec 2026, Quang Ninh). NetRace supports ticketing, participant management and photo search.",
-          "url": "https://netrace.vn/giai-chay"
+          "name": "Vân Sơn Hidden Charm",
+          "text": "Vân Sơn: the MVP reached its first live event, with ticketing scoped for about 300 runners."
+        },
+        {
+          "name": "NetRace Photo",
+          "text": "NetRace Photo: 30,000+ photos across three races with 10,000+ runners. At Amber Run As One 2026, 95.6% of photos were matched to the right runner and photos were delivered within 24 hours."
         }
-      ]
+      ],
+      "lesson": "My takeaway is to give each live race a concrete product question to test. Before expanding, I would agree three metrics with the partner: successful payment rate, manual handling time and cost to serve a race. These metrics would guide further investment and help validate a charging model."
     }
   },
   "pc-kol": {

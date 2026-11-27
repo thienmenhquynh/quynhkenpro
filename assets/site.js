@@ -317,6 +317,7 @@
           }
           paragraph(en ? 'Who it is for' : 'Đối tượng', it.a);
           paragraph(en ? 'Problem' : 'Bài toán', it.problem);
+          if (it.story) it.story.forEach(function (section) { paragraph(section[0], section[1]); });
           function detailTable(label, className) {
             var table = document.createElement('table'), caption = document.createElement('caption'), body = document.createElement('tbody');
             table.className = 'vw-detail-table ' + className;
@@ -331,7 +332,7 @@
             return content;
           }
           if (it.f && it.f.length) {
-            var featuresBody = detailTable(en ? 'Key features' : 'Tính năng nổi bật', 'vw-features');
+            var featuresBody = detailTable(it.featureTitle || (en ? 'Key features' : 'Tính năng nổi bật'), 'vw-features');
             it.f.forEach(function (text, index) {
               var separator = text.indexOf(': ');
               var featureCell = detailRow(featuresBody, separator > -1 ? text.slice(0, separator) : String(index + 1), separator > -1 ? text.slice(separator + 2) : text);
@@ -340,7 +341,7 @@
             });
           }
           if (it.cases && it.cases.length) {
-            var casesBody = detailTable('Case study', 'vw-cases');
+            var casesBody = detailTable(it.caseTitle || 'Case study', 'vw-cases');
             it.cases.forEach(function (item) {
               var content = detailRow(casesBody, item.name, item.text);
               if (item.url && /^https:\/\//.test(item.url)) {
@@ -351,6 +352,7 @@
               }
             });
           }
+          paragraph(en ? 'Lessons' : 'Bài học', it.lesson);
           if (it.source) {
             var source = document.createElement('p'), sourceLink = document.createElement('a');
             source.className = 'profile-source'; sourceLink.href = it.source;
@@ -421,6 +423,8 @@
         if (window.gsap && !reduce.matches) gsap.fromTo(vEl.col, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out', overwrite: true });
       }
       pcards.forEach(function (card, i) {
+        var detail = card.querySelector('[data-open-featured]');
+        if (detail) detail.addEventListener('click', function () { openFeat(i, 0); });
         var view = card.querySelector('.br-view');
         if (!view) return;
         function go() {
