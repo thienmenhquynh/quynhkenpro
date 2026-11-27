@@ -105,6 +105,23 @@ section .cs-meta.cap { padding:24px; }
   .nr-evidence-grid { grid-template-columns:1fr; }
   .nr-evidence-grid figure:first-child { grid-row:auto; }
 }
+.nr-field { margin-block:clamp(24px,4vw,48px); }
+.nr-field-grid figure:first-child img { align-self:center; }
+.nr-field-grid figure:not(:first-child) a { position:relative; display:block; min-height:0; }
+.nr-field-grid figure:not(:first-child) a::before { content:""; display:block; aspect-ratio:16 / 9; }
+.nr-field-grid figure:not(:first-child) img {
+  position:absolute;
+  inset:0;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 30%;
+}
+.nr-field-grid figure:last-child img { object-position:50% 70%; }
+@media (max-width:560px) {
+  .nr-field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .nr-field-grid figure:first-child { grid-column:1 / -1; }
+  .nr-field-grid figure:not(:first-child) a::before { aspect-ratio:4 / 5; }
+}
 .cs-toc a { box-shadow:var(--elevation-quiet); }
 .cs-toc a:hover { transform:none; box-shadow:var(--elevation-card); }
 .win { border-left:2px solid var(--primary); border-radius:var(--radius-sm); }
